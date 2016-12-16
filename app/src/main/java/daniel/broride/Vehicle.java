@@ -3,8 +3,9 @@ package daniel.broride;
 
 public class Vehicle {
 
-    private String vehicleModel;
+    private String Model;
     private Double consumption;
+    private int capacity;
 
 
 
