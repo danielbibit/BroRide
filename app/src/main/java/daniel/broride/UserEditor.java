@@ -2,12 +2,54 @@ package daniel.broride;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class UserEditor extends AppCompatActivity {
+    User user = new User();
+    DbHelper myDb;
+    EditText editName, editAge;
+    Button insert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_editor);
+
+        myDb = new DbHelper(this);
+
+        editName = (EditText) findViewById(R.id.edit_name);
+        editAge = (EditText) findViewById(R.id.edit_age);
+
+        insert = (Button) findViewById(R.id.button);
+
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertDb();
+            }
+        });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    public void insertDb(){
+        user.setName(editName.getText().toString());
+        user.setAge(editAge.getInputType());
+
+        try {
+            myDb.insertUser(user);
+        } catch (SqlException e) {
+            e.printStackTrace();
+            Toast.makeText(UserEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 }

@@ -1,8 +1,11 @@
 package daniel.broride;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +16,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DbHelper myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        myDb = new DbHelper(this);
     }
 
     @Override
@@ -72,9 +81,24 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            openUserEditor();
         } else if (id == R.id.nav_gallery) {
+            Cursor res = myDb.getAllData();
+            if(res.getCount()==0){
+                //show message
+                showMessage("ERRO","Nothing found");
+            }
 
+            StringBuffer buffer = new StringBuffer();
+
+            while(res.moveToNext()){
+                buffer.append("Id : "+res.getString(0)+"\n");
+                buffer.append("Name : "+res.getString(1)+"\n");
+                buffer.append("Surname : "+res.getString(2)+"\n");
+                buffer.append("Age : "+res.getString(3)+"\n\n");
+            }
+
+            showMessage("Data", buffer.toString());
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -88,5 +112,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openUserEditor(){
+        Intent intent = new Intent(this, UserEditor.class);
+        intent.putExtra(EXTRA_MESSAGE, "Test");
+        startActivity(intent);
+    }
+
+    public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }
