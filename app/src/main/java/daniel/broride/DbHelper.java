@@ -1,6 +1,8 @@
 package daniel.broride;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -40,14 +42,40 @@ public class DbHelper extends SQLiteOpenHelper {
                 USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT,");
 
         db.execSQL("CREATE TABLE "+TABLE_VEHICLE+" ("+VEHICLE_ID + "INTEGER PRIMARY KEY AUINCREMENT,"+
-                VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" TEXT,"+USER_DEBIT+" TEXT,");
-
+                VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" TEXT,"+VEHICLE_CONSUMPTION+" TEXT,");
+        /*
         db.execSQL("CREATE TABLE "+TABLE_USER+" ("+USER_ID + "INTEGER PRIMARY KEY AUINCREMENT,"+
                 USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT,");
+        */
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_VEHICLE);
+    }
 
+    public void insertUser(User user) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(USER_NAME, user.getName());
+        contentValues.put(USER_DRIVER, user.getName());
+        contentValues.put(USER_AGE, user.getAge());
+        contentValues.put(USER_DEBIT, user.getDebit());
+
+        long result = db.insert(TABLE_USER, null, contentValues);
+
+        if (result == -1){
+            throw new SqlException();
+        }
+    }
+
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_USER, null);
+
+        return res;
     }
 }
