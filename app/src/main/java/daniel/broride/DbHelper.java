@@ -71,12 +71,22 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void insertVehicle(Vehicle vehicle){
+    public void insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(VEHICLE_MODEL, vehicle.getModel());
+        contentValues.put(VEHICLE_NAME, vehicle.getName());
+        contentValues.put(VEHICLE_CAPACITY, vehicle.getCapacity());
+        contentValues.put(VEHICLE_CONSUMPTION, vehicle.getConsumption());
+
+        long result = db.insert(TABLE_VEHICLE, null, contentValues);
+
+        if (result == -1){
+            throw new SqlException();
+        }
     }
+
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
 
