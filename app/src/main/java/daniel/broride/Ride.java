@@ -5,6 +5,7 @@ public class Ride {
     private User[] users;
     private Double gasPrice;
     private Double distance;
+    private Double price;
 
     public Ride(){};
 
