@@ -36,7 +36,7 @@ public class UserEditor extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        finish();
     }
 
     public void insertDb(){
@@ -45,11 +45,12 @@ public class UserEditor extends AppCompatActivity {
 
         try {
             myDb.insertUser(user);
+            Toast.makeText(UserEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
+            finish();
         } catch (SqlException e) {
             e.printStackTrace();
             Toast.makeText(UserEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
         }
-
     }
 
 }

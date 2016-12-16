@@ -3,10 +3,7 @@ package daniel.broride;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -80,29 +77,14 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_users) {
             openUserEditor();
-        } else if (id == R.id.nav_gallery) {
-            Cursor res = myDb.getAllData();
-            if(res.getCount()==0){
-                //show message
-                showMessage("ERRO","Nothing found");
-            }
-
-            StringBuffer buffer = new StringBuffer();
-
-            while(res.moveToNext()){
-                buffer.append("Id : "+res.getString(0)+"\n");
-                buffer.append("Name : "+res.getString(1)+"\n");
-                buffer.append("Surname : "+res.getString(2)+"\n");
-                buffer.append("Age : "+res.getString(3)+"\n\n");
-            }
-
-            showMessage("Data", buffer.toString());
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_vehicles) {
+           openVehicleEditor();
+        } else if (id == R.id.nav_rides) {
 
         } else if (id == R.id.nav_manage) {
-
+            showAllData();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -120,6 +102,30 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void openVehicleEditor(){
+        Intent intent = new Intent(this, VehicleEditor.class);
+        intent.putExtra(EXTRA_MESSAGE, "test");
+        startActivity(intent);
+    }
+
+    public void showAllData(){
+        Cursor res = myDb.getAllData();
+        if(res.getCount()==0){
+            //show message
+            showMessage("ERRO","Nothing found");
+        }
+
+        StringBuffer buffer = new StringBuffer();
+
+        while(res.moveToNext()){
+            buffer.append("Id : "+res.getString(0)+"\n");
+            buffer.append("Name : "+res.getString(1)+"\n");
+            buffer.append("Surname : "+res.getString(2)+"\n");
+            buffer.append("Age : "+res.getString(3)+"\n\n");
+        }
+
+        showMessage("Data", buffer.toString());
+    }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
