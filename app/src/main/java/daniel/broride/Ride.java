@@ -12,4 +12,21 @@ public class Ride {
         this.vehicle = vehicle;
         users = new User[this.vehicle.getCapacity()];
     }
+
+    //Gets and Setter
+    public Double getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(Double gasPrice) {
+        this.gasPrice = gasPrice;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
 }
