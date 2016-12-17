@@ -5,7 +5,7 @@ public class User {
     private String name;
     private int age;
     private double debit;
-    private boolean driver = false;
+    private int isDriver = 0;
 
     //Gets and setters
     public String getName() {
@@ -32,11 +32,11 @@ public class User {
         this.debit = debit;
     }
 
-    public boolean isDriver() {
-        return driver;
+    public int isDriver() {
+        return isDriver
     }
 
-    public void setDriver(boolean driver) {
-        this.driver = driver;
+    public void setDriver(int isDriver) {
+        this.isDriver = isDriver;
     }
 }
