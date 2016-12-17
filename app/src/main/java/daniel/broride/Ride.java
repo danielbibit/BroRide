@@ -5,7 +5,6 @@ public class Ride {
     private User[] users;
     private Double gasPrice;
     private Double distance;
-    private Double price;
 
     public Ride(){};
 
@@ -29,5 +28,9 @@ public class Ride {
 
     public void setDistance(Double distance) {
         this.distance = distance;
+    }
+
+    public Double getPrice(){
+        return gasPrice*distance;
     }
 }
