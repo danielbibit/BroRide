@@ -32,6 +32,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RIDE_GAS = "DRIVER";
     public static final String RIDE_DISTANCE = "AGE";
     */
+
     public static synchronized DbHelper getsInstance(Context context){
         if(mInstance == null){
             mInstance = new DbHelper(context.getApplicationContext());
@@ -63,6 +64,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_VEHICLE);
     }
 
+    /*------------------------------------------------------------------------------------------------------------------------------*/
+
     public void insertUser(User user) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -79,8 +82,15 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(User user) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        String id = String.valueOf(user.getId());
 
+        int i = db.delete(TABLE_USER, "ID = ?", new String[]{id});
+
+        if(i == 0){
+            throw new SqlException();
+        }
     }
 
     public void insertVehicle(Vehicle vehicle)throws SqlException{
@@ -98,6 +108,11 @@ public class DbHelper extends SQLiteOpenHelper {
             throw new SqlException();
         }
     }
+
+    public void deleteVehicle(int id){
+
+    }
+
 
     public void deleteEverything(){
         SQLiteDatabase db = this.getWritableDatabase();

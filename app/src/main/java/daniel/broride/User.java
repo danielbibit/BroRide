@@ -9,6 +9,15 @@ public class User {
     private int isDriver = 0;
 
     //Gets and setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
