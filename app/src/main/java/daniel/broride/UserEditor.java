@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UserEditor extends AppCompatActivity {
+public class UserEditor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     User user = new User();
 
     TextView description;
@@ -37,11 +38,14 @@ public class UserEditor extends AppCompatActivity {
         btnAction = (Button) findViewById(R.id.button);
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
+
         spinnerUser = (Spinner) findViewById(R.id.spinnerUser);
 
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.UserManager, android.R.layout.simple_spinner_item );
+       // ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.UserManager, android.R.layout.simple_spinner_item );
 
-        spinnerUser.setAdapter(adapter);
+        //spinnerUser.setAdapter(adapter);
+
+        spinnerUser.setOnItemSelectedListener(this);
 
         switch (message){
             case "edit":
@@ -91,4 +95,35 @@ public class UserEditor extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    // test
+
+    /*private void loadSpinnerData() {
+        // database handler
+        DbHelper db = new DbHelper(getApplicationContext());
+
+        // Spinner Drop down elements
+        List<String> lables = db.getAllLabels();
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, lables);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+    }
+    */
 }
