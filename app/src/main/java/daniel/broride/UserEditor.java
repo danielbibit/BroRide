@@ -29,6 +29,7 @@ public class UserEditor extends AppCompatActivity {
         editName = (EditText) findViewById(R.id.edit_name);
         editAge = (EditText) findViewById(R.id.edit_age);
         btnAction = (Button) findViewById(R.id.button);
+        isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
 
         switch (message){
@@ -62,7 +63,9 @@ public class UserEditor extends AppCompatActivity {
         DbHelper myDb = DbHelper.getsInstance(this);
 
         user.setName(editName.getText().toString());
-        user.setAge(editAge.getInputType());
+        user.setDriver(isDriver.isChecked()==true ? 1:0);
+        user.setAge(Integer.parseInt(editAge.getText().toString()));
+
 
         try {
             myDb.insertUser(user);

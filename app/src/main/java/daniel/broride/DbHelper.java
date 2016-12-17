@@ -47,10 +47,10 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+TABLE_USER+" ("+USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT)");
+                USER_NAME+" TEXT,"+USER_DRIVER+" INTEGER,"+USER_AGE+" INTEGER,"+USER_DEBIT+" REAL)");
 
         db.execSQL("CREATE TABLE "+TABLE_VEHICLE+" ("+VEHICLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" TEXT,"+VEHICLE_CONSUMPTION+" TEXT)");
+                VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" INTEGER,"+VEHICLE_CONSUMPTION+" REAL)");
         /*
         db.execSQL("CREATE TABLE "+TABLE_USER+" ("+USER_ID + "INTEGER PRIMARY KEY AUINCREMENT,"+
                 USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT,");
@@ -68,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(USER_NAME, user.getName());
-        contentValues.put(USER_DRIVER, user.getName());
+        contentValues.put(USER_DRIVER, user.getIsDriver());
         contentValues.put(USER_AGE, user.getAge());
         contentValues.put(USER_DEBIT, user.getDebit());
 

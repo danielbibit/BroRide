@@ -32,8 +32,8 @@ public class User {
         this.debit = debit;
     }
 
-    public int isDriver() {
-        return isDriver
+    public int getIsDriver() {
+        return isDriver;
     }
 
     public void setDriver(int isDriver) {
