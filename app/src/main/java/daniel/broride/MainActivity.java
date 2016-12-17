@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    DbHelper myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        myDb = new DbHelper(this);
+        //DbHelper myDb = DbHelper.getsInstance(this);
+       // myDb = new DbHelper(this);
     }
 
     @Override
@@ -111,7 +111,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showAllData(){
+        DbHelper myDb = DbHelper.getsInstance(this);
         Cursor res = myDb.getAllData();
+
         if(res.getCount()==0){
             //show message
             showMessage("ERRO","Nothing found");

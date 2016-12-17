@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
+    private static DbHelper mInstance;
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "main.db";
 
@@ -31,8 +32,15 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RIDE_GAS = "DRIVER";
     public static final String RIDE_DISTANCE = "AGE";
     */
+    public static synchronized DbHelper getsInstance(Context context){
+        if(mInstance == null){
+            mInstance = new DbHelper(context.getApplicationContext());
+        }
 
-    public DbHelper(Context context){
+        return mInstance;
+    }
+
+    private DbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 public class UserEditor extends AppCompatActivity {
     User user = new User();
-    DbHelper myDb;
+    DbHelper myDb = DbHelper.getsInstance(this);
+
     EditText editName, editAge;
     Button insert;
     CheckBox isDriver;
@@ -35,7 +36,7 @@ public class UserEditor extends AppCompatActivity {
 
         }
 
-        myDb = new DbHelper(this);
+        //myDb = new DbHelper(this);
 
         editName = (EditText) findViewById(R.id.edit_name);
         editAge = (EditText) findViewById(R.id.edit_age);
