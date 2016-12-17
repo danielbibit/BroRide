@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,10 @@ public class UserEditor extends AppCompatActivity {
     EditText editName, editAge;
     Button btnAction;
     CheckBox isDriver;
+    Spinner spinnerUser;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,11 @@ public class UserEditor extends AppCompatActivity {
         btnAction = (Button) findViewById(R.id.button);
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
+        spinnerUser = (Spinner) findViewById(R.id.spinnerUser);
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.UserManager, android.R.layout.simple_spinner_item );
+
+        spinnerUser.setAdapter(adapter);
 
         switch (message){
             case "edit":

@@ -34,4 +34,8 @@ public class Ride {
     public Double getPrice(){
         return gasPrice*distance;
     }
+
+    public Double getPricePerUser(int i){
+        return getPrice()/i;
+    }
 }

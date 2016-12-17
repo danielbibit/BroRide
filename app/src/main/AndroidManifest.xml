@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".VehicleEditor" />
         <activity android:name=".UserEditor" />
-        <activity android:name=".RideEditor"></activity>
+        <activity android:name=".RideEditor" />
     </application>
 
 </manifest>
