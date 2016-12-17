@@ -2,6 +2,7 @@ package daniel.broride;
 
 
 public class Vehicle {
+    private int id;
     private String name, model;
     private int capacity = 0;
     private Double consumption;

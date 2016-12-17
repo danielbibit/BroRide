@@ -79,6 +79,10 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteUser(int id){
+
+    }
+
     public void insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

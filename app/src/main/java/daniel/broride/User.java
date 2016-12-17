@@ -2,6 +2,7 @@ package daniel.broride;
 
 
 public class User {
+    private int id;
     private String name;
     private int age;
     private double debit;

@@ -1,6 +1,7 @@
 package daniel.broride;
 
 public class Ride {
+    private int id;
     private Vehicle vehicle;
     private User[] users;
     private Double gasPrice;

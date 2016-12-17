@@ -44,7 +44,7 @@ public class UserEditor extends AppCompatActivity {
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        insertDb();
+                        createNewUser();
                     }
                 });
                 break;
@@ -59,13 +59,12 @@ public class UserEditor extends AppCompatActivity {
         finish();
     }
 
-    public void insertDb(){
+    public void createNewUser(){
         DbHelper myDb = DbHelper.getsInstance(this);
 
         user.setName(editName.getText().toString());
         user.setDriver(isDriver.isChecked()==true ? 1:0);
         user.setAge(Integer.parseInt(editAge.getText().toString()));
-
 
         try {
             myDb.insertUser(user);
