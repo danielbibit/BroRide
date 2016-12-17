@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_vehicles) {
            openVehicleEditor();
         } else if (id == R.id.nav_rides) {
-
+            openUserManage();
         } else if (id == R.id.nav_manage) {
             showAllData();
         } else if (id == R.id.nav_share) {
@@ -109,6 +109,13 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
+
+    public void openUserManage(){
+        Intent intent = new Intent(this, UserManage.class);
+        intent.putExtra(EXTRA_MESSAGE, "test");
+        startActivity(intent);
+    }
+
 
     public void showAllData(){
         DbHelper myDb = DbHelper.getsInstance(this);

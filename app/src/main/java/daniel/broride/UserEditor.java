@@ -15,14 +15,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class UserEditor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class UserEditor extends AppCompatActivity{
     User user = new User();
 
     TextView description;
     EditText editName, editAge;
     Button btnAction;
     CheckBox isDriver;
-    Spinner spinnerUser;
+
 
 
 
@@ -41,15 +41,7 @@ public class UserEditor extends AppCompatActivity implements AdapterView.OnItemS
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
 
-        spinnerUser = (Spinner) findViewById(R.id.spinnerUser);
 
-       // ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.UserManager, android.R.layout.simple_spinner_item );
-
-        //spinnerUser.setAdapter(adapter);
-
-        spinnerUser.setOnItemSelectedListener(this);
-
-        loadSpinnerData();
 
         switch (message){
             case "edit":
@@ -99,35 +91,8 @@ public class UserEditor extends AppCompatActivity implements AdapterView.OnItemS
         finish();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-    // test
-
-    private void loadSpinnerData() {
-        // database handler
-        DbHelper myDb = DbHelper.getsInstance(this);
-
-        // Spinner Drop down elements
-        List<String> lables = myDb.getAllLabels();
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lables);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinnerUser.setAdapter(dataAdapter);
-    }
 
 }

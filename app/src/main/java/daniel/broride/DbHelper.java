@@ -132,8 +132,9 @@ public class DbHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public List<String> getAllLabels(){
-        List<String> labels = new ArrayList<String>();
+    // Creater a String array object and return
+    public ArrayList<String> getAllLabels(){
+        ArrayList<String> labels = new ArrayList<String>();
 
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_USER;
