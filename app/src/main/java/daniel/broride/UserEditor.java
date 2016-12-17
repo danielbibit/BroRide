@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class UserEditor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     User user = new User();
 
@@ -46,6 +48,8 @@ public class UserEditor extends AppCompatActivity implements AdapterView.OnItemS
         //spinnerUser.setAdapter(adapter);
 
         spinnerUser.setOnItemSelectedListener(this);
+
+        loadSpinnerData();
 
         switch (message){
             case "edit":
@@ -107,12 +111,12 @@ public class UserEditor extends AppCompatActivity implements AdapterView.OnItemS
 
     // test
 
-    /*private void loadSpinnerData() {
+    private void loadSpinnerData() {
         // database handler
-        DbHelper db = new DbHelper(getApplicationContext());
+        DbHelper myDb = DbHelper.getsInstance(this);
 
         // Spinner Drop down elements
-        List<String> lables = db.getAllLabels();
+        List<String> lables = myDb.getAllLabels();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -123,7 +127,7 @@ public class UserEditor extends AppCompatActivity implements AdapterView.OnItemS
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+        spinnerUser.setAdapter(dataAdapter);
     }
-    */
+
 }

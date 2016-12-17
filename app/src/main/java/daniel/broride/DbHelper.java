@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DbHelper extends SQLiteOpenHelper {
     private static DbHelper mInstance;
     private static final int DATABASE_VERSION = 1;
@@ -56,6 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE "+TABLE_USER+" ("+USER_ID + "INTEGER PRIMARY KEY AUINCREMENT,"+
                 USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT,");
         */
+
     }
 
     @Override
@@ -127,4 +131,29 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return res;
     }
+
+    public List<String> getAllLabels(){
+        List<String> labels = new ArrayList<String>();
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_USER;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                labels.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning lables
+        return labels;
+    }
+
 }
