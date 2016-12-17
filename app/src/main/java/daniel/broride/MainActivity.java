@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
     public void openUserEditor(){
         Intent intent = new Intent(this, UserEditor.class);
-        intent.putExtra(EXTRA_MESSAGE, "Test");
+        intent.putExtra(EXTRA_MESSAGE, "create");
         startActivity(intent);
     }
 
@@ -124,11 +124,14 @@ public class MainActivity extends AppCompatActivity
         while(res.moveToNext()){
             buffer.append("Id : "+res.getString(0)+"\n");
             buffer.append("Name : "+res.getString(1)+"\n");
-            buffer.append("Surname : "+res.getString(2)+"\n");
-            buffer.append("Age : "+res.getString(3)+"\n\n");
+            buffer.append("Driver : "+res.getString(2)+"\n");
+            buffer.append("Age : "+res.getString(3)+"\n");
+            buffer.append("Debit: "+res.getString(4)+"\n\n");
         }
 
         showMessage("Data", buffer.toString());
+
+        myDb.deleteEverything();
     }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

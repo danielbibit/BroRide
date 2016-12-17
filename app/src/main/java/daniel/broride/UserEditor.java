@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class UserEditor extends AppCompatActivity {
     User user = new User();
-    DbHelper myDb = DbHelper.getsInstance(this);
 
+    TextView description;
     EditText editName, editAge;
-    Button insert;
+    Button btnAction;
     CheckBox isDriver;
 
     @Override
@@ -25,29 +26,30 @@ public class UserEditor extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
+        editName = (EditText) findViewById(R.id.edit_name);
+        editAge = (EditText) findViewById(R.id.edit_age);
+        btnAction = (Button) findViewById(R.id.button);
+        description = (TextView)findViewById(R.id.textView_description);
+
         switch (message){
             case "edit":
                 break;
             case "delete":
                 break;
             case "create":
+                description.setText("Criar");
+                btnAction.setText("Criar!");
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        insertDb();
+                    }
+                });
                 break;
             default:
 
         }
-
-        //myDb = new DbHelper(this);
-
-        editName = (EditText) findViewById(R.id.edit_name);
-        editAge = (EditText) findViewById(R.id.edit_age);
-        insert = (Button) findViewById(R.id.button);
-
-        insert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertDb();
-            }
-        });
     }
 
     @Override
@@ -57,6 +59,8 @@ public class UserEditor extends AppCompatActivity {
     }
 
     public void insertDb(){
+        DbHelper myDb = DbHelper.getsInstance(this);
+
         user.setName(editName.getText().toString());
         user.setAge(editAge.getInputType());
 

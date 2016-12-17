@@ -54,7 +54,7 @@
         android:text="MODO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9"
+        android:id="@+id/textView_description"
         android:textSize="24sp"
         android:layout_above="@+id/textView_nome"
         android:layout_toRightOf="@+id/textView8"
@@ -99,8 +99,8 @@
         android:id="@+id/driver_checkBox"
         android:layout_alignBaseline="@+id/textView_motorista"
         android:layout_alignBottom="@+id/textView_motorista"
-        android:layout_toLeftOf="@+id/textView9"
-        android:layout_toStartOf="@+id/textView9" />
+        android:layout_toLeftOf="@+id/textView_description"
+        android:layout_toStartOf="@+id/textView_description" />
 
     <EditText
         android:layout_width="wrap_content"

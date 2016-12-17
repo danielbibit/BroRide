@@ -8,25 +8,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static DbHelper mInstance;
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "main.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "main.db";
 
-    public static final String TABLE_USER = "USER_TABLE";
-    public static final String USER_ID = "ID";
-    public static final String USER_NAME = "NAME";
-    public static final String USER_DRIVER = "DRIVER";
-    public static final String USER_AGE = "AGE";
-    public static final String USER_DEBIT = "DEBIT";
+    private static final String TABLE_USER = "USER_TABLE";
+    private static final String USER_ID = "ID";
+    private static final String USER_NAME = "NAME";
+    private static final String USER_DRIVER = "DRIVER";
+    private static final String USER_AGE = "AGE";
+    private static final String USER_DEBIT = "DEBIT";
 
-    public static final String TABLE_VEHICLE = "USER_VEHICLE";
-    public static final String VEHICLE_ID = "ID";
-    public static final String VEHICLE_MODEL = "MODEL";
-    public static final String VEHICLE_NAME = "NAME";
-    public static final String VEHICLE_CAPACITY = "CAPACITY";
-    public static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
+    private static final String TABLE_VEHICLE = "USER_VEHICLE";
+    private static final String VEHICLE_ID = "ID";
+    private static final String VEHICLE_MODEL = "MODEL";
+    private static final String VEHICLE_NAME = "NAME";
+    private static final String VEHICLE_CAPACITY = "CAPACITY";
+    private static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
 
     /*
-    public static final String TABLE_RIDE = "USER_TABLE";
+    public static final String TABLE_RIDE = "RIDE_TABLE";
     public static final String RIDE_ID = "ID";
     public static final String RIDE_VEHICLE = "NAME";
     public static final String RIDE_GAS = "DRIVER";
@@ -93,6 +93,12 @@ public class DbHelper extends SQLiteOpenHelper {
         if (result == -1){
             throw new SqlException();
         }
+    }
+
+    public void deleteEverything(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.rawQuery("DELETE FROM "+TABLE_USER, null);
     }
 
     public Cursor getAllData(){
