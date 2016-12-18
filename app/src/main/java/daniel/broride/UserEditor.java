@@ -48,16 +48,30 @@ public class UserEditor extends AppCompatActivity{
             case "display":
                 description.setText("Visualizar");
                 btnAction.setText("edit");
-                int id = intent.getIntExtra("id", 3);
-                //int id = 3;
-                Log.d("Debug id", ""+id);
-                displayUser(id, 1);
-                break;
-            case "edit":
+
+                int id = intent.getIntExtra("id", 0);
+
+                Data data = Data.getInstance();
+                data.fillUser(this);
+
+                User user;
+                user = data.getUserById(id);
+
+                displayMode(0);
+
+                editName.setText(user.getName());
+                editAge.setText(String.valueOf(user.getAge()));
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
 
                 break;
-            case "delete":
-                break;
+
             case "create":
                 description.setText("Criar");
                 btnAction.setText("Criar!");
@@ -80,22 +94,22 @@ public class UserEditor extends AppCompatActivity{
         finish();
     }
 
-    public void displayUser(int id, int mode){
-        Data data = Data.getInstance();
-        data.fillUser(this);
-        User user;
-        Log.d("Debug", ""+id);
-        user = data.getUserById(id);
-        if(mode==1){
+    public void displayMode(int mode){
+        if(mode==0) {
             editName.setFocusable(false);
             editAge.setFocusable(false);
             isDriver.setFocusable(false);
             editName.setClickable(false);
             editAge.setClickable(false);
             isDriver.setClickable(false);
+        }else if(mode == 1){
+            editName.setFocusable(true);
+            editAge.setFocusable(true);
+            isDriver.setFocusable(true);
+            editName.setClickable(true);
+            editAge.setClickable(true);
+            isDriver.setClickable(true);
         }
-        editName.setText(user.getName());
-        editAge.setText(String.valueOf(user.getAge()));
     }
 
     public void createNewUser(){
@@ -118,6 +132,16 @@ public class UserEditor extends AppCompatActivity{
         }
     }
 
+    public void deleteUser(int id){
+        DbHelper myDb = DbHelper.getsInstance(this);
+        Data data = Data.getInstance();
+
+        try {
+            myDb.deleteUser(data.getUserById(id));
+        } catch (SqlException e) {
+            e.printStackTrace();
+        }
+    }
     public void back(View view){
         finish();
     }
