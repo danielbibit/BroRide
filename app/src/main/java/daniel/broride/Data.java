@@ -25,6 +25,8 @@ public class Data {
             //trowh error
         }
         int i = 0;
+        count = 0;
+
         while(res.moveToNext()){
             users[i] = new User();
             users[i].setId(res.getInt(0));
@@ -35,6 +37,11 @@ public class Data {
             count++;
             i++;
         }
+    }
+    public void insertUser(User user){
+        users[count] = new User();
+        users[count] = user;
+        count++;
     }
 
     public User getUser(int i){

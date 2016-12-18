@@ -28,9 +28,6 @@ public class UserEditor extends AppCompatActivity{
     Button btnAction;
     CheckBox isDriver;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +41,6 @@ public class UserEditor extends AppCompatActivity{
         btnAction = (Button) findViewById(R.id.button);
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
-
-        /*
-        Intent receiver = getIntent();
-        Bundle b = receiver.getExtras();
-
-        if(b != null){
-            this.i = b.getInt("id");
-            fillUser();
-        }
-        */
 
 
         switch (message){
@@ -85,13 +72,16 @@ public class UserEditor extends AppCompatActivity{
 
     public void createNewUser(){
         DbHelper myDb = DbHelper.getsInstance(this);
+        Data data = Data.getInstance();
 
         user.setName(editName.getText().toString());
         user.setDriver(isDriver.isChecked()==true ? 1:0);
         user.setAge(Integer.parseInt(editAge.getText().toString()));
 
         try {
-            myDb.insertUser(user);
+            int id = myDb.insertUser(user);
+            user.setId(id);
+            data.insertUser(user);
             Toast.makeText(UserEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
             finish();
         } catch (SqlException e) {
@@ -102,20 +92,6 @@ public class UserEditor extends AppCompatActivity{
 
     public void back(View view){
         finish();
-    }
-
-    public void fillUser(){
-
-        if ( i != 789){
-            DbHelper myDb = DbHelper.getsInstance(this);
-            User user = new User();
-
-            user = myDb.getUser(2);
-
-            editName.setText(user.getName());
-            editAge.setText(user.getAge());
-
-        }
     }
 
 }

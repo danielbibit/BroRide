@@ -71,7 +71,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     /*------------------------------------------------------------------------------------------------------------------------------*/
 
-    public void insertUser(User user) throws SqlException{
+    public int insertUser(User user) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -84,6 +84,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
         if (result == -1){
             throw new SqlException();
+        }else{
+            return (int) result;
         }
     }
 
