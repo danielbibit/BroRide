@@ -103,7 +103,6 @@ public class DbHelper extends SQLiteOpenHelper {
         int result = db.update(TABLE_USER, contentValues, "ID = ?", new String[]{String.valueOf(user.getId())});
 
         if (result == 0){
-            Log.d("SQLERRO", "deu erro no sql");
             throw new SqlException();
         }
     }
@@ -118,6 +117,17 @@ public class DbHelper extends SQLiteOpenHelper {
             throw new SqlException();
         }
     }
+
+    public Cursor getAllUsersData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_USER, null);
+
+        return res;
+    }
+
+
+
 
     public void insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
@@ -135,6 +145,10 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateVehicle(Vehicle vehicle){
+
+    }
+
     public void deleteVehicle(Vehicle vehicle) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         String id = String.valueOf(vehicle.getId());
@@ -144,15 +158,6 @@ public class DbHelper extends SQLiteOpenHelper {
         if(i == 0){
             throw new SqlException();
         }
-    }
-
-
-    public Cursor getAllData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_USER, null);
-
-        return res;
     }
 
 }

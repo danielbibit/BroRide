@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import static daniel.broride.MainActivity.EXTRA_MESSAGE;
+
 public class UserEditor extends AppCompatActivity{
     User user = new User();
 
@@ -36,7 +38,7 @@ public class UserEditor extends AppCompatActivity{
         setContentView(R.layout.activity_user_editor);
 
         Intent intent = getIntent();
-        message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        message = intent.getStringExtra(EXTRA_MESSAGE);
 
         editName = (EditText) findViewById(R.id.edit_name);
         editAge = (EditText) findViewById(R.id.edit_age);
@@ -45,36 +47,31 @@ public class UserEditor extends AppCompatActivity{
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
 
+        final int id = intent.getIntExtra("id", 0);
+        description.setText("Visualizar");
+        btnAction.setText("Editar");
+        Data data = Data.getInstance();
+        data.fillUser(this);
+
+        final User user;
+        user = data.getUserById(id);
+
+        //setViewMode(1);
+        editName.setText(user.getName());
+        editAge.setText(String.valueOf(user.getAge()));
+        isDriver.setChecked(user.getIsDriver()==1?true:false);
 
         switch (message){
             case "display":
-                final int id = intent.getIntExtra("id", 0);
-                description.setText("Visualizar");
-                btnAction.setText("Editar");
-                Data data = Data.getInstance();
-                data.fillUser(this);
-
-                final User user;
-                user = data.getUserById(id);
-
-                //setViewMode(1);
-                editName.setText(user.getName());
-                editAge.setText(String.valueOf(user.getAge()));
-                isDriver.setChecked(user.getIsDriver()==1?true:false);
 
                 //Listener for the action button
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(pass ==0){
-                            //setViewMode(1);
-                            description.setText("Editar");
-                            btnDelete.setVisibility(View.INVISIBLE);
-                            btnAction.setText("Confirmar");
-                            pass++;
-                        }else if(pass ==1){
-                            updateUser(user);
-                        }
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "edit");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
                     }
                 });
 
@@ -82,15 +79,10 @@ public class UserEditor extends AppCompatActivity{
                 btnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        description.setText("Deletar");
-                        btnDelete.setVisibility(View.INVISIBLE);
-                        btnAction.setText("Confirmar");
-                        btnAction.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                deleteUser(id);
-                            }
-                        });
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
                     }
                 });
 
@@ -104,6 +96,31 @@ public class UserEditor extends AppCompatActivity{
                     @Override
                     public void onClick(View v) {
                         createNewUser();
+                    }
+                });
+                break;
+
+            case "delete":
+                description.setText("Deletar");
+                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteUser(id);
+                    }
+                });
+                break;
+
+            case "edit":
+                description.setText("Editar");
+                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateUser(user);
                     }
                 });
                 break;
@@ -163,7 +180,7 @@ public class UserEditor extends AppCompatActivity{
         try {
             int id = myDb.insertUser(user);
             user.setId(id);
-            data.insertUser(user);
+            //data.insertUser(user);
             Toast.makeText(UserEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
             data.fillUser(this);
             finish();

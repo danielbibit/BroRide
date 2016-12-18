@@ -25,7 +25,7 @@ public class Data {
     //Preenche o Data base User
     public void fillUser(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllData();
+        Cursor res = myDb.getAllUsersData();
 
         if(res.getCount()==0){
             //show message
@@ -69,12 +69,15 @@ public class Data {
     public int getCountUsers(){
         return countUsers;
     }
+
+
     //----------------------------------------------------------------------------------------------
+
 
     //Preenche o Data base Vehicle
     public void fillVehicle(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllData();
+        Cursor res = myDb.getAllUsersData();
 
         if(res.getCount()==0){
             //show message
