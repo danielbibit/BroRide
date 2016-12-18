@@ -65,7 +65,6 @@ public class UserEditor extends AppCompatActivity{
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 });
 
