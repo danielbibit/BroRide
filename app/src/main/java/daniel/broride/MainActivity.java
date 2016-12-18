@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*------------------------------------------------------------------------------------------*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        /*------------------------------------------------------------------------------------------*/
 
         data = Data.getInstance();
         data.fillUser(this);
@@ -77,9 +79,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_users) {
-            openUserManage();
+            openUserManager();
         } else if (id == R.id.nav_vehicles) {
-           openVehicleEditor();
+            openVehicleManager();
         } else if (id == R.id.nav_rides) {
 
         } else if (id == R.id.nav_manage) {
@@ -95,24 +97,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void openUserEditor(){
-        Intent intent = new Intent(this, UserEditor.class);
-        intent.putExtra(EXTRA_MESSAGE, "create");
-        startActivity(intent);
-    }
-
-    public void openVehicleEditor(){
-        Intent intent = new Intent(this, VehicleEditor.class);
+    public void openVehicleManager(){
+        Intent intent = new Intent(this, VehicleManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
-    public void openUserManage(){
+    public void openUserManager(){
         Intent intent = new Intent(this, UserManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
+    public void openRideManager(){
+
+    }
 
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
@@ -129,6 +128,7 @@ public class MainActivity extends AppCompatActivity
 
         showMessage("Data", buffer.toString());
     }
+
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);

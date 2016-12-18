@@ -25,7 +25,7 @@ public class Data {
     //Preenche o Data base User
     public void fillUser(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllData();
+        Cursor res = myDb.getAllUsersData();
 
         if(res.getCount()==0){
             //show message
@@ -69,12 +69,15 @@ public class Data {
     public int getCountUsers(){
         return countUsers;
     }
+
+
     //----------------------------------------------------------------------------------------------
+
 
     //Preenche o Data base Vehicle
     public void fillVehicle(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllData();
+        Cursor res = myDb.getAllUsersData();
 
         if(res.getCount()==0){
             //show message
@@ -119,8 +122,6 @@ public class Data {
         return countVehicles;
     }
 
-
-
     //Metodos usados pelos Managers
     public ArrayList<String> getAllUsersData() {
         ArrayList<String> labels = new ArrayList<String>();
@@ -144,7 +145,7 @@ public class Data {
     public ArrayList<String> getAllVehiclesData() {
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countUsers; i++){
+        for (int i = 0; i< countUsers; i++){/////////////////////////
 
             labels.add(vehicles[i].getName());
         }

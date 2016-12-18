@@ -39,8 +39,7 @@ public class UserManager extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
                 openUserEditor(arrayUsersId[position]);
             }
         });
@@ -73,6 +72,7 @@ public class UserManager extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
     private void loadSpinnerData() {
         // database handler
         //DbHelper myDb = DbHelper.getsInstance(this);

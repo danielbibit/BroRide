@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,23 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateUser(User user) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(USER_ID, user.getId());
+        contentValues.put(USER_NAME, user.getName());
+        contentValues.put(USER_DRIVER, user.getIsDriver());
+        contentValues.put(USER_AGE, user.getAge());
+        contentValues.put(USER_DEBIT, user.getDebit());
+
+        int result = db.update(TABLE_USER, contentValues, "ID = ?", new String[]{String.valueOf(user.getId())});
+
+        if (result == 0){
+            throw new SqlException();
+        }
+    }
+
     public void deleteUser(User user) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         String id = String.valueOf(user.getId());
@@ -99,6 +117,18 @@ public class DbHelper extends SQLiteOpenHelper {
             throw new SqlException();
         }
     }
+
+    public Cursor getAllUsersData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_USER, null);
+
+        return res;
+    }
+
+
+
+
 
     public void insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
@@ -116,6 +146,23 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateVehicle(Vehicle vehicle) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(VEHICLE_MODEL, vehicle.getModel());
+        contentValues.put(VEHICLE_NAME, vehicle.getName());
+        contentValues.put(VEHICLE_CAPACITY, vehicle.getCapacity());
+        contentValues.put(VEHICLE_CONSUMPTION, vehicle.getConsumption());
+
+        int result = db.update(TABLE_VEHICLE, contentValues, "ID = ?",
+                new String[]{String.valueOf(vehicle.getId())});
+
+        if(result == 0){
+            throw new SqlException();
+        }
+    }
+
     public void deleteVehicle(Vehicle vehicle) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         String id = String.valueOf(vehicle.getId());
@@ -125,77 +172,6 @@ public class DbHelper extends SQLiteOpenHelper {
         if(i == 0){
             throw new SqlException();
         }
-    }
-
-
-    public void deleteEverything(){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.rawQuery("DELETE FROM "+TABLE_USER, null);
-    }
-
-    public Cursor getAllData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_USER, null);
-
-        return res;
-    }
-
-    // Creater a String array object and return
-    public ArrayList<String> getAllLabels(){
-        ArrayList<String> labels = new ArrayList<String>();
-
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_USER;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                labels.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-
-        // closing connection
-        cursor.close();
-        db.close();
-
-        // returning lables
-        return labels;
-    }
-
-    //Metodos relacionados ao userManage
-
-    public User getUser(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USER, // a. tabela
-                COLUNAS_USER, // b. colunas
-                " id = ?", // c. colunas para comparar
-                new String[] { String.valueOf(id) }, // d. parâmetros
-                null, // e. group by
-                null, // f. having
-                null, // g. order by
-                null); // h. limit
-        if (cursor == null) {
-            return null;
-        } else {
-            cursor.moveToFirst();
-            User user = cursorToUser(cursor);
-            return user;
-        }
-    }
-
-    private User cursorToUser(Cursor cursor) {
-        User user = new User();
-        user.setId(Integer.parseInt(cursor.getString(0)));
-        user.setName(cursor.getString(1));
-        user.setDriver(Integer.parseInt(cursor.getString(2)));
-        user.setAge(Integer.parseInt(cursor.getString(3)));
-        user.setDebit(Double.parseDouble(cursor.getString(4)));
-        return user;
     }
 
 }
