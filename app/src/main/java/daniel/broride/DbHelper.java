@@ -165,26 +165,26 @@ public class DbHelper extends SQLiteOpenHelper {
         return labels;
     }
 
-     //Metodos relacionados ao userManage
+    //Metodos relacionados ao userManage
 
-     public User getUser(int id) {
-         SQLiteDatabase db = this.getReadableDatabase();
-         Cursor cursor = db.query(TABLE_USER, // a. tabela
-                 COLUNAS_USER, // b. colunas
-                 " id = ?", // c. colunas para comparar
-                 new String[] { String.valueOf(id) }, // d. parâmetros
-                 null, // e. group by
-                 null, // f. having
-                 null, // g. order by
-                 null); // h. limit
-         if (cursor == null) {
-             return null;
-         } else {
-             cursor.moveToFirst();
-             User user = cursorToUser(cursor);
-             return user;
-         }
-     }
+    public User getUser(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USER, // a. tabela
+                COLUNAS_USER, // b. colunas
+                " id = ?", // c. colunas para comparar
+                new String[] { String.valueOf(id) }, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null, // g. order by
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        } else {
+            cursor.moveToFirst();
+            User user = cursorToUser(cursor);
+            return user;
+        }
+    }
 
     private User cursorToUser(Cursor cursor) {
         User user = new User();
