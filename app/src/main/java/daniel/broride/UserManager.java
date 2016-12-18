@@ -68,7 +68,7 @@ public class UserManager extends AppCompatActivity {
             startActivity(intent);
         }else{
             intent.putExtra(EXTRA_MESSAGE,"display");
-            intent.addFlags(n);
+            intent.putExtra("id",n);
             startActivity(intent);
         }
     }
