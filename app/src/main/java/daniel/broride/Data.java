@@ -65,4 +65,14 @@ public class Data {
 
        return labels;
     }
+    public int[] getAllId(){
+
+        int[] array = new int[count - 1];
+
+        for (int i = 0; i == count; i++) {
+            array[i] = users[i].getId();
+        }
+
+        return  array;
+    }
 }

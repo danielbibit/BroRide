@@ -23,6 +23,8 @@ public class UserManage extends AppCompatActivity {
 
     private int id;
 
+    int[] arrayId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +34,14 @@ public class UserManage extends AppCompatActivity {
         button = (Button) findViewById(R.id.addUser);
 
         loadSpinnerData();
+        fillArrayId();
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
-                id = position;
-                openUserEditor(0);
 
+                openUserEditor(arrayId[position]);
             }
         });
 
@@ -53,15 +53,25 @@ public class UserManage extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadSpinnerData();
+    }
+
     private void openUserEditor(int n){
         Intent intent = new Intent(this, UserEditor.class);
 
         if(n==-1){
             intent.putExtra(EXTRA_MESSAGE, "create");
             startActivity(intent);
+        }else{
+            intent.putExtra(EXTRA_MESSAGE,"Display");
+            intent.addFlags(n);
+            startActivity(intent);
         }
     }
-
     private void loadSpinnerData() {
         // database handler
         //DbHelper myDb = DbHelper.getsInstance(this);
@@ -81,4 +91,10 @@ public class UserManage extends AppCompatActivity {
         // attaching data adapter to spinner
         lista.setAdapter(dataAdapter);
     }
+
+    private void fillArrayId(){
+        Data data = Data.getInstance();
+        arrayId = data.getAllId();
+    }
+
 }
