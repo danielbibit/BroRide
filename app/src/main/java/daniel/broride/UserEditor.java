@@ -51,7 +51,7 @@ public class UserEditor extends AppCompatActivity{
                 int id = intent.getIntExtra("id", 3);
                 //int id = 3;
                 Log.d("Debug id", ""+id);
-                displayUser(id);
+                displayUser(id, 1);
                 break;
             case "edit":
 
@@ -80,13 +80,20 @@ public class UserEditor extends AppCompatActivity{
         finish();
     }
 
-    public void displayUser(int id){
+    public void displayUser(int id, int mode){
         Data data = Data.getInstance();
         data.fillUser(this);
         User user;
         Log.d("Debug", ""+id);
         user = data.getUserById(id);
-
+        if(mode==1){
+            editName.setFocusable(false);
+            editAge.setFocusable(false);
+            isDriver.setFocusable(false);
+            editName.setClickable(false);
+            editAge.setClickable(false);
+            isDriver.setClickable(false);
+        }
         editName.setText(user.getName());
         editAge.setText(String.valueOf(user.getAge()));
     }
