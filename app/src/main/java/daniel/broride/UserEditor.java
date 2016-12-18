@@ -48,8 +48,8 @@ public class UserEditor extends AppCompatActivity{
             case "display":
                 description.setText("Visualizar");
                 btnAction.setText("edit");
-                //int id = intent.getIntExtra("id", 3);
-                int id = 3;
+                int id = intent.getIntExtra("id", 3);
+                //int id = 3;
                 Log.d("Debug id", ""+id);
                 displayUser(id);
                 break;

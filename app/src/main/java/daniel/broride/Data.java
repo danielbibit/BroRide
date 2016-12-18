@@ -80,12 +80,14 @@ public class Data {
 
        return labels;
     }
+
     public int[] getAllId(){
-
-        int[] array = new int[count - 1];
-
-        for (int i = 0; i == count; i++) {
+        Log.d("Debug", "Entrei no metodo pra retornar todos ids");
+        int[] array = new int[count];
+        Log.d("count value",""+count);
+        for (int i = 0; i < count; i++) {
             array[i] = users[i].getId();
+            Log.d("Debug", ""+array[i]);
         }
 
         return  array;

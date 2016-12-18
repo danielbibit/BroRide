@@ -58,6 +58,7 @@ public class UserManager extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadSpinnerData();
+        fillArrayId();
     }
 
     private void openUserEditor(int n){
