@@ -1,7 +1,10 @@
 package daniel.broride;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 public class Data {
     private static Data mInstance;
@@ -50,5 +53,16 @@ public class Data {
 
     public int getCount(){
         return count;
+    }
+
+    public ArrayList<String> getAllData() {
+        ArrayList<String> labels = new ArrayList<String>();
+
+        for (int i = 0; i<count; i++){
+
+            labels.add(users[i].getName());
+        }
+
+       return labels;
     }
 }

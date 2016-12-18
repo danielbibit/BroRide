@@ -64,15 +64,15 @@ public class UserManage extends AppCompatActivity {
 
     private void loadSpinnerData() {
         // database handler
-        DbHelper myDb = DbHelper.getsInstance(this);
+        //DbHelper myDb = DbHelper.getsInstance(this);
+        Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = myDb.getAllLabels();
+        List<String> lables = data.getAllData();
 
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lables);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lables);
 
         // Drop down layout style - list view with radio button
         dataAdapter
