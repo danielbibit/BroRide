@@ -48,8 +48,6 @@ public class UserEditor extends AppCompatActivity{
         Bundle b = getIntent().getExtras();
         i = b.getInt("id");
 
-        viewUser();
-
 
         switch (message){
             case "edit":
@@ -98,20 +96,6 @@ public class UserEditor extends AppCompatActivity{
     public void back(View view){
         finish();
     }
-
-    public void viewUser(){
-
-        if(a){
-
-            DbHelper myDb = DbHelper.getsInstance(this);
-            Cursor cursor = myDb.getCursor();
-
-            editName.setText(cursor.getString(1));
-           // editAge.setText(cursor.getString(3));
-        }
-    }
-
-
 
 
 }
