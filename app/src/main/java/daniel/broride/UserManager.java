@@ -16,7 +16,7 @@ import java.util.List;
 
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
-public class UserManage extends AppCompatActivity {
+public class UserManager extends AppCompatActivity {
 
     ListView lista;
     Button button;
@@ -67,7 +67,7 @@ public class UserManage extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE, "create");
             startActivity(intent);
         }else{
-            intent.putExtra(EXTRA_MESSAGE,"Display");
+            intent.putExtra(EXTRA_MESSAGE,"display");
             intent.addFlags(n);
             startActivity(intent);
         }

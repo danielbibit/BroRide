@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,7 +45,15 @@ public class UserEditor extends AppCompatActivity{
 
 
         switch (message){
+            case "display":
+                description.setText("Visualizar");
+                btnAction.setText("edit");
+                int id = intent.getFlags();
+                Log.d("Debug id", ""+id);
+                displayUser(id);
+                break;
             case "edit":
+
                 break;
             case "delete":
                 break;
@@ -68,6 +77,16 @@ public class UserEditor extends AppCompatActivity{
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    public void displayUser(int id){
+        Data data = Data.getInstance();
+        User user;
+
+        user = data.getUserById(id);
+
+        //editName.setText(user.getName());
+        //editAge.setText(String.valueOf(user.getAge()));
     }
 
     public void createNewUser(){

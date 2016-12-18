@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,10 +35,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        DbHelper myDb = DbHelper.getsInstance(this);
-        Cursor res = myDb.getAllData();
         data = Data.getInstance();
-        data.fillUser(res);
+        data.fillUser(this);
     }
 
     @Override
@@ -113,7 +109,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openUserManage(){
-        Intent intent = new Intent(this, UserManage.class);
+        Intent intent = new Intent(this, UserManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
@@ -121,7 +117,6 @@ public class MainActivity extends AppCompatActivity
 
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
-
 
         for(int i=0; i<data.getCount(); i++){
             User user = data.getUser(i);

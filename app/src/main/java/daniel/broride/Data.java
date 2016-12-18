@@ -1,5 +1,6 @@
 package daniel.broride;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -22,13 +23,16 @@ public class Data {
 
     private Data(){}
 
-    public void fillUser(Cursor res){
+    public void fillUser(Context context){
+        DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
+        Cursor res = myDb.getAllData();
+
         if(res.getCount()==0){
             //show message
             //trowh error
         }
         int i = 0;
-        count = 0;
+        //count = 0;
 
         while(res.moveToNext()){
             users[i] = new User();
@@ -41,6 +45,17 @@ public class Data {
             i++;
         }
     }
+
+    public User getUserById(int id){
+        User user = null;
+        for(int i=0; i<count; i++){
+            if(users[i].getId()== id){
+                return users[i];
+            }
+        }
+       return user;
+    }
+
     public void insertUser(User user){
         users[count] = new User();
         users[count] = user;
