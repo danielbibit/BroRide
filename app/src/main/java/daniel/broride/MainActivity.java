@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_users) {
-            openUserManage();
+            openUserManager();
         } else if (id == R.id.nav_vehicles) {
-           openVehicleEditor();
+            openVehicleManager();
         } else if (id == R.id.nav_rides) {
 
         } else if (id == R.id.nav_manage) {
@@ -95,19 +95,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void openUserEditor(){
-        Intent intent = new Intent(this, UserEditor.class);
-        intent.putExtra(EXTRA_MESSAGE, "create");
-        startActivity(intent);
-    }
-
-    public void openVehicleEditor(){
-        Intent intent = new Intent(this, VehicleEditor.class);
+    public void openVehicleManager(){
+        Intent intent = new Intent(this, VehicleManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
-    public void openUserManage(){
+    public void openUserManager(){
         Intent intent = new Intent(this, UserManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);

@@ -119,8 +119,6 @@ public class Data {
         return countVehicles;
     }
 
-
-
     //Metodos usados pelos Managers
     public ArrayList<String> getAllUsersData() {
         ArrayList<String> labels = new ArrayList<String>();
