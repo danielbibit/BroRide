@@ -32,11 +32,6 @@ public class VehicleEditor extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     public void displayData(int id){
 
     }
