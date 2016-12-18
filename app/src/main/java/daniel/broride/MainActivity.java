@@ -1,7 +1,6 @@
 package daniel.broride;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.design.widget.NavigationView;
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
 
-        for(int i=0; i<data.getCount(); i++){
+        for(int i = 0; i<data.getCountUsers(); i++){
             User user = data.getUser(i);
 
             buffer.append("Id : "+ user.getId()+"\n");
