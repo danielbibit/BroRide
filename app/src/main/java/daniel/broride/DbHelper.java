@@ -113,8 +113,15 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteVehicle(int id){
+    public void deleteVehicle(Vehicle vehicle) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        String id = String.valueOf(vehicle.getId());
 
+        int i = db.delete(TABLE_VEHICLE, "ID = ?", new String[]{id});
+
+        if(i == 0){
+            throw new SqlException();
+        }
     }
 
 
