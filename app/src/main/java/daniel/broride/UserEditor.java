@@ -1,6 +1,8 @@
 package daniel.broride;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,11 +20,13 @@ import java.util.List;
 public class UserEditor extends AppCompatActivity{
     User user = new User();
 
+    private boolean a = true;
+    private int i;
+
     TextView description;
     EditText editName, editAge;
     Button btnAction;
     CheckBox isDriver;
-
 
 
 
@@ -41,6 +45,10 @@ public class UserEditor extends AppCompatActivity{
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
 
+        Bundle b = getIntent().getExtras();
+        i = b.getInt("id");
+
+        viewUser();
 
 
         switch (message){
@@ -91,6 +99,17 @@ public class UserEditor extends AppCompatActivity{
         finish();
     }
 
+    public void viewUser(){
+
+        if(a){
+
+            DbHelper myDb = DbHelper.getsInstance(this);
+            Cursor cursor = myDb.getCursor();
+
+            editName.setText(cursor.getString(1));
+           // editAge.setText(cursor.getString(3));
+        }
+    }
 
 
 

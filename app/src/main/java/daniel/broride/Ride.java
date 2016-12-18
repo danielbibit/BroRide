@@ -14,6 +14,8 @@ public class Ride {
         users = new User[this.vehicle.getCapacity()];
     }
 
+
+
     //Gets and Setter
     public Double getGasPrice() {
         return gasPrice;
