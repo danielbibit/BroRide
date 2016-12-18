@@ -129,6 +129,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
+
     public void insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -145,8 +146,21 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateVehicle(Vehicle vehicle){
+    public void updateVehicle(Vehicle vehicle) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
+        contentValues.put(VEHICLE_MODEL, vehicle.getModel());
+        contentValues.put(VEHICLE_NAME, vehicle.getName());
+        contentValues.put(VEHICLE_CAPACITY, vehicle.getCapacity());
+        contentValues.put(VEHICLE_CONSUMPTION, vehicle.getConsumption());
+
+        int result = db.update(TABLE_VEHICLE, contentValues, "ID = ?",
+                new String[]{String.valueOf(vehicle.getId())});
+
+        if(result == 0){
+            throw new SqlException();
+        }
     }
 
     public void deleteVehicle(Vehicle vehicle) throws SqlException{

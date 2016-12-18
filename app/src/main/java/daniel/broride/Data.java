@@ -145,7 +145,7 @@ public class Data {
     public ArrayList<String> getAllVehiclesData() {
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countUsers; i++){
+        for (int i = 0; i< countUsers; i++){/////////////////////////
 
             labels.add(vehicles[i].getName());
         }

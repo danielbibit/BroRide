@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*------------------------------------------------------------------------------------------*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        /*------------------------------------------------------------------------------------------*/
 
         data = Data.getInstance();
         data.fillUser(this);
@@ -107,6 +109,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void openRideManager(){
+
+    }
 
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
@@ -123,6 +128,7 @@ public class MainActivity extends AppCompatActivity
 
         showMessage("Data", buffer.toString());
     }
+
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
