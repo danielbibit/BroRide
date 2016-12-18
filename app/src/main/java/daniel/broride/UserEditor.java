@@ -48,7 +48,8 @@ public class UserEditor extends AppCompatActivity{
             case "display":
                 description.setText("Visualizar");
                 btnAction.setText("edit");
-                int id = intent.getFlags();
+                //int id = intent.getIntExtra("id", 3);
+                int id = 3;
                 Log.d("Debug id", ""+id);
                 displayUser(id);
                 break;
@@ -81,12 +82,13 @@ public class UserEditor extends AppCompatActivity{
 
     public void displayUser(int id){
         Data data = Data.getInstance();
+        data.fillUser(this);
         User user;
-
+        Log.d("Debug", ""+id);
         user = data.getUserById(id);
 
-        //editName.setText(user.getName());
-        //editAge.setText(String.valueOf(user.getAge()));
+        editName.setText(user.getName());
+        editAge.setText(String.valueOf(user.getAge()));
     }
 
     public void createNewUser(){

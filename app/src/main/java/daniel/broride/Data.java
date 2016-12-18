@@ -32,7 +32,7 @@ public class Data {
             //trowh error
         }
         int i = 0;
-        //count = 0;
+        count = 0;
 
         while(res.moveToNext()){
             users[i] = new User();
