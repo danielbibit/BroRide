@@ -45,8 +45,15 @@ public class UserEditor extends AppCompatActivity{
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         description = (TextView)findViewById(R.id.textView_description);
 
-        Bundle b = getIntent().getExtras();
-        i = b.getInt("id");
+        /*
+        Intent receiver = getIntent();
+        Bundle b = receiver.getExtras();
+
+        if(b != null){
+            this.i = b.getInt("id");
+            fillUser();
+        }
+        */
 
 
         switch (message){
@@ -97,5 +104,18 @@ public class UserEditor extends AppCompatActivity{
         finish();
     }
 
+    public void fillUser(){
+
+        if ( i != 789){
+            DbHelper myDb = DbHelper.getsInstance(this);
+            User user = new User();
+
+            user = myDb.getUser(2);
+
+            editName.setText(user.getName());
+            editAge.setText(user.getAge());
+
+        }
+    }
 
 }

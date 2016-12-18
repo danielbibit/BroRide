@@ -20,6 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String USER_DRIVER = "DRIVER";
     private static final String USER_AGE = "AGE";
     private static final String USER_DEBIT = "DEBIT";
+    private static final String[] COLUNAS_USER = {USER_ID, USER_NAME,USER_DRIVER, USER_AGE,USER_DEBIT};
 
     private static final String TABLE_VEHICLE = "USER_VEHICLE";
     private static final String VEHICLE_ID = "ID";
@@ -164,5 +165,35 @@ public class DbHelper extends SQLiteOpenHelper {
         return labels;
     }
 
+     //Metodos relacionados ao userManage
+
+     public User getUser(int id) {
+         SQLiteDatabase db = this.getReadableDatabase();
+         Cursor cursor = db.query(TABLE_USER, // a. tabela
+                 COLUNAS_USER, // b. colunas
+                 " id = ?", // c. colunas para comparar
+                 new String[] { String.valueOf(id) }, // d. parâmetros
+                 null, // e. group by
+                 null, // f. having
+                 null, // g. order by
+                 null); // h. limit
+         if (cursor == null) {
+             return null;
+         } else {
+             cursor.moveToFirst();
+             User user = cursorToUser(cursor);
+             return user;
+         }
+     }
+
+    private User cursorToUser(Cursor cursor) {
+        User user = new User();
+        user.setId(Integer.parseInt(cursor.getString(0)));
+        user.setName(cursor.getString(1));
+        user.setDriver(Integer.parseInt(cursor.getString(2)));
+        user.setAge(Integer.parseInt(cursor.getString(3)));
+        user.setDebit(Double.parseDouble(cursor.getString(4)));
+        return user;
+    }
 
 }

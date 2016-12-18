@@ -21,6 +21,7 @@ public class UserManage extends AppCompatActivity {
     ListView lista;
     Button button;
 
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,14 @@ public class UserManage extends AppCompatActivity {
         loadSpinnerData();
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
+                id = position;
+                openUserEditor();
+
             }
         });
 
@@ -49,7 +55,10 @@ public class UserManage extends AppCompatActivity {
     }
     private void openUserEditor(){
         Intent intent = new Intent(this, UserEditor.class);
+        //Bundle b = new Bundle();
+        //b.putInt("id",id);
         intent.putExtra(EXTRA_MESSAGE, "test");
+        //intent.putExtras(b);
         startActivity(intent);
     }
 
