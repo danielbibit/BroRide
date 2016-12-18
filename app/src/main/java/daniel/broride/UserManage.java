@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class UserManage extends AppCompatActivity {
 
     ListView lista;
+    Button button;
 
 
     @Override
@@ -26,6 +28,7 @@ public class UserManage extends AppCompatActivity {
         setContentView(R.layout.activity_user_manage);
 
         lista = (ListView) findViewById(R.id.ListaUsers) ;
+        button = (Button) findViewById(R.id.addUser);
 
         loadSpinnerData();
 
@@ -33,16 +36,20 @@ public class UserManage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
-                openUserManage(position);
+            }
+        });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUserEditor();
             }
         });
 
     }
-    private void openUserManage(int i){
+    private void openUserEditor(){
         Intent intent = new Intent(this, UserEditor.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
-        intent.putExtra("id",i);
         startActivity(intent);
     }
 
@@ -52,7 +59,7 @@ public class UserManage extends AppCompatActivity {
 
         // Spinner Drop down elements
         List<String> lables = myDb.getAllLabels();
-        lables.add("New User");
+
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
