@@ -11,6 +11,7 @@ public class Data {
     private static Data mInstance;
 
     User[] users = new User[20];
+    Vehicle[] vehicles = new Vehicle[20];
     int count;
 
     public static synchronized Data getInstance(){
@@ -70,7 +71,9 @@ public class Data {
         return count;
     }
 
-    public ArrayList<String> getAllData() {
+
+    //Metodos usados pelos Managers
+    public ArrayList<String> getAllUsersData() {
         ArrayList<String> labels = new ArrayList<String>();
 
         for (int i = 0; i<count; i++){
@@ -81,15 +84,31 @@ public class Data {
        return labels;
     }
 
-    public int[] getAllId(){
-        Log.d("Debug", "Entrei no metodo pra retornar todos ids");
+    public int[] getAllUsersId(){
         int[] array = new int[count];
-        Log.d("count value",""+count);
         for (int i = 0; i < count; i++) {
             array[i] = users[i].getId();
-            Log.d("Debug", ""+array[i]);
         }
-
         return  array;
     }
+
+    public ArrayList<String> getAllVehiclesData() {
+        ArrayList<String> labels = new ArrayList<String>();
+
+        for (int i = 0; i<count; i++){
+
+            labels.add(vehicles[i].getName());
+        }
+
+        return labels;
+    }
+
+    public int[] getAllVehicleId(){
+        int[] array = new int[count];
+        for (int i = 0; i < count; i++) {
+            array[i] = users[i].getId();
+        }
+        return  array;
+    }
+    //---------------------------------------------------------------
 }

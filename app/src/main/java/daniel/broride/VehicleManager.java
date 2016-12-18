@@ -10,7 +10,7 @@ import java.util.List;
 public class VehicleManager extends AppCompatActivity {
 
     ListView lista;
-    int[] arrayId;
+    int[] arrayVehicleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class VehicleManager extends AppCompatActivity {
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = data.getAllData();
+        List<String> lables = data.getAllVehiclesData();
 
 
         // Creating adapter for spinner
@@ -38,8 +38,9 @@ public class VehicleManager extends AppCompatActivity {
         lista.setAdapter(dataAdapter);
     }
 
-    private void fillArrayId(){
+    private void fillVehicleArrayId(){
         Data data = Data.getInstance();
-        arrayId = data.getAllId();
+        arrayVehicleId = data.getAllVehicleId();
     }
+
 }

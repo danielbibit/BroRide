@@ -23,7 +23,7 @@ public class UserManager extends AppCompatActivity {
 
     private int id;
 
-    int[] arrayId;
+    int[] arrayUsersId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,14 @@ public class UserManager extends AppCompatActivity {
         button = (Button) findViewById(R.id.addUser);
 
         loadSpinnerData();
-        fillArrayId();
+        fillUsersArrayId();;
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
 
-                openUserEditor(arrayId[position]);
+                openUserEditor(arrayUsersId[position]);
             }
         });
 
@@ -58,7 +58,7 @@ public class UserManager extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadSpinnerData();
-        fillArrayId();
+        fillUsersArrayId();
     }
 
     private void openUserEditor(int n){
@@ -79,7 +79,7 @@ public class UserManager extends AppCompatActivity {
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = data.getAllData();
+        List<String> lables = data.getAllUsersData();
 
 
         // Creating adapter for spinner
@@ -93,9 +93,9 @@ public class UserManager extends AppCompatActivity {
         lista.setAdapter(dataAdapter);
     }
 
-    private void fillArrayId(){
+    private void fillUsersArrayId(){
         Data data = Data.getInstance();
-        arrayId = data.getAllId();
+        arrayUsersId = data.getAllUsersId();
     }
 
 }
