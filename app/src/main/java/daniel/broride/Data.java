@@ -9,7 +9,7 @@ public class Data {
     User[] users = new User[20];
     int count;
 
-    public static synchronized Data getmInstance(){
+    public static synchronized Data getInstance(){
         if(mInstance == null){
             mInstance = new Data();
         }
@@ -34,8 +34,6 @@ public class Data {
             users[i].setDebit(res.getDouble(4));
             count++;
             i++;
-            Log.d("Debug ", "Adicionei 1");
-            Log.d("Debug ", users[i].getName());
         }
     }
 

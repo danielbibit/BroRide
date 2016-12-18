@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
+    Data data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //DbHelper myDb = DbHelper.getsInstance(this);
-       // myDb = new DbHelper(this);
+        DbHelper myDb = DbHelper.getsInstance(this);
+        Cursor res = myDb.getAllData();
+        data = Data.getInstance();
+        data.fillUser(res);
     }
 
     @Override
@@ -80,11 +82,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_users) {
-            openUserEditor();
+            openUserManage();
         } else if (id == R.id.nav_vehicles) {
            openVehicleEditor();
         } else if (id == R.id.nav_rides) {
-            openUserManage();
+
         } else if (id == R.id.nav_manage) {
             showAllData();
         } else if (id == R.id.nav_share) {
@@ -118,27 +120,20 @@ public class MainActivity extends AppCompatActivity
 
 
     public void showAllData(){
-        DbHelper myDb = DbHelper.getsInstance(this);
-        Cursor res = myDb.getAllData();
-
-        if(res.getCount()==0){
-            //show message
-            showMessage("ERRO","Nothing found");
-        }
-
         StringBuffer buffer = new StringBuffer();
 
-        while(res.moveToNext()){
-            buffer.append("Id : "+res.getString(0)+"\n");
-            buffer.append("Name : "+res.getString(1)+"\n");
-            buffer.append("Driver : "+res.getString(2)+"\n");
-            buffer.append("Age : "+res.getString(3)+"\n");
-            buffer.append("Debit: "+res.getString(4)+"\n\n");
+
+        for(int i=0; i<data.getCount(); i++){
+            User user = data.getUser(i);
+
+            buffer.append("Id : "+ user.getId()+"\n");
+            buffer.append("Name : "+user.getName()+"\n");
+            buffer.append("Driver : "+user.getIsDriver()+"\n");
+            buffer.append("Age : "+user.getAge()+"\n");
+            buffer.append("Debit: "+user.getDebit()+"\n\n");
         }
 
         showMessage("Data", buffer.toString());
-
-        myDb.deleteEverything();
     }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

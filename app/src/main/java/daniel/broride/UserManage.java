@@ -40,7 +40,7 @@ public class UserManage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
                 id = position;
-                openUserEditor();
+                openUserEditor(0);
 
             }
         });
@@ -48,18 +48,18 @@ public class UserManage extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openUserEditor();
+                openUserEditor(-1);
             }
         });
 
     }
-    private void openUserEditor(){
+    private void openUserEditor(int n){
         Intent intent = new Intent(this, UserEditor.class);
-        //Bundle b = new Bundle();
-        //b.putInt("id",id);
-        intent.putExtra(EXTRA_MESSAGE, "test");
-        //intent.putExtras(b);
-        startActivity(intent);
+
+        if(n==-1){
+            intent.putExtra(EXTRA_MESSAGE, "create");
+            startActivity(intent);
+        }
     }
 
     private void loadSpinnerData() {
