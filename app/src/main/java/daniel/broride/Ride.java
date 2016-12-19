@@ -2,14 +2,12 @@ package daniel.broride;
 
 public class Ride {
     private int id;
-    private String name;
-    private String description;
+    private String name, description;
     private Vehicle vehicle;
     private User[] users = new User[10];
     private String[] usersId = new String[10];
     private int userCount;
-    private Double gasPrice;
-    private Double distance;
+    private Double distance, gasPrice;
 
     public Ride(){};
 
@@ -23,12 +21,7 @@ public class Ride {
         userCount++;
     }
 
-    public void setVehicleId(){
-
-    }
-
     //Gets and Setter
-
 
     public int getVehicleId(){
         int i = vehicle.getId();

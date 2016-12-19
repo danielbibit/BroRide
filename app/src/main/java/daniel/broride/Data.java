@@ -11,7 +11,7 @@ public class Data {
     private User[] users = new User[20];
     private Vehicle[] vehicles = new Vehicle[20];
     private Ride[] rides = new Ride[20];
-    private int countUsers,countVehicles,countRide;
+    private int countUsers = 0, countVehicles = 0, countRide = 0;
 
 
     public static synchronized Data getInstance(){
@@ -195,7 +195,7 @@ public class Data {
     }
 
     public int getCountRide(){
-        return countVehicles;
+        return countRide;
     }
 
     ///Metodos usados pelos Managers
@@ -203,18 +203,17 @@ public class Data {
 
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countUsers; i++){
-
-            labels.add(users[i].getName());
+        for (int i = 0; i< countRide; i++){
+            labels.add(rides[i].getName()+" : "+rides[i].getDescription());
         }
 
         return labels;
     }
 
     public int[] getAllRideId(){
-        int[] array = new int[countUsers];
-        for (int i = 0; i < countUsers; i++) {
-            array[i] = users[i].getId();
+        int[] array = new int[countRide];
+        for (int i = 0; i < countRide; i++) {
+            array[i] = rides[i].getId();
         }
         return  array;
     }

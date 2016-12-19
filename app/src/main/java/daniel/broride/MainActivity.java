@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_vehicles) {
             openVehicleManager();
         } else if (id == R.id.nav_rides) {
-
+            openRideManager();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -111,11 +112,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openRideManager(){
-
+        Intent intent = new Intent(this, RideManager.class);
+        intent.putExtra(EXTRA_MESSAGE, "test");
+        startActivity(intent);
     }
 
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
+        Log.d("DEBUG", ""+data.getCountRide());
 
         for(int i = 0; i<data.getCountRide(); i++){
             Ride ride = data.getRide(i);

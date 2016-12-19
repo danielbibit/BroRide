@@ -11,37 +11,37 @@
     tools:context="daniel.broride.VehicleManager">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="54dp">
+        android:layout_marginBottom="54dp"
+        android:orientation="horizontal">
 
         <ListView
+            android:id="@+id/ListaVehicle"
             android:layout_width="match_parent"
             android:layout_height="428dp"
-            android:textSize="@dimen/txt_size"
-            android:id="@+id/ListaVehicle" />
+            android:textSize="@dimen/txt_size" />
     </LinearLayout>
 
     <Button
-        android:text="New Vehicle"
+        android:id="@+id/voltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/newVehicle"
+        android:onClick="back"
+        android:text="Voltar" />
+
+    <Button
+        android:id="@+id/newVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/newVehicle" />
-
-    <Button
-        android:text="Voltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/newVehicle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/voltar"
-        android:onClick="back" />
+        android:layout_alignParentRight="true"
+        android:text="New Vehicle" />
 </RelativeLayout>

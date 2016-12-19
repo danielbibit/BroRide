@@ -101,7 +101,8 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(USER_AGE, user.getAge());
         contentValues.put(USER_DEBIT, user.getDebit());
 
-        int result = db.update(TABLE_USER, contentValues, "ID = ?", new String[]{String.valueOf(user.getId())});
+        int result = db.update(TABLE_USER, contentValues, "ID = ?",
+                new String[]{String.valueOf(user.getId())});
 
         if (result == 0){
             throw new SqlException();
