@@ -176,4 +176,12 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getAllVehicleData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_VEHICLE, null);
+
+        return res;
+    }
+
 }
