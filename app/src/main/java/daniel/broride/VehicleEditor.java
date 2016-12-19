@@ -54,6 +54,11 @@ public class VehicleEditor extends AppCompatActivity {
                 });
                 break;
             case "display":
+                setViewMode(0);
+                description.setText("Visualizar");
+                btnAction.setText("Editar");
+
+                //displayData(id);
                 break;
             case "edit":
                 break;
@@ -109,7 +114,6 @@ public class VehicleEditor extends AppCompatActivity {
         try {
             int id = myDb.insertVehicle(vehicle);
             vehicle.setId(id);
-            //data.insertUser(user);
             Toast.makeText(VehicleEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
             data.fillVehicle(this);
             finish();

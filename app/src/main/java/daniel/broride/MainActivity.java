@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
 
         data = Data.getInstance();
         data.fillUser(this);
+        data.fillVehicle(this);
     }
 
     @Override
