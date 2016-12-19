@@ -207,12 +207,26 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateRide(){
+    public void updateRide(Ride ride){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
+        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
+        //contentValues.put(RIDE_VEHICLE, ride.getV());
+        contentValues.put(RIDE_GAS, ride.getGasPrice());
+        //contentValues.put(RIDE_USERS, ride.getName());
     }
 
-    public void deleteRide(){
+    public void deleteRide(Ride ride) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        String id = String.valueOf(ride.getId());
 
+        int i = db.delete(TABLE_VEHICLE, "ID = ?", new String[]{id});
+
+        if(i == 0){
+            throw new SqlException();
+        }
     }
 
     public Cursor getAllRides(){
