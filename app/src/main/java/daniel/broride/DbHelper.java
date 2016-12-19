@@ -218,7 +218,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateRide(Ride ride){
+    public void updateRide(Ride ride) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         String id = String.valueOf(ride.getId());
@@ -232,13 +232,17 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
 
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
+
+        if(result == 0){
+            throw new SqlException();
+        }
     }
 
     public void deleteRide(Ride ride) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         String id = String.valueOf(ride.getId());
 
-        int i = db.delete(TABLE_VEHICLE, "ID = ?", new String[]{id});
+        int i = db.delete(TABLE_RIDE, "ID = ?", new String[]{id});
 
         if(i == 0){
             throw new SqlException();

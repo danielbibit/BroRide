@@ -3,11 +3,14 @@ package daniel.broride;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class RideManager extends AppCompatActivity {
     ListView lista;
     Button button;
     int[] arrayRideId;
+    Data data = Data.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class RideManager extends AppCompatActivity {
         super.onResume();
         loadSpinnerData();
         fillRideArrayId();
+        data.fillRide(this);
     }
 
     private void openRideEditor(int n){
@@ -77,7 +82,18 @@ public class RideManager extends AppCompatActivity {
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, labels);
+                android.R.layout.simple_spinner_item, labels){
+            @Override
+            public View getView(int  position, View convertView, ViewGroup parent){
+                View view = super.getView(position, convertView, parent);
+
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
+
+                return view;
+            }
+        };
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

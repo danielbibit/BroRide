@@ -19,15 +19,14 @@ import java.util.List;
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideEditor extends AppCompatActivity  {
-
     int arrayVehicleId[];
     int idVehicle;
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
-    Button buttonAction;
-    String message;
+    Button btnAction, btnDelete;
+    private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
 
@@ -52,7 +51,8 @@ public class RideEditor extends AppCompatActivity  {
         //CheckBox
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
-        buttonAction = (Button) findViewById(R.id.btnAction);
+        btnAction = (Button) findViewById(R.id.btnAction);
+        btnDelete  = (Button) findViewById(R.id.btnDelete);
 
         loadSpinnerCar();
         fillUsersArrayId();
@@ -74,19 +74,24 @@ public class RideEditor extends AppCompatActivity  {
         switch (message){
             case "create":
                 mode.setText("Criar");
-                buttonAction.setOnClickListener(new View.OnClickListener() {
+                btnAction.setText("Criar!");
+                btnDelete.setVisibility(View.INVISIBLE);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         createNewRide();
                     }
                 });
+
                 break;
 
             case "commit":
                 mode.setText("Commit");
                 viewMode();
                 displayRides(id);
-                buttonAction.setOnClickListener(new View.OnClickListener() {
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent nIntent = getIntent();
@@ -95,26 +100,59 @@ public class RideEditor extends AppCompatActivity  {
                         startActivity(nIntent);
                     }
                 });
+
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
+                    }
+                });
+
                 break;
+
             case "delete":
+                mode.setText("Deletar");
+                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
                 viewMode();
+                displayRides(id);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteRide();
+                    }
+                });
 
                 break;
             case "edit":
                 mode.setText("Editar");
+                btnDelete.setVisibility(View.INVISIBLE);
+
                 displayRides(id);
-                buttonAction.setOnClickListener(new View.OnClickListener() {
+                btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        updateRide();
+                        updateRide(id);
+                        finish();
                     }
                 });
+
                 break;
 
             default:
                 //never reach (i hope...)
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 
     private void loadSpinnerCar() {
@@ -139,6 +177,8 @@ public class RideEditor extends AppCompatActivity  {
         etDescription.setFocusable(false);
         etDistance.setFocusable(false);
         etGas.setFocusable(false);
+        spCar.setFocusable(false);
+        spUser.setFocusable(false);
     }
 
     public void displayRides(int id){
@@ -178,23 +218,46 @@ public class RideEditor extends AppCompatActivity  {
         } catch (SqlException e) {
             e.printStackTrace();
             Toast.makeText(RideEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
-    private void updateRide(){
+    private void updateRide(int id){
         DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
+
+        ride.setId(id);
+        ride.setName(etNome.getText().toString());
+        ride.setDescription(etDescription.getText().toString());
+        ride.setDistance(Double.valueOf(etDistance.getText().toString()));
+        ride.setGasPrice(Double.valueOf(etGas.getText().toString()));
+
+        try {
+            myDb.updateRide(ride);
+            Toast.makeText(this, "Data atualizada!", Toast.LENGTH_LONG).show();
+            data.fillRide(this);
+            finish();
+        } catch (SqlException e) {
+            Toast.makeText(this, "ERRO: Data não atualizada!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            finish();
+        }
 
     }
 
     private void deleteRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
+        Data data = Data.getInstance();
 
         try{
-            myDb.deleteRide(ride);
+            myDb.deleteRide(data.getRideById(ride.getId()));
+            data.fillRide(this);
+            Toast.makeText(RideEditor.this, "Data deletada", Toast.LENGTH_LONG).show();
+            finish();
         }catch(SqlException e){
             e.printStackTrace();
-            Toast.makeText(RideEditor.this, "Data not Deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(RideEditor.this, "ERRO: Data não deletada", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 

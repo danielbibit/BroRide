@@ -31,19 +31,20 @@ public class Data {
         if(res.getCount()==0){
             //show message
             //trowh error
-        }
-        int i = 0;
-        countUsers = 0;
+        }else {
+            int i = 0;
+            countUsers = 0;
 
-        while(res.moveToNext()){
-            users[i] = new User();
-            users[i].setId(res.getInt(0));
-            users[i].setName(res.getString(1));
-            users[i].setDriver(res.getInt(2));
-            users[i].setAge(res.getInt(3));
-            users[i].setDebit(res.getDouble(4));
-            countUsers++;
-            i++;
+            while (res.moveToNext()) {
+                users[i] = new User();
+                users[i].setId(res.getInt(0));
+                users[i].setName(res.getString(1));
+                users[i].setDriver(res.getInt(2));
+                users[i].setAge(res.getInt(3));
+                users[i].setDebit(res.getDouble(4));
+                countUsers++;
+                i++;
+            }
         }
     }
 
