@@ -22,7 +22,8 @@
         <activity android:name=".UserEditor" />
         <activity android:name=".RideEditor" />
         <activity android:name=".UserManager" />
-        <activity android:name=".VehicleManager"></activity>
+        <activity android:name=".VehicleManager" />
+        <activity android:name=".RideManager"></activity>
     </application>
 
 </manifest>

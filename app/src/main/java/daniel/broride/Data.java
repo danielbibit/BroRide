@@ -112,6 +112,7 @@ public class Data {
 
     //Metodos usados pelos Managers
     public ArrayList<String> getAllUsersData() {
+
         ArrayList<String> labels = new ArrayList<String>();
 
         for (int i = 0; i< countUsers; i++){
