@@ -117,14 +117,14 @@ public class MainActivity extends AppCompatActivity
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
 
-        for(int i = 0; i<data.getCountUsers(); i++){
-            User user = data.getUser(i);
+        for(int i = 0; i<data.getCountRide(); i++){
+            Ride ride = data.getRide(i);
 
-            buffer.append("Id : "+ user.getId()+"\n");
-            buffer.append("Name : "+user.getName()+"\n");
-            buffer.append("Driver : "+user.getIsDriver()+"\n");
-            buffer.append("Age : "+user.getAge()+"\n");
-            buffer.append("Debit: "+user.getDebit()+"\n\n");
+            buffer.append("Id : "+ ride.getId()+"\n");
+            buffer.append("Name : "+ride.getName()+"\n");
+            buffer.append("Description : "+ride.getDescription()+"\n");
+            buffer.append("Distance : "+ride.getDistance()+"\n");
+            buffer.append("Debit: "+ride.getGasPrice()+"\n\n");
         }
 
         showMessage("Data", buffer.toString());

@@ -13,25 +13,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static DbHelper mInstance;
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "main.db";
-
     private static final String TABLE_USER = "USER_TABLE";
     private static final String USER_ID = "ID";
     private static final String USER_NAME = "NAME";
     private static final String USER_DRIVER = "DRIVER";
     private static final String USER_AGE = "AGE";
     private static final String USER_DEBIT = "DEBIT";
-
     private static final String TABLE_VEHICLE = "USER_VEHICLE";
     private static final String VEHICLE_ID = "ID";
     private static final String VEHICLE_MODEL = "MODEL";
     private static final String VEHICLE_NAME = "NAME";
     private static final String VEHICLE_CAPACITY = "CAPACITY";
     private static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
-
-
     private static final String TABLE_RIDE = "RIDE_TABLE";
     private static final String RIDE_ID = "ID";
     private static final String RIDE_NAME = "NAME";
@@ -40,7 +35,12 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String RIDE_GAS = "GAS";
     private static final String RIDE_DISTANCE = "DISTANCE";
     private static final String RIDE_USERS = "USERS";
+    private static DbHelper mInstance;
 
+
+    private DbHelper(Context context){
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
     public static synchronized DbHelper getsInstance(Context context){
         if(mInstance == null){
@@ -48,10 +48,6 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return mInstance;
-    }
-
-    private DbHelper(Context context){
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -200,6 +196,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
         contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
+        contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
 
         long result = db.insert(TABLE_RIDE, null, contentValues);
@@ -214,12 +211,17 @@ public class DbHelper extends SQLiteOpenHelper {
     public void updateRide(Ride ride){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        String id = String.valueOf(ride.getId());
 
+        contentValues.put(RIDE_ID, ride.getId());
         contentValues.put(RIDE_NAME, ride.getName());
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
-        //contentValues.put(RIDE_VEHICLE, ride.getV());
+        contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
-        //contentValues.put(RIDE_USERS, ride.getName());
+        contentValues.put(RIDE_DISTANCE, ride.getDistance());
+        contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+
+        int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
     }
 
     public void deleteRide(Ride ride) throws SqlException{

@@ -190,8 +190,8 @@ public class Data {
     }
 
 
-    public Vehicle getRide(int i){
-        return vehicles[i];
+    public Ride getRide(int i){
+        return rides[i];
     }
 
     public int getCountRide(){
@@ -218,5 +218,5 @@ public class Data {
         }
         return  array;
     }
-    
+
 }

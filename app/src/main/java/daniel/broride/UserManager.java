@@ -20,10 +20,8 @@ public class UserManager extends AppCompatActivity {
 
     ListView lista;
     Button button;
-
-    private int id;
-
     int[] arrayUsersId;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +72,10 @@ public class UserManager extends AppCompatActivity {
     }
 
     private void loadSpinnerData() {
-        // database handler
-        //DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
         List<String> lables = data.getAllUsersData();
-
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
