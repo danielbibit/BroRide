@@ -30,13 +30,14 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String VEHICLE_CAPACITY = "CAPACITY";
     private static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
 
-    /*
+
     public static final String TABLE_RIDE = "RIDE_TABLE";
     public static final String RIDE_ID = "ID";
-    public static final String RIDE_VEHICLE = "NAME";
-    public static final String RIDE_GAS = "DRIVER";
-    public static final String RIDE_DISTANCE = "AGE";
-    */
+    public static final String RIDE_VEHICLE = "VEHICLE";
+    public static final String RIDE_GAS = "GAS";
+    public static final String RIDE_DISTANCE = "DISTANCE";
+    public static final String RIDE_USERS = "USERS";
+
 
     public static synchronized DbHelper getsInstance(Context context){
         if(mInstance == null){
@@ -57,10 +58,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE "+TABLE_VEHICLE+" ("+VEHICLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" INTEGER,"+VEHICLE_CONSUMPTION+" REAL)");
-        /*
-        db.execSQL("CREATE TABLE "+TABLE_USER+" ("+USER_ID + "INTEGER PRIMARY KEY AUINCREMENT,"+
-                USER_NAME+" TEXT,"+USER_DRIVER+" TEXT,"+USER_AGE+" TEXT,"+USER_DEBIT+" TEXT,");
-        */
+
+        db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+" REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" REAL");
 
     }
 
@@ -68,6 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_VEHICLE);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_RIDE);
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------*/

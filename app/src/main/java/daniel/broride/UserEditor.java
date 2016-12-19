@@ -26,7 +26,7 @@ public class UserEditor extends AppCompatActivity{
 
     private String message;
 
-    TextView description;
+    TextView description, debitValue;
     EditText editName, editAge;
     Button btnAction, btnDelete;
     CheckBox isDriver;
@@ -40,6 +40,7 @@ public class UserEditor extends AppCompatActivity{
         message = intent.getStringExtra(EXTRA_MESSAGE);
 
         description = (TextView)findViewById(R.id.textView_description);
+        debitValue = (TextView)findViewById(R.id.textViewDebitValue);
         editName = (EditText) findViewById(R.id.edit_name);
         editAge = (EditText) findViewById(R.id.edit_age);
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
@@ -142,7 +143,7 @@ public class UserEditor extends AppCompatActivity{
 
     public void displayData(int id){
         user = data.getUserById(id);
-
+        debitValue.setText(String.valueOf(user.getDebit()));
         editName.setText(user.getName());
         editAge.setText(String.valueOf(user.getAge()));
         isDriver.setChecked(user.getIsDriver() == 1);
