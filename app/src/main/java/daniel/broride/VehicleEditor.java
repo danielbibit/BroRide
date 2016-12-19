@@ -1,5 +1,6 @@
 package daniel.broride;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,10 @@ public class VehicleEditor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_editor);
 
+        final Intent intent = getIntent();
+        message = getIntent().getStringExtra(EXTRA_MESSAGE);
+
+
         editNome = (EditText) findViewById(R.id.editNome);
         editConsumo = (EditText) findViewById(R.id.editConsumo);
         editCapacidade = (EditText) findViewById(R.id.editCapacidade);
@@ -37,7 +42,11 @@ public class VehicleEditor extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
-        message = getIntent().getStringExtra(EXTRA_MESSAGE);
+        data = Data.getInstance();
+        data.fillVehicle(this);
+
+
+        final int id = intent.getIntExtra("id", 0);
 
 
         switch (message){
@@ -58,7 +67,16 @@ public class VehicleEditor extends AppCompatActivity {
                 description.setText("Visualizar");
                 btnAction.setText("Editar");
 
-                //displayData(id);
+                displayData(id);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
+                    }
+                });
                 break;
             case "edit":
                 break;
