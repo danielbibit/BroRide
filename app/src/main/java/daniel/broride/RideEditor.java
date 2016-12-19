@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,6 +25,9 @@ public class RideEditor extends AppCompatActivity  {
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
+    Button buttonAction;
+
+    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class RideEditor extends AppCompatActivity  {
         //CheckBox
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
+        buttonAction = (Button) findViewById(R.id.btnAction);
+
         loadSpinnerCar();
         idVehicle = arrayVehicleId[0];
 
@@ -53,6 +59,20 @@ public class RideEditor extends AppCompatActivity  {
             }
         });
 
+        switch (message){
+            case "create":
+                buttonAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        createNewRide();
+                    }
+                });
+                break;
+
+            default:
+                //never reach
+                break;
+        }
     }
 
     private void loadSpinnerCar() {
