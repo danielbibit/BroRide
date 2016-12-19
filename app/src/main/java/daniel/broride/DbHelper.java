@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -194,9 +195,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         contentValues.put(RIDE_NAME, ride.getName());
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
-        //contentValues.put(RIDE_VEHICLE, ride.getV());
+        contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
-        //contentValues.put(RIDE_USERS, ride.getName());
+        contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+
 
         long result = db.insert(TABLE_RIDE, null, contentValues);
 

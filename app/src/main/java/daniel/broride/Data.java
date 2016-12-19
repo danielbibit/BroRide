@@ -85,7 +85,6 @@ public class Data {
         return  array;
     }
 
-
     //----------------------------------------------------------------------------------------------
 
 
@@ -219,24 +218,5 @@ public class Data {
         }
         return  array;
     }
-
-    public ArrayList<String> getAllRideData() {
-        ArrayList<String> labels = new ArrayList<String>();
-
-        for (int i = 0; i< countVehicles; i++){/////////////////////////
-
-            labels.add(vehicles[i].getName());
-        }
-
-        return labels;
-    }
-
-    public int[] getAllRideId(){
-        int[] array = new int[countVehicles];
-        for (int i = 0; i < countVehicles; i++) {
-            array[i] = vehicles[i].getId();
-        }
-        return  array;
-    }
-
+    
 }

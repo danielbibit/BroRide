@@ -6,6 +6,7 @@ public class Ride {
     private String description;
     private Vehicle vehicle;
     private User[] users = new User[10];
+    private String[] usersId = new String[10];
     private int userCount;
     private Double gasPrice;
     private Double distance;
@@ -26,13 +27,17 @@ public class Ride {
 
     }
 
+    //Gets and Setter
+
+
     public int getVehicleId(){
         int i = vehicle.getId();
         return i;
     }
 
-    //Gets and Setter
-
+    public String[] getUsersId() {
+        return usersId;
+    }
 
     public int getId() {
         return id;
