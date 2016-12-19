@@ -41,5 +41,6 @@
         android:layout_alignTop="@+id/newVehicle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/voltar" />
+        android:id="@+id/voltar"
+        android:onClick="back" />
 </RelativeLayout>

@@ -1,21 +1,37 @@
 package daniel.broride;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
+
+import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class VehicleManager extends AppCompatActivity {
 
     ListView lista;
     int[] arrayVehicleId;
 
+    Button newVehicle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_manager);
+
+        newVehicle = (Button) findViewById(R.id.newVehicle);
+
+        newVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openVehicleEditor();
+            }
+        });
     }
 
     private void loadSpinnerData() {
@@ -43,4 +59,13 @@ public class VehicleManager extends AppCompatActivity {
         arrayVehicleId = data.getAllVehicleId();
     }
 
+    private void openVehicleEditor(){
+        Intent intent = new Intent(VehicleManager.this, VehicleEditor.class);
+        intent.putExtra(EXTRA_MESSAGE, "create");
+        startActivity(intent);
+    }
+
+    public void back(View view){
+        finish();
+    }
 }

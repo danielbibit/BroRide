@@ -2,11 +2,14 @@ package daniel.broride;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class VehicleEditor extends AppCompatActivity {
 
@@ -17,6 +20,7 @@ public class VehicleEditor extends AppCompatActivity {
     EditText editNome,editConsumo,editCapacidade,editModelo;
     TextView description;
     Button btnAction,btnDelete,btnVoltar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class VehicleEditor extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
+        message = getIntent().getStringExtra(EXTRA_MESSAGE);
+
 
         switch (message){
             case "create":
@@ -46,6 +52,7 @@ public class VehicleEditor extends AppCompatActivity {
             default:
                 //never reach
         }
+
     }
 
     @Override
@@ -84,8 +91,10 @@ public class VehicleEditor extends AppCompatActivity {
         Data data = Data.getInstance();
 
         vehicle.setName(editNome.getText().toString());
-        vehicle.setConsumption(Double.parseDouble(editNome.getText().toString()));
-        // vehicle.setAge(Integer.parseInt(editAge.getText().toString()));
+        vehicle.setConsumption(Double.parseDouble(editConsumo.getText().toString()));
+        vehicle.setCapacity(Integer.parseInt(editCapacidade.getText().toString()));
+        vehicle.setModel(editModelo.getText().toString());
+
 
         try {
             int id = myDb.insertVehicle(vehicle);
@@ -104,9 +113,10 @@ public class VehicleEditor extends AppCompatActivity {
         DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
 
-        // vehicle.setName(editName.getText().toString());
-        // vehicle.setDriver(isDriver.isChecked() ? 1:0);
-        // vehicle.setAge(Integer.parseInt(editCapacity.getText().toString()));
+        vehicle.setName(editNome.getText().toString());
+        vehicle.setConsumption(Double.parseDouble(editConsumo.getText().toString()));
+        vehicle.setCapacity(Integer.parseInt(editCapacidade.getText().toString()));
+        vehicle.setModel(editModelo.getText().toString());
 
         try {
             myDb.updateVehicle(vehicle);
