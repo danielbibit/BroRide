@@ -63,7 +63,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 RIDE_NAME+" TEXT"+ RIDE_DESCRIPTION+" TEXT"+ RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+
-                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" REAL");
+                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" TEXT");
 
     }
 

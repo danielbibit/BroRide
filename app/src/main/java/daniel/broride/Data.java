@@ -154,11 +154,11 @@ public class Data {
     //---------------------------------------------------------------
 
     //Preenche o Data base Ride
-    public void fillRide(Context context){
+    public void fillRide(Context context) {
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
         Cursor res = myDb.getAllVehicleData();
 
-        if(res.getCount()==0){
+        if (res.getCount() == 0) {
             //show message
             //trowh error
         }
@@ -167,7 +167,7 @@ public class Data {
 
         fillVehicle(context.getApplicationContext());
 
-        while(res.moveToNext()){
+        while (res.moveToNext()) {
 
             rides[i] = new Ride();
             rides[i].setId(res.getInt(0));
@@ -176,22 +176,18 @@ public class Data {
             rides[i].insertVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
-
-
-
-            countRide++;
-            i++;
+            //rides[i].setUsers[]
         }
     }
 
-    public Vehicle getRideById(int id){
-        Vehicle vehicle = null;
-        for(int i = 0; i< countVehicles; i++){
-            if(vehicles[i].getId()== id){
-                return vehicles[i];
+    public Ride getRideById(int id){
+        Ride ride = null;
+        for(int i = 0; i<countRide ; i++){
+            if(rides[i].getId()== id){
+                return rides[i];
             }
         }
-        return vehicle;
+        return ride;
     }
 
 
@@ -203,7 +199,7 @@ public class Data {
         return countVehicles;
     }
 
-    /* //Metodos usados pelos Managers
+    ///Metodos usados pelos Managers
     public ArrayList<String> getAllRideData() {
 
         ArrayList<String> labels = new ArrayList<String>();
@@ -242,5 +238,5 @@ public class Data {
         }
         return  array;
     }
-    */
+
 }
