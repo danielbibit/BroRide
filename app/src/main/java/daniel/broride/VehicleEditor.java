@@ -62,6 +62,7 @@ public class VehicleEditor extends AppCompatActivity {
                     }
                 });
                 break;
+
             case "display":
                 setViewMode(0);
                 description.setText("Visualizar");
@@ -73,15 +74,55 @@ public class VehicleEditor extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "edit");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
+                    }
+                });
+
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
                         nIntent.putExtra("id",id);
                         startActivity(nIntent);
                     }
                 });
                 break;
+
             case "edit":
+                //setViewMode(0);
+                description.setText("Editar");
+                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
+
+                displayData(id);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateVehicle(vehicle);
+                    }
+                });
                 break;
+
             case "delete":
+                setViewMode(0);
+                description.setText("Deletar");
+                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
+
+                displayData(id);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteVehicle(id);
+                    }
+                });
                 break;
+
             default:
                 //never reach
         }
