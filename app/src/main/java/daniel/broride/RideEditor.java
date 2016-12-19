@@ -2,6 +2,7 @@ package daniel.broride;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,7 @@ public class RideEditor extends AppCompatActivity  {
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
         loadSpinnerCar();
+        idVehicle = arrayVehicleId[0];
 
         spCar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,21 +75,25 @@ public class RideEditor extends AppCompatActivity  {
     public void createNewRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
+        Vehicle vehicle;
+        vehicle = data.getVehicleById(idVehicle);
 
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
-        user.setAge(Integer.parseInt(editAge.getText().toString()));
+        ride.insertVehicle(vehicle);
+        ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
+        ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
 
         try {
-            int id = myDb.insertUser(user);
-            user.setId(id);
+            int id = myDb.insertRide(ride);
+            ride.setId(id);
             //data.insertUser(user);
-            Toast.makeText(UserEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
-            data.fillUser(this);
+            Toast.makeText(RideEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
+            data.fillRide(this);
             finish();
         } catch (SqlException e) {
             e.printStackTrace();
-            Toast.makeText(UserEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(RideEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
         }
     }
     private void fillUsersArrayId(){
