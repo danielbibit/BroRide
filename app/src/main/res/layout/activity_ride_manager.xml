@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button4">
+        android:layout_above="@+id/addUser">
 
         <ListView
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/button4" />
+        android:id="@+id/addUser" />
 
     <Button
         android:text="voltar"

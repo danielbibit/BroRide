@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_user_manager">UserManager</string>
+    <string name="for_all" />
 
     <string-array name="UserManager">
         <item>Adicionar Usuario</item>
