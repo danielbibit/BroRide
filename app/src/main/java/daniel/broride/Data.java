@@ -77,7 +77,7 @@ public class Data {
     //Preenche o Data base Vehicle
     public void fillVehicle(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllUsersData();
+        Cursor res = myDb.getAllVehicleData();
 
         if(res.getCount()==0){
             //show message

@@ -46,7 +46,6 @@ public class UserEditor extends AppCompatActivity{
         btnAction = (Button) findViewById(R.id.button);
         btnDelete = (Button) findViewById(R.id.btnDelete);
 
-
         data = Data.getInstance();
         data.fillUser(this);
 
