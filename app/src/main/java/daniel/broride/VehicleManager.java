@@ -24,7 +24,12 @@ public class VehicleManager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_manager);
 
+        lista = (ListView) findViewById(R.id.ListaVehicle);
+
         newVehicle = (Button) findViewById(R.id.newVehicle);
+
+        loadSpinnerData();
+        //fillVehicleArrayId();
 
         newVehicle.setOnClickListener(new View.OnClickListener() {
             @Override

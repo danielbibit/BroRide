@@ -22,7 +22,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="428dp"
-            android:textSize="@dimen/txt_size" />
+            android:textSize="@dimen/txt_size"
+            android:id="@+id/ListaVehicle" />
     </LinearLayout>
 
     <Button
