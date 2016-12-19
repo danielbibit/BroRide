@@ -3,6 +3,7 @@ package daniel.broride;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -192,10 +193,32 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(RIDE_NAME, ride.getName());
-        contentValues.put(RIDE_NAME, ride.getName());
-        contentValues.put(RIDE_NAME, ride.getName());
-        contentValues.put(RIDE_NAME, ride.getName());
-        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
+        //contentValues.put(RIDE_VEHICLE, ride.getV());
+        contentValues.put(RIDE_GAS, ride.getGasPrice());
+        //contentValues.put(RIDE_USERS, ride.getName());
+
+        long result = db.insert(TABLE_RIDE, null, contentValues);
+
+        if(result == 1){
+            return (int)result;
+        }else{
+            throw new SqlException();
+        }
     }
 
+    public void updateRide(){
+
+    }
+
+    public void deleteRide(){
+
+    }
+
+    public Cursor getAllRides(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_RIDE, null);
+        return res;
+    }
 }
