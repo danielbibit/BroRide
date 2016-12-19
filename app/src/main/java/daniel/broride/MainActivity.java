@@ -85,11 +85,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rides) {
 
         } else if (id == R.id.nav_manage) {
-            showAllData();
+
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            showAllData();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

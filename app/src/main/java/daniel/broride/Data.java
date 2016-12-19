@@ -56,12 +56,6 @@ public class Data {
        return user;
     }
 
-    public void insertUser(User user){
-        users[countUsers] = new User();
-        users[countUsers] = user;
-        countUsers++;
-    }
-
     public User getUser(int i){
         return users[i];
     }
@@ -106,12 +100,6 @@ public class Data {
             }
         }
         return vehicle;
-    }
-
-    public void insertVehicle(Vehicle vehicle){
-        vehicles[countVehicles] = new Vehicle();
-        vehicles[countVehicles] = vehicle;
-        countVehicles++;
     }
 
     public Vehicle getVehicle(int i){
