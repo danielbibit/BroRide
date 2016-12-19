@@ -100,7 +100,7 @@ public class VehicleEditor extends AppCompatActivity {
 
         editNome.setText(vehicle.getName());
         editConsumo.setText(String.valueOf(vehicle.getConsumption()));
-        editCapacidade.setText(vehicle.getCapacity());
+        editCapacidade.setText(String.valueOf(vehicle.getCapacity()));
         editModelo.setText(vehicle.getModel());
 
     }
