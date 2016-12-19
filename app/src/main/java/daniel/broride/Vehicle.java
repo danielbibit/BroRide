@@ -48,4 +48,5 @@ public class Vehicle {
     public void setConsumption(Double consumption) {
         this.consumption = consumption;
     }
+
 }
