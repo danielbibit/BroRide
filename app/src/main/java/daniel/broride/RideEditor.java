@@ -17,6 +17,8 @@ public class RideEditor extends AppCompatActivity  {
     TextView mode;
     CheckBox cbIsMotorista;
 
+    String message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,19 @@ public class RideEditor extends AppCompatActivity  {
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
         loadSpinnerCar();
+
+        switch(message){
+            case "create":
+                break;
+            case "edit":
+                break;
+            case "delete":
+                break;
+            case "commit":
+                break;
+            default:
+                break;
+        }
 
     }
 
