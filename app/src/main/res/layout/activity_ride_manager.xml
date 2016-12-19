@@ -10,4 +10,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="daniel.broride.RideManager">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/button4">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="433dp"
+            android:id="@+id/lista" />
+    </LinearLayout>
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/button4" />
+
+    <Button
+        android:text="voltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="back" />
 </RelativeLayout>
