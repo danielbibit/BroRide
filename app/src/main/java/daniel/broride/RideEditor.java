@@ -20,17 +20,16 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideEditor extends AppCompatActivity  {
 
-    Ride ride = new Ride();
     int arrayVehicleId[];
     int idVehicle;
-
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
     Button buttonAction;
-
     String message;
+    private Ride ride = new Ride();
+    private Data data = Data.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,8 @@ public class RideEditor extends AppCompatActivity  {
         loadSpinnerCar();
         fillUsersArrayId();
 
+        final int id = intent.getIntExtra("id", 0);
+
         spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -72,6 +73,7 @@ public class RideEditor extends AppCompatActivity  {
 
         switch (message){
             case "create":
+                mode.setText("Criar");
                 buttonAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,8 +82,37 @@ public class RideEditor extends AppCompatActivity  {
                 });
                 break;
 
+            case "commit":
+                mode.setText("Commit");
+                viewMode();
+                displayRides(id);
+                buttonAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "edit");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
+                    }
+                });
+                break;
+            case "delete":
+                viewMode();
+
+                break;
+            case "edit":
+                mode.setText("Editar");
+                displayRides(id);
+                buttonAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateRide();
+                    }
+                });
+                break;
+
             default:
-                //never reach
+                //never reach (i hope...)
                 break;
         }
     }
@@ -101,6 +132,21 @@ public class RideEditor extends AppCompatActivity  {
 
         // attaching data adapter to spinner
         spCar.setAdapter(dataAdapter);
+    }
+
+    public void viewMode(){
+        etNome.setFocusable(false);
+        etDescription.setFocusable(false);
+        etDistance.setFocusable(false);
+        etGas.setFocusable(false);
+    }
+
+    public void displayRides(int id){
+        ride = data.getRideById(id);
+        etNome.setText(ride.getName());
+        etDescription.setText(ride.getDescription());
+        etGas.setText(String.valueOf(ride.getGasPrice()));
+        etDistance.setText(String.valueOf(ride.getDistance()));
     }
 
     public void createNewRide(){
@@ -134,6 +180,28 @@ public class RideEditor extends AppCompatActivity  {
             Toast.makeText(RideEditor.this, "Data not inserted", Toast.LENGTH_LONG).show();
         }
     }
+
+    private void updateRide(){
+        DbHelper myDb = DbHelper.getsInstance(this);
+        Data data = Data.getInstance();
+
+    }
+
+    private void deleteRide(){
+        DbHelper myDb = DbHelper.getsInstance(this);
+
+        try{
+            myDb.deleteRide(ride);
+        }catch(SqlException e){
+            e.printStackTrace();
+            Toast.makeText(RideEditor.this, "Data not Deleted", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void back(View view){
+        finish();
+    }
+
     private void fillUsersArrayId(){
         Data data = Data.getInstance();
         arrayVehicleId = data.getAllVehicleId();

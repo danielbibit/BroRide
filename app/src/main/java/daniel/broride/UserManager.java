@@ -93,4 +93,8 @@ public class UserManager extends AppCompatActivity {
         arrayUsersId = data.getAllUsersId();
     }
 
+    public void back(View view){
+        finish();
+    }
+
 }

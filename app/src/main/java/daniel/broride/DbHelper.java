@@ -211,10 +211,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
-        if(result == 1){
-            return (int)result;
-        }else{
+        if(result == -1){
             throw new SqlException();
+        }else{
+            return (int)result;
         }
     }
 

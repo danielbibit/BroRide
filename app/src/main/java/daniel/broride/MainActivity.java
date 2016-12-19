@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
         data = Data.getInstance();
         data.fillUser(this);
         data.fillVehicle(this);
+        data.fillRide(this);
     }
 
     @Override
