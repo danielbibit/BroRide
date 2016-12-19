@@ -42,6 +42,16 @@ public class VehicleEditor extends AppCompatActivity {
 
         switch (message){
             case "create":
+                description.setText("Criar");
+                btnAction.setText("Criar!");
+                btnDelete.setVisibility(View.INVISIBLE);
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        createNewVehicle();
+                    }
+                });
                 break;
             case "display":
                 break;
