@@ -50,12 +50,17 @@ public class RideEditor extends AppCompatActivity  {
         buttonAction = (Button) findViewById(R.id.btnAction);
 
         loadSpinnerCar();
-        idVehicle = arrayVehicleId[0];
+        fillUsersArrayId();
 
-        spCar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 idVehicle = arrayVehicleId[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                idVehicle = arrayVehicleId[0];
             }
         });
 
