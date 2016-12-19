@@ -80,9 +80,11 @@ public class VehicleEditor extends AppCompatActivity {
     public void displayData(int id){
         vehicle = data.getVehicleById(id);
 
-        //editName.setText(vehicle.getName());
-       // editAge.setText(String.valueOf(vehicle.getCapacity()));
-      //  isDriver.setChecked(user.getIsDriver() == 1);
+        editNome.setText(vehicle.getName());
+        editConsumo.setText(String.valueOf(vehicle.getConsumption()));
+        editCapacidade.setText(vehicle.getCapacity());
+        editModelo.setText(vehicle.getModel());
+
     }
 
     public void setViewMode(int mode){
