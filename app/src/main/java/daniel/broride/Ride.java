@@ -22,6 +22,15 @@ public class Ride {
         userCount++;
     }
 
+    public void setVehicleId(){
+
+    }
+
+    public int getVehicleId(){
+        int i = vehicle.getId();
+        return i;
+    }
+
     //Gets and Setter
 
 
@@ -47,6 +56,10 @@ public class Ride {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void insertVehicle (Vehicle vehicle){
+        this.vehicle = vehicle;
     }
 
     public Double getGasPrice() {
