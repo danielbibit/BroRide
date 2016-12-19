@@ -93,14 +93,14 @@ public class Data {
             vehicles[i].setName(res.getString(2));
             vehicles[i].setCapacity(res.getInt(3));
             vehicles[i].setConsumption(res.getDouble(4));
-            countUsers++;
+            countVehicles++;
             i++;
         }
     }
 
     public Vehicle getVehicleById(int id){
         Vehicle vehicle = null;
-        for(int i = 0; i< countUsers; i++){
+        for(int i = 0; i< countVehicles; i++){
             if(vehicles[i].getId()== id){
                 return vehicles[i];
             }
@@ -145,7 +145,7 @@ public class Data {
     public ArrayList<String> getAllVehiclesData() {
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countUsers; i++){/////////////////////////
+        for (int i = 0; i< countVehicles; i++){/////////////////////////
 
             labels.add(vehicles[i].getName());
         }
@@ -154,9 +154,9 @@ public class Data {
     }
 
     public int[] getAllVehicleId(){
-        int[] array = new int[countUsers];
-        for (int i = 0; i < countUsers; i++) {
-            array[i] = users[i].getId();
+        int[] array = new int[countVehicles];
+        for (int i = 0; i < countVehicles; i++) {
+            array[i] = vehicles[i].getId();
         }
         return  array;
     }
