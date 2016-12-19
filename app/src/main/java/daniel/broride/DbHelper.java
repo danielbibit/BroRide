@@ -189,6 +189,9 @@ public class DbHelper extends SQLiteOpenHelper {
         return res;
     }
 
+
+
+
     public int insertRide(Ride ride) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -198,7 +201,6 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
-
 
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
