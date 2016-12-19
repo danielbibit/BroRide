@@ -16,17 +16,20 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "main.db";
     private static final String TABLE_USER = "USER_TABLE";
+
     private static final String USER_ID = "ID";
     private static final String USER_NAME = "NAME";
     private static final String USER_DRIVER = "DRIVER";
     private static final String USER_AGE = "AGE";
     private static final String USER_DEBIT = "DEBIT";
+
     private static final String TABLE_VEHICLE = "USER_VEHICLE";
     private static final String VEHICLE_ID = "ID";
     private static final String VEHICLE_MODEL = "MODEL";
     private static final String VEHICLE_NAME = "NAME";
     private static final String VEHICLE_CAPACITY = "CAPACITY";
     private static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
+
     private static final String TABLE_RIDE = "RIDE_TABLE";
     private static final String RIDE_ID = "ID";
     private static final String RIDE_NAME = "NAME";
@@ -35,8 +38,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String RIDE_GAS = "GAS";
     private static final String RIDE_DISTANCE = "DISTANCE";
     private static final String RIDE_USERS = "USERS";
-    private static DbHelper mInstance;
 
+    private static DbHelper mInstance;
 
     private DbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,9 +61,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE "+TABLE_VEHICLE+" ("+VEHICLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" INTEGER,"+VEHICLE_CONSUMPTION+" REAL)");
 
-        db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                RIDE_NAME+" TEXT"+ RIDE_DESCRIPTION+" TEXT"+ RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+
-                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" TEXT");
+        db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                RIDE_NAME+" TEXT,"+ RIDE_DESCRIPTION+" TEXT,"+ RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+
+                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" TEXT)");
 
     }
 
@@ -192,6 +195,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public int insertRide(Ride ride) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
+        Log.d("Log2",ride.getName());
+        Log.d("Log2",ride.getDescription());
+        Log.d("Log2",""+ride.getDistance());
+        Log.d("Log2",""+ride.getGasPrice());
+
 
         contentValues.put(RIDE_NAME, ride.getName());
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());

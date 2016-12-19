@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
+            this.deleteDatabase("main.db");
         } else if (id == R.id.nav_send) {
             showAllData();
         }
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity
     public void showAllData(){
         StringBuffer buffer = new StringBuffer();
         Log.d("DEBUG", ""+data.getCountRide());
+        data.fillRide(this);
 
         for(int i = 0; i<data.getCountRide(); i++){
             Ride ride = data.getRide(i);

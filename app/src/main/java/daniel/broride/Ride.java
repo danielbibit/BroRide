@@ -9,7 +9,12 @@ public class Ride {
     private int userCount;
     private Double distance, gasPrice;
 
-    public Ride(){};
+    public Ride(){
+        for(int i=0; i<10; i++){
+            usersId[i] = new String();
+            usersId[i] = "0";
+        }
+    };
 
     public Ride(Vehicle vehicle){
         this.vehicle = vehicle;

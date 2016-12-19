@@ -155,7 +155,7 @@ public class Data {
     //Preenche o Data base Ride
     public void fillRide(Context context) {
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
-        Cursor res = myDb.getAllVehicleData();
+        Cursor res = myDb.getAllRides();
 
         if (res.getCount() == 0) {
             //show message
@@ -175,7 +175,8 @@ public class Data {
             rides[i].insertVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
-            //rides[i].setUsers[]
+            countRide++;
+            i++;
         }
     }
 

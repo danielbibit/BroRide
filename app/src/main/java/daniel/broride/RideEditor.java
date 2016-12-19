@@ -1,5 +1,6 @@
 package daniel.broride;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideEditor extends AppCompatActivity  {
 
@@ -33,6 +36,9 @@ public class RideEditor extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_editor);
+
+        Intent intent = getIntent();
+        message = intent.getStringExtra(EXTRA_MESSAGE);
 
         //EditText
         etNome = (EditText) findViewById(R.id.etNome);
@@ -100,8 +106,11 @@ public class RideEditor extends AppCompatActivity  {
     public void createNewRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
+
         Vehicle vehicle;
         vehicle = data.getVehicleById(idVehicle);
+
+        Log.d("log", "Entrei no createNewRide");
 
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
@@ -109,10 +118,14 @@ public class RideEditor extends AppCompatActivity  {
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
 
+        Log.d("Log",ride.getName());
+        Log.d("Log",ride.getDescription());
+        Log.d("Log",""+ride.getDistance());
+        Log.d("Log",""+ride.getGasPrice());
+
         try {
             int id = myDb.insertRide(ride);
             ride.setId(id);
-            //data.insertUser(user);
             Toast.makeText(RideEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
             data.fillRide(this);
             finish();
