@@ -27,7 +27,7 @@ public class VehicleManager extends AppCompatActivity {
 
         lista = (ListView) findViewById(R.id.ListaVehicle);
 
-        newVehicle = (Button) findViewById(R.id.newVehicle);
+        newVehicle = (Button) findViewById(R.id.btn_new);
 
         loadSpinnerData();
         fillVehicleArrayId();

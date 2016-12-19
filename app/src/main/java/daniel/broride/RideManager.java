@@ -25,7 +25,7 @@ public class RideManager extends AppCompatActivity {
         setContentView(R.layout.activity_ride_manager);
 
         lista = (ListView) findViewById(R.id.lista);
-        button = (Button) findViewById(R.id.newVehicle);
+        button = (Button) findViewById(R.id.btn_new);
 
         loadSpinnerData();
         fillRideArrayId();
@@ -38,12 +38,14 @@ public class RideManager extends AppCompatActivity {
             }
         });
 
+        /*
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openRideEditor(-1);
             }
         });
+        */
     }
 
     @Override
