@@ -21,7 +21,6 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String USER_DRIVER = "DRIVER";
     private static final String USER_AGE = "AGE";
     private static final String USER_DEBIT = "DEBIT";
-    private static final String[] COLUNAS_USER = {USER_ID, USER_NAME,USER_DRIVER, USER_AGE,USER_DEBIT};
 
     private static final String TABLE_VEHICLE = "USER_VEHICLE";
     private static final String VEHICLE_ID = "ID";
@@ -31,12 +30,14 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String VEHICLE_CONSUMPTION = "CONSUMPTION";
 
 
-    public static final String TABLE_RIDE = "RIDE_TABLE";
-    public static final String RIDE_ID = "ID";
-    public static final String RIDE_VEHICLE = "VEHICLE";
-    public static final String RIDE_GAS = "GAS";
-    public static final String RIDE_DISTANCE = "DISTANCE";
-    public static final String RIDE_USERS = "USERS";
+    private static final String TABLE_RIDE = "RIDE_TABLE";
+    private static final String RIDE_ID = "ID";
+    private static final String RIDE_NAME = "NAME";
+    private static final String RIDE_DESCRIPTION = "DESCRIPTION";
+    private static final String RIDE_VEHICLE = "VEHICLE";
+    private static final String RIDE_GAS = "GAS";
+    private static final String RIDE_DISTANCE = "DISTANCE";
+    private static final String RIDE_USERS = "USERS";
 
 
     public static synchronized DbHelper getsInstance(Context context){
@@ -60,7 +61,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 VEHICLE_MODEL+" TEXT,"+VEHICLE_NAME+" TEXT,"+VEHICLE_CAPACITY+" INTEGER,"+VEHICLE_CONSUMPTION+" REAL)");
 
         db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+" REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" REAL");
+                RIDE_NAME+" TEXT"+ RIDE_DESCRIPTION+" TEXT"+ RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+
+                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" REAL");
 
     }
 
@@ -183,6 +185,17 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM "+ TABLE_VEHICLE, null);
 
         return res;
+    }
+
+    public int insertRide(Ride ride) throws SqlException{
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_NAME, ride.getName());
+        contentValues.put(RIDE_NAME, ride.getName());
     }
 
 }
