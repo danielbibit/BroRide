@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,7 +30,15 @@ public class VehicleManager extends AppCompatActivity {
         newVehicle = (Button) findViewById(R.id.newVehicle);
 
         loadSpinnerData();
-        //fillVehicleArrayId();
+        fillVehicleArrayId();
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
+                openVehicleEditor(arrayVehicleId[position]);
+            }
+        });
 
         newVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +46,14 @@ public class VehicleManager extends AppCompatActivity {
                 openVehicleEditor();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadSpinnerData();
+        fillVehicleArrayId();
+
     }
 
     private void loadSpinnerData() {
@@ -72,5 +89,18 @@ public class VehicleManager extends AppCompatActivity {
 
     public void back(View view){
         finish();
+    }
+
+    private void openVehicleEditor(int n){
+        Intent intent = new Intent(this, VehicleEditor.class);
+
+        if(n==-1){
+            intent.putExtra(EXTRA_MESSAGE, "create");
+            startActivity(intent);
+        }else{
+            intent.putExtra(EXTRA_MESSAGE,"display");
+            intent.putExtra("id",n);
+            startActivity(intent);
+        }
     }
 }
