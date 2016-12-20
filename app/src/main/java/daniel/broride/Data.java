@@ -2,6 +2,7 @@ package daniel.broride;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,6 @@ public class Data {
     private Vehicle[] vehicles = new Vehicle[20];
     private Ride[] rides = new Ride[20];
     private int countUsers = 0, countVehicles = 0, countRide = 0;
-
 
     public static synchronized Data getInstance(){
         if(mInstance == null){
@@ -176,6 +176,9 @@ public class Data {
             rides[i].insertVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
+            rides[i].setDriverPays(res.getInt(6));
+
+            Log.d("fillRideDebug",""+res.getInt(6));
             countRide++;
             i++;
         }
@@ -190,7 +193,6 @@ public class Data {
         }
         return ride;
     }
-
 
     public Ride getRide(int i){
         return rides[i];

@@ -8,7 +8,7 @@ public class Ride {
     private String[] usersId = new String[10];
     private int userCount;
     private Double distance, gasPrice;
-    private int driverPays = 0;
+    private int driverPays;
 
     public Ride(){
         for(int i=0; i<10; i++){

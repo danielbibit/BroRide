@@ -201,6 +201,7 @@ public class DbHelper extends SQLiteOpenHelper {
         Log.d("Log2",ride.getDescription());
         Log.d("Log2",""+ride.getDistance());
         Log.d("Log2",""+ride.getGasPrice());
+        Log.d("Log drivepay",""+ride.getDriverPays());
 
 
         contentValues.put(RIDE_NAME, ride.getName());

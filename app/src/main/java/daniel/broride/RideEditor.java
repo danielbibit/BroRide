@@ -21,16 +21,17 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class RideEditor extends AppCompatActivity  {
     int arrayVehicleId[];
     int idVehicle;
-
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
     Button btnAction, btnDelete;
-
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
+    private int id;
+    private int arrayUsersId[];
+    private int idUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,10 @@ public class RideEditor extends AppCompatActivity  {
         btnDelete  = (Button) findViewById(R.id.btnDelete);
 
         loadSpinnerCar();
+        loadSpinnerUser();
         //fillUsersArrayId();
 
-        final int id = intent.getIntExtra("id", 0);
+        id = intent.getIntExtra("id", 0);
 
         spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,7 +93,7 @@ public class RideEditor extends AppCompatActivity  {
             case "commit":
                 mode.setText("Commit");
                 viewMode();
-                displayRides(id);
+                displayRides();
 
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -120,7 +122,7 @@ public class RideEditor extends AppCompatActivity  {
                 btnDelete.setVisibility(View.INVISIBLE);
                 btnAction.setText("Confirmar");
                 viewMode();
-                displayRides(id);
+                displayRides();
 
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -134,7 +136,7 @@ public class RideEditor extends AppCompatActivity  {
                 mode.setText("Editar");
                 btnDelete.setVisibility(View.INVISIBLE);
 
-                displayRides(id);
+                displayRides();
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -176,7 +178,7 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     private void loadSpinnerUser(){
-        List<String> labels = data.getAllRideData();
+        List<String> labels = data.getAllUsersData();
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, labels);
@@ -184,9 +186,11 @@ public class RideEditor extends AppCompatActivity  {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spUser.setAdapter(dataAdapter);
+
+        arrayUsersId = data.getAllUsersId();
     }
 
-    public void viewMode(){
+    private void viewMode(){
         etNome.setFocusable(false);
         etDescription.setFocusable(false);
         etDistance.setFocusable(false);
@@ -196,29 +200,27 @@ public class RideEditor extends AppCompatActivity  {
         cbIsMotorista.setClickable(false);
     }
 
-    public void displayRides(int id){
+    private void displayRides(){
         ride = data.getRideById(id);
         etNome.setText(ride.getName());
         etDescription.setText(ride.getDescription());
         etGas.setText(String.valueOf(ride.getGasPrice()));
         etDistance.setText(String.valueOf(ride.getDistance()));
+        cbIsMotorista.setChecked(ride.getDriverPays() == 1);
     }
 
-    public void createNewRide(){
+    private void createNewRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
-        //Data data = Data.getInstance();
 
         Vehicle vehicle;
         vehicle = data.getVehicleById(idVehicle);
-
-        Log.d("log", "Entrei no createNewRide");
 
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
         ride.insertVehicle(vehicle);
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
-        ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);
+        ride.setDriverPays(cbIsMotorista.isChecked() ? 1 : 0);
 
         Log.d("Log",ride.getName());
         Log.d("Log",ride.getDescription());
@@ -281,10 +283,5 @@ public class RideEditor extends AppCompatActivity  {
     public void back(View view){
         finish();
     }
-
-    /*private void fillUsersArrayId(){
-        //Data data = Data.getInstance();
-        arrayVehicleId = data.getAllVehicleId();
-    }*/
 
 }

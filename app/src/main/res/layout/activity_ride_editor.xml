@@ -171,7 +171,8 @@
                 android:layout_marginLeft="11dp"
                 android:layout_marginStart="11dp"
                 android:layout_toEndOf="@+id/textView3"
-                android:layout_toRightOf="@+id/textView3" />
+                android:layout_toRightOf="@+id/textView3"
+                android:checked="false" />
 
 
         </TableRow>

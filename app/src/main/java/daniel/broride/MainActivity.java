@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         for(int i = 0; i<data.getCountRide(); i++){
             Ride ride = data.getRide(i);
 
-            buffer.append("Id : "+ ride.getId()+"\n");
+            buffer.append("Id : "+ ride.getDriverPays()+"\n");
             buffer.append("Name : "+ride.getName()+"\n");
             buffer.append("Description : "+ride.getDescription()+"\n");
             buffer.append("Distance : "+ride.getDistance()+"\n");
