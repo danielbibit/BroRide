@@ -22,7 +22,6 @@ import java.util.List;
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideEditor extends AppCompatActivity  {
-
     //Multi Selection User Create
     String[] allUsersLabel;
     int[] allUsersId;
@@ -34,12 +33,15 @@ public class RideEditor extends AppCompatActivity  {
     TextView mode;
     CheckBox cbIsMotorista;
     Button btnAction, btnAction2, btnCommit;
+
     //Spinner Vehicles
     int arrayVehicleId[];
     int idVehicle;
+
     //Spiner User
     private int arrayUsersId[];//Delete this
     private int idUser;
+
     //General User atributes for the activity
     private String message;
     private Ride ride = new Ride();
@@ -352,7 +354,6 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     protected void showSelectUserDialog() {
-
         boolean[] checkedUsers = new boolean[arrayUsersId.length];
 
         int count = arrayUsersId.length;
@@ -366,13 +367,11 @@ public class RideEditor extends AppCompatActivity  {
             @Override
 
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
                 if(isChecked)
                     selectedUsers.add(allUsersId[which]);
 
                 else
                     selectedUsers.remove(allUsersId[which]);
-
             }
 
         };
@@ -384,7 +383,6 @@ public class RideEditor extends AppCompatActivity  {
         AlertDialog dialog = builder.create();
 
         dialog.show();
-
     }
 
 

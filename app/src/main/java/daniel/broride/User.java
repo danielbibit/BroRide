@@ -8,8 +8,7 @@ public class User {
     private double debit;
     private int isDriver = 0;
 
-    //Gets and setters
-
+    //Getters and setters
     public int getId() {
         return id;
     }

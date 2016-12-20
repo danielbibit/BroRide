@@ -25,6 +25,12 @@ public class Data {
         return mInstance;
     }
 
+    public void syncWithDb(){
+        fillUser(context);
+        fillVehicle(context);
+        fillRide(context);
+    }
+
     //Preenche o Data base User
     public void fillUser(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
@@ -58,14 +64,6 @@ public class Data {
             }
         }
        return user;
-    }
-
-    public User getUser(int i){
-        return users[i];
-    }
-
-    public int getCountUsers(){
-        return countUsers;
     }
 
     public ArrayList<String> getUsersArrayList() {
