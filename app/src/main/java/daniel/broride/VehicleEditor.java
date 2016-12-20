@@ -3,7 +3,6 @@ package daniel.broride;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,13 +14,11 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class VehicleEditor extends AppCompatActivity {
 
     String message;
-    private Vehicle vehicle = new Vehicle();
-    private Data data;
-
     EditText editNome,editConsumo,editCapacidade,editModelo;
     TextView description;
     Button btnAction,btnDelete,btnVoltar;
-
+    private Vehicle vehicle = new Vehicle();
+    private Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,7 @@ public class VehicleEditor extends AppCompatActivity {
         description = (TextView) findViewById(R.id.description);
 
         btnAction = (Button) findViewById(R.id.btnAction);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnDelete = (Button) findViewById(R.id.btnAction2);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         data = Data.getInstance();

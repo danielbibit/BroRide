@@ -11,132 +11,132 @@
     tools:context="daniel.broride.UserEditor">
 
     <TextView
-        android:text="Usuario:"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/textView8"
+        android:layout_alignParentTop="true"
+        android:text="Usuario:"
         android:textSize="36sp" />
 
     <TextView
-        android:text="Nome"
+        android:id="@+id/textView_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_nome"
-        android:layout_below="@+id/textView8"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp" />
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="21dp"
+        android:text="Nome" />
 
     <EditText
+        android:id="@+id/edit_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edit_age"
-        android:layout_alignTop="@+id/textView_idade"
         android:layout_alignLeft="@+id/edit_name"
-        android:layout_alignStart="@+id/edit_name" />
+        android:layout_alignStart="@+id/edit_name"
+        android:layout_alignTop="@+id/textView_idade"
+        android:ems="10"
+        android:inputType="number" />
 
     <TextView
-        android:text="MODO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView_description"
-        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/textView_nome"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8"
         android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
+        android:layout_marginStart="22dp"
+        android:layout_toEndOf="@+id/textView8"
+        android:layout_toRightOf="@+id/textView8"
+        android:text="MODO"
+        android:textSize="24sp" />
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="Voltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="13dp"
+        android:text="Button" />
+
+    <Button
         android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button"
         android:layout_alignBottom="@+id/button"
         android:layout_alignLeft="@+id/textView_idade"
         android:layout_alignStart="@+id/textView_idade"
-        android:onClick="back" />
+        android:onClick="back"
+        android:text="Voltar" />
 
     <TextView
-        android:text="É motorista ?"
+        android:id="@+id/textView_motorista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_motorista"
-        android:layout_below="@+id/edit_age"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="13dp" />
+        android:layout_below="@+id/edit_age"
+        android:layout_marginTop="13dp"
+        android:text="É motorista ?" />
 
     <CheckBox
+        android:id="@+id/driver_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/driver_checkBox"
         android:layout_alignBaseline="@+id/textView_motorista"
         android:layout_alignBottom="@+id/textView_motorista"
         android:layout_toLeftOf="@+id/textView_description"
         android:layout_toStartOf="@+id/textView_description" />
 
     <EditText
+        android:id="@+id/edit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/edit_name"
         android:layout_alignTop="@+id/textView_nome"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
-        android:text="Idade"
+        android:id="@+id/textView_idade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_idade"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/edit_name"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edit_name"
+        android:layout_marginTop="22dp"
+        android:text="Idade" />
 
     <Button
-        android:text="Delete"
+        android:id="@+id/btnAction2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnDelete"
         android:layout_alignBaseline="@+id/button2"
         android:layout_alignBottom="@+id/button2"
+        android:layout_toEndOf="@+id/driver_checkBox"
         android:layout_toRightOf="@+id/driver_checkBox"
-        android:layout_toEndOf="@+id/driver_checkBox" />
+        android:text="Delete" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/textViewDebitValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textViewDebit"
-        android:layout_toRightOf="@+id/button2"
         android:layout_toEndOf="@+id/button2"
-        android:id="@+id/textViewDebitValue" />
+        android:layout_toRightOf="@+id/button2"
+        android:text="TextView" />
 
     <TextView
-        android:text="Debito"
+        android:id="@+id/textViewDebit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewDebit"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Debito" />
 
 </RelativeLayout>

@@ -29,6 +29,14 @@
         android:onClick="back"
         android:text="Voltar" />
 
+    <Button
+        android:id="@+id/btnAction2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Commit" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -241,14 +249,6 @@
         </TableRow>
 
     </TableLayout>
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Delete" />
 
 
 </RelativeLayout>

@@ -1,35 +1,25 @@
 package daniel.broride;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class UserEditor extends AppCompatActivity{
-    private User user = new User();
-    private Data data;
-
-    private String message;
-
     TextView description, debitValue;
     EditText editName, editAge;
     Button btnAction, btnDelete;
     CheckBox isDriver;
+    private User user = new User();
+    private Data data;
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +35,7 @@ public class UserEditor extends AppCompatActivity{
         editAge = (EditText) findViewById(R.id.edit_age);
         isDriver = (CheckBox) findViewById(R.id.driver_checkBox);
         btnAction = (Button) findViewById(R.id.button);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnDelete = (Button) findViewById(R.id.btnAction2);
 
         data = Data.getInstance();
         data.fillUser(this);

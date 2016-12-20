@@ -22,21 +22,25 @@ import java.util.List;
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideEditor extends AppCompatActivity  {
-    int arrayVehicleId[];
-    int idVehicle;
 
     //Multi Selection User Create
     String[] allUsersLabel;
     int[] allUsersId;
     ArrayList<Integer> selectedUsers = new ArrayList<Integer>();
+
     //View objects
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
-    Button btnAction, btnDelete, btnCommit;
-    private int arrayUsersId[];
+    Button btnAction, btnAction2, btnCommit;
+    //Spinner Vehicles
+    int arrayVehicleId[];
+    int idVehicle;
+    //Spiner User
+    private int arrayUsersId[];//Delete this
     private int idUser;
+    //General User atributes for the activity
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
@@ -67,12 +71,11 @@ public class RideEditor extends AppCompatActivity  {
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
         btnAction = (Button) findViewById(R.id.btnAction);
-        btnDelete  = (Button) findViewById(R.id.btnDelete);
+        btnAction2  = (Button) findViewById(R.id.btnAction2);
         btnCommit = (Button) findViewById(R.id.button_commit);
 
         loadSpinnerCar();
         loadSpinnerUser();
-        //fillUsersArrayId();
 
         id = intent.getIntExtra("id", 0);
 
@@ -80,7 +83,7 @@ public class RideEditor extends AppCompatActivity  {
             case "create":
                 mode.setText("Criar");
                 btnAction.setText("Criar!");
-                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction2.setVisibility(View.INVISIBLE);
 
                 spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -113,7 +116,7 @@ public class RideEditor extends AppCompatActivity  {
                     }
                 });
 
-                btnDelete.setOnClickListener(new View.OnClickListener() {
+                btnAction2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -144,21 +147,11 @@ public class RideEditor extends AppCompatActivity  {
                     }
                 });
 
-                btnDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent nIntent = getIntent();
-                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
-                        nIntent.putExtra("id",id);
-                        startActivity(nIntent);
-                    }
-                });
-
                 break;
 
             case "delete":
                 mode.setText("Deletar");
-                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction2.setVisibility(View.INVISIBLE);
                 btnAction.setText("Confirmar");
                 viewMode();
                 displayRides();
@@ -174,7 +167,7 @@ public class RideEditor extends AppCompatActivity  {
 
             case "edit":
                 mode.setText("Editar");
-                btnDelete.setVisibility(View.INVISIBLE);
+                btnAction2.setText("Deletar");
 
                 displayRides();
                 btnAction.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +175,16 @@ public class RideEditor extends AppCompatActivity  {
                     public void onClick(View v) {
                         updateRide(id);
                         finish();
+                    }
+                });
+
+                btnAction2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
                     }
                 });
 
@@ -202,11 +205,11 @@ public class RideEditor extends AppCompatActivity  {
     private void loadSpinnerCar() {
 
         // Spinner Drop down elements
-        List<String> lables = data.getAllVehiclesData();
+        List<String> labels = data.getAllVehiclesData();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lables);
+                android.R.layout.simple_spinner_item, labels);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

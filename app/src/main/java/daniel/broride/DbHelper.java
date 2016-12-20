@@ -230,7 +230,6 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
-        Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
 
         if(result == 0){

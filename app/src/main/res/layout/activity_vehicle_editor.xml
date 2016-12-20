@@ -11,131 +11,131 @@
     tools:context="daniel.broride.VehicleEditor">
 
     <TextView
-        android:text="Veículo"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="18dp"
-        android:id="@+id/textView2"
-        android:textSize="36sp"
-        android:layout_alignParentTop="true" />
+        android:text="Veículo"
+        android:textSize="36sp" />
 
     <TextView
-        android:text="Nome"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="37dp"
+        android:text="Nome"
         />
 
     <TextView
-        android:text="Modelo"
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/editNome"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editNome"
+        android:layout_marginTop="14dp"
+        android:text="Modelo" />
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Button" />
 
     <TextView
-        android:text="Capacidade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView11"
-        android:layout_alignTop="@+id/editCapacidade"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Consumo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView12"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/editCapacidade"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/editCapacidade"
+        android:text="Capacidade" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editCapacidade"
+        android:layout_marginTop="19dp"
+        android:text="Consumo" />
 
     <EditText
+        android:id="@+id/editCapacidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editCapacidade"
-        android:layout_marginTop="14dp"
         android:layout_below="@+id/editModelo"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/btnVoltar"
         android:layout_toRightOf="@+id/btnVoltar"
-        android:layout_toEndOf="@+id/btnVoltar" />
+        android:ems="10"
+        android:inputType="number" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/description"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
         android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp" />
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="TextView" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/editNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editCapacidade"
+        android:layout_alignStart="@+id/editCapacidade"
         android:layout_alignTop="@+id/textView5"
-        android:layout_alignLeft="@+id/editCapacidade"
-        android:layout_alignStart="@+id/editCapacidade" />
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/editModelo"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_alignLeft="@+id/editCapacidade"
-        android:layout_alignStart="@+id/editCapacidade" />
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editConsumo"
-        android:layout_alignTop="@+id/textView12"
         android:layout_alignLeft="@+id/editCapacidade"
-        android:layout_alignStart="@+id/editCapacidade" />
+        android:layout_alignStart="@+id/editCapacidade"
+        android:layout_alignTop="@+id/textView7"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editConsumo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editCapacidade"
+        android:layout_alignStart="@+id/editCapacidade"
+        android:layout_alignTop="@+id/textView12"
+        android:ems="10"
+        android:inputType="numberDecimal" />
 
     <Button
-        android:text="Voltar"
+        android:id="@+id/btnVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnVoltar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="back" />
+        android:onClick="back"
+        android:text="Voltar" />
 
     <Button
-        android:text="Deletar"
+        android:id="@+id/btnAction2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnDelete"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Deletar" />
 </RelativeLayout>
