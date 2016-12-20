@@ -11,10 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
@@ -78,7 +75,7 @@ public class UserManager extends AppCompatActivity {
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = data.getAllUsersData();
+        List<String> lables = data.getUsersArrayList();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

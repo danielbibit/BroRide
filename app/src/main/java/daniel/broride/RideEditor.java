@@ -1,6 +1,8 @@
 package daniel.broride;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static daniel.broride.MainActivity.EXTRA_MESSAGE;
@@ -21,14 +24,19 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class RideEditor extends AppCompatActivity  {
     int arrayVehicleId[];
     int idVehicle;
+
+    //Multi Selection User Create
+    String[] allUsersLabel;
+    int[] allUsersId;
+    ArrayList<Integer> selectedUsers = new ArrayList<Integer>();
     //View objects
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
-    Button btnAction, btnDelete;
+    Button btnAction, btnDelete, btnCommit;
     private int arrayUsersId[];
-    private int idUsers;
+    private int idUser;
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
@@ -41,6 +49,9 @@ public class RideEditor extends AppCompatActivity  {
 
         Intent intent = getIntent();
         message = intent.getStringExtra(EXTRA_MESSAGE);
+
+        allUsersLabel = data.getUsersArrayString();
+        allUsersId = data.getAllUsersId();
 
         //EditText
         etNome = (EditText) findViewById(R.id.etNome);
@@ -57,6 +68,7 @@ public class RideEditor extends AppCompatActivity  {
 
         btnAction = (Button) findViewById(R.id.btnAction);
         btnDelete  = (Button) findViewById(R.id.btnDelete);
+        btnCommit = (Button) findViewById(R.id.button_commit);
 
         loadSpinnerCar();
         loadSpinnerUser();
@@ -64,23 +76,35 @@ public class RideEditor extends AppCompatActivity  {
 
         id = intent.getIntExtra("id", 0);
 
-        spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                idVehicle = arrayVehicleId[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                idVehicle = arrayVehicleId[0];
-            }
-        });
-
         switch (message){
             case "create":
                 mode.setText("Criar");
                 btnAction.setText("Criar!");
                 btnDelete.setVisibility(View.INVISIBLE);
+
+                spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        idVehicle = arrayVehicleId[position];
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        idVehicle = arrayVehicleId[0];
+                    }
+                });
+
+                spUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        idUser = arrayUsersId[position];
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        idUser = arrayUsersId[0];
+                    }
+                });
 
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,6 +119,14 @@ public class RideEditor extends AppCompatActivity  {
 
                     }
                 });
+
+                btnCommit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showSelectUserDialog();
+                    }
+                });
+
                 break;
 
             case "commit":
@@ -186,7 +218,7 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     private void loadSpinnerUser(){
-        List<String> labels = data.getAllUsersData();
+        List<String> labels = data.getUsersArrayList();
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, labels);
@@ -216,11 +248,30 @@ public class RideEditor extends AppCompatActivity  {
         etDescription.setText(ride.getDescription());
         etGas.setText(String.valueOf(ride.getGasPrice()));
         etDistance.setText(String.valueOf(ride.getDistance()));
-
-        //spUser.setSelection();
-        //spCar.setOnClickListener();
-
         cbIsMotorista.setChecked(ride.getDriverPays() == 1);
+
+        int selectedCar = 0;
+
+        for(int i=0; i<arrayVehicleId.length; i++){
+            if(ride.getVehicleId()==arrayVehicleId[i]){
+                selectedCar=i;
+                break;
+            }
+        }
+
+        spCar.setSelection(selectedCar);
+
+        int selectedUser = 0;
+
+        Log.d("Motorista: ", ""+ride.getUsersId(0));
+        for(int i =0; i<allUsersId.length; i++){
+            if(ride.getUsersId(0) == allUsersId[i]){
+                selectedUser = i;
+                break;
+            }
+        }
+
+        spUser.setSelection(selectedUser);
     }
 
     private void createNewRide(){
@@ -235,11 +286,14 @@ public class RideEditor extends AppCompatActivity  {
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1 : 0);
+        ride.insertUser(data.getUserById(idUser));
+        Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
+        Log.d("Usuario InsaerindoM2", ride.getUser(0).getName());
 
-        Log.d("Log",ride.getName());
-        Log.d("Log",ride.getDescription());
-        Log.d("Log",""+ride.getDistance());
-        Log.d("Log",""+ride.getGasPrice());
+        for(int i : selectedUsers){
+            ride.insertUser(data.getUserById(i));
+            Log.d("Usuario Inserindo", data.getUserById(i).getName());
+        }
 
         try {
             int id = myDb.insertRide(ride);
@@ -294,8 +348,6 @@ public class RideEditor extends AppCompatActivity  {
         }
     }
 
-
-/*
     protected void showSelectUserDialog() {
 
         boolean[] checkedUsers = new boolean[arrayUsersId.length];
@@ -303,7 +355,7 @@ public class RideEditor extends AppCompatActivity  {
         int count = arrayUsersId.length;
 
         for(int i = 0; i < count; i++)
-            checkedUsers[i] = selectedColours.contains(colours[i]);
+            checkedUsers[i] = selectedUsers.contains(allUsersId[i]);
 
         DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new
                 DialogInterface.OnMultiChoiceClickListener() {
@@ -313,31 +365,25 @@ public class RideEditor extends AppCompatActivity  {
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 
                 if(isChecked)
-
-                    selectedColours.add(colours[which]);
+                    selectedUsers.add(allUsersId[which]);
 
                 else
-
-                    selectedColours.remove(colours[which]);
-
-                //onChangeSelectedColours();
+                    selectedUsers.remove(allUsersId[which]);
 
             }
 
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Select Colours");
-
-        builder.setMultiChoiceItems(data.getAllUsersData(), checkedUsers, coloursDialogListener);
+        builder.setTitle("Selecione Usuarios");
+        builder.setMultiChoiceItems(allUsersLabel, checkedUsers, coloursDialogListener);
 
         AlertDialog dialog = builder.create();
 
         dialog.show();
 
     }
-*/
+
 
     public void back(View view){
         finish();

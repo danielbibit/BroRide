@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Data {
     private static Data mInstance;
@@ -67,7 +68,7 @@ public class Data {
         return countUsers;
     }
 
-    public ArrayList<String> getAllUsersData() {
+    public ArrayList<String> getUsersArrayList() {
 
         ArrayList<String> labels = new ArrayList<String>();
 
@@ -77,6 +78,16 @@ public class Data {
         }
 
         return labels;
+    }
+
+    public String[] getUsersArrayString(){
+        String[] array = new String[countUsers];
+
+        for(int i=0; i<countUsers; i++){
+            array[i] = users[i].getName();
+        }
+
+        return array;
     }
 
     public int[] getAllUsersId(){
@@ -160,13 +171,13 @@ public class Data {
         Cursor res = myDb.getAllRides();
 
         if (res.getCount() == 0) {
-            //show message
-            //trowh error
         }
+
         int i = 0;
         countRide = 0;
 
         fillVehicle(context.getApplicationContext());
+        fillUser(context.getApplicationContext());
 
         while (res.moveToNext()) {
 
@@ -177,10 +188,22 @@ public class Data {
             rides[i].insertVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
-
             rides[i].setDriverPays(res.getInt(7));
 
-            Log.d("fillRideDebug",""+res.getInt(6));
+            String[] usersFromDb = Utils.StringToArray(res.getString(6));
+            Log.d("Peguei",res.getString(6));
+            Log.d("Pegui2", usersFromDb[0]);
+            Log.d("Pegui2", usersFromDb[1]);
+            Log.d("Pegui2", usersFromDb[2]);
+            Log.d("Pegui2", usersFromDb[3]);
+            for(int j=0; j<usersFromDb.length; j++){
+                Log.d("Fiz",""+j);
+                if(!(usersFromDb[j].equals("") || usersFromDb[j].equals("0") || usersFromDb[j].equals("null"))){
+                    Log.d("Fiz1",usersFromDb[j]+j);
+                    rides[i].insertUser(getUserById( Integer.parseInt(usersFromDb[j]) ));
+                }
+            }
+
             countRide++;
             i++;
         }

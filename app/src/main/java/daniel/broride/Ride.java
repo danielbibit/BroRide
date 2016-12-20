@@ -5,8 +5,8 @@ public class Ride {
     private String name, description;
     private Vehicle vehicle;
     private User[] users = new User[10];
-    private String[] usersId = new String[10];
-    private int userCount;
+    private String[] usersId = new String[20];
+    private int userCount = 0;
     private Double distance, gasPrice;
     private int driverPays;
 
@@ -17,13 +17,9 @@ public class Ride {
         }
     };
 
-    public Ride(Vehicle vehicle){
-        this.vehicle = vehicle;
-        users = new User[this.vehicle.getCapacity()];
-    }
-
     public void insertUser(User user){
         users[userCount] = new User();
+        users[userCount] = user;
         userCount++;
     }
 
@@ -34,16 +30,36 @@ public class Ride {
         return i;
     }
 
+    public String[] getUsersId() {
+        //for(int i=0; i<usersId.length; i++){
+        //    usersId[i] ="0";
+        //}
+
+        for(int i=0; i<userCount; i++){
+            usersId[i] = String.valueOf(users[i].getId());
+        }
+        return usersId;
+    }
+
+    public int getUsersId(int n){
+        getUsersId();
+        return Integer.valueOf(usersId[n]);
+    }
+
+    public User getUser(int i){
+        return users[i];
+    }
+
+    public User[] getUsers() {
+        return users;
+    }
+
     public int getDriverPays() {
         return driverPays;
     }
 
     public void setDriverPays(int driverPays) {
         this.driverPays = driverPays;
-    }
-
-    public String[] getUsersId() {
-        return usersId;
     }
 
     public int getId() {

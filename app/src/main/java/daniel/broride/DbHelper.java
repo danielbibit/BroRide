@@ -37,8 +37,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String RIDE_VEHICLE = "VEHICLE";
     private static final String RIDE_GAS = "GAS";
     private static final String RIDE_DISTANCE = "DISTANCE";
-    private static final String RIDE_DRIVERPAY = "DRIVER";
     private static final String RIDE_USERS = "USERS";
+    private static final String RIDE_DRIVERPAY = "DRIVER";
 
     private static DbHelper mInstance;
 
@@ -133,9 +133,6 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-
-
-
     public int insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -197,21 +194,20 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        Log.d("Log2",ride.getName());
-        Log.d("Log2",ride.getDescription());
-        Log.d("Log2",""+ride.getDistance());
-        Log.d("Log2",""+ride.getGasPrice());
+        Log.d("LogDbn",ride.getName());
+        Log.d("LogDbd",ride.getDescription());
+        Log.d("LogDbd",""+ride.getDistance());
+        Log.d("LogDbg",""+ride.getGasPrice());
         Log.d("Log drivepay",""+ride.getDriverPays());
-
 
         contentValues.put(RIDE_NAME, ride.getName());
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
         contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+        contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
-
+        Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
         if(result == -1){
@@ -232,9 +228,9 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_VEHICLE, ride.getVehicleId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+        contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
-
+        Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
 
         if(result == 0){
