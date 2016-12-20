@@ -21,11 +21,13 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class RideEditor extends AppCompatActivity  {
     int arrayVehicleId[];
     int idVehicle;
+
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
     Button btnAction, btnDelete;
+
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
@@ -55,7 +57,7 @@ public class RideEditor extends AppCompatActivity  {
         btnDelete  = (Button) findViewById(R.id.btnDelete);
 
         loadSpinnerCar();
-        fillUsersArrayId();
+        //fillUsersArrayId();
 
         final int id = intent.getIntExtra("id", 0);
 
@@ -156,7 +158,6 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     private void loadSpinnerCar() {
-        Data data = Data.getInstance();
 
         // Spinner Drop down elements
         List<String> lables = data.getAllVehiclesData();
@@ -170,6 +171,19 @@ public class RideEditor extends AppCompatActivity  {
 
         // attaching data adapter to spinner
         spCar.setAdapter(dataAdapter);
+
+        arrayVehicleId = data.getAllVehicleId();
+    }
+
+    private void loadSpinnerUser(){
+        List<String> labels = data.getAllRideData();
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, labels);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spUser.setAdapter(dataAdapter);
     }
 
     public void viewMode(){
@@ -179,6 +193,7 @@ public class RideEditor extends AppCompatActivity  {
         etGas.setFocusable(false);
         spCar.setFocusable(false);
         spUser.setFocusable(false);
+        cbIsMotorista.setClickable(false);
     }
 
     public void displayRides(int id){
@@ -191,7 +206,7 @@ public class RideEditor extends AppCompatActivity  {
 
     public void createNewRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
-        Data data = Data.getInstance();
+        //Data data = Data.getInstance();
 
         Vehicle vehicle;
         vehicle = data.getVehicleById(idVehicle);
@@ -203,6 +218,7 @@ public class RideEditor extends AppCompatActivity  {
         ride.insertVehicle(vehicle);
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
+        ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);
 
         Log.d("Log",ride.getName());
         Log.d("Log",ride.getDescription());
@@ -224,13 +240,14 @@ public class RideEditor extends AppCompatActivity  {
 
     private void updateRide(int id){
         DbHelper myDb = DbHelper.getsInstance(this);
-        Data data = Data.getInstance();
+        //Data data = Data.getInstance();
 
         ride.setId(id);
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
         ride.setDistance(Double.valueOf(etDistance.getText().toString()));
         ride.setGasPrice(Double.valueOf(etGas.getText().toString()));
+        ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);
 
         try {
             myDb.updateRide(ride);
@@ -247,7 +264,7 @@ public class RideEditor extends AppCompatActivity  {
 
     private void deleteRide(){
         DbHelper myDb = DbHelper.getsInstance(this);
-        Data data = Data.getInstance();
+        //Data data = Data.getInstance();
 
         try{
             myDb.deleteRide(data.getRideById(ride.getId()));
@@ -265,9 +282,9 @@ public class RideEditor extends AppCompatActivity  {
         finish();
     }
 
-    private void fillUsersArrayId(){
-        Data data = Data.getInstance();
+    /*private void fillUsersArrayId(){
+        //Data data = Data.getInstance();
         arrayVehicleId = data.getAllVehicleId();
-    }
+    }*/
 
 }

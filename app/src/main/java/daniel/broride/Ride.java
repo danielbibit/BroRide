@@ -8,6 +8,7 @@ public class Ride {
     private String[] usersId = new String[10];
     private int userCount;
     private Double distance, gasPrice;
+    private int driverPays = 0;
 
     public Ride(){
         for(int i=0; i<10; i++){
@@ -31,6 +32,14 @@ public class Ride {
     public int getVehicleId(){
         int i = vehicle.getId();
         return i;
+    }
+
+    public int getDriverPays() {
+        return driverPays;
+    }
+
+    public void setDriverPays(int driverPays) {
+        this.driverPays = driverPays;
     }
 
     public String[] getUsersId() {

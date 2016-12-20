@@ -37,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String RIDE_VEHICLE = "VEHICLE";
     private static final String RIDE_GAS = "GAS";
     private static final String RIDE_DISTANCE = "DISTANCE";
+    private static final String RIDE_DRIVERPAY = "DRIVER";
     private static final String RIDE_USERS = "USERS";
 
     private static DbHelper mInstance;
@@ -63,7 +64,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE "+TABLE_RIDE+" ("+RIDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 RIDE_NAME+" TEXT,"+ RIDE_DESCRIPTION+" TEXT,"+ RIDE_VEHICLE+" INTEGER,"+RIDE_GAS+
-                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+" TEXT)");
+                " REAL,"+RIDE_DISTANCE+" REAL,"+ RIDE_USERS+ " TEXT,"+RIDE_DRIVERPAY+" INTEGER)");
 
     }
 
@@ -208,6 +209,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+        contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
@@ -230,6 +232,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Arrays.toString(ride.getUsersId()));
+        contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
 

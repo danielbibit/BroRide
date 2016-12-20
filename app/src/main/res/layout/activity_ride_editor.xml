@@ -173,6 +173,48 @@
                 android:layout_toEndOf="@+id/textView3"
                 android:layout_toRightOf="@+id/textView3" />
 
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:text="Motorista"
+                android:textAllCaps="false" />
+
+            <Spinner
+                android:id="@+id/spUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView4" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:text="Carro" />
+
+            <Spinner
+                android:id="@+id/spCar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/Carro"
+                android:layout_centerHorizontal="true" />
         </TableRow>
 
         <TableRow
@@ -188,37 +230,6 @@
                 android:layout_below="@+id/cbIsMotorista"
                 android:layout_marginTop="19dp"
                 android:text="Usuarios" />
-
-            <Spinner
-                android:id="@+id/spUser"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView4" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/Carro"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/spUser"
-                android:layout_marginTop="30dp"
-                android:text="Carro" />
-
-            <Spinner
-                android:id="@+id/spCar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/Carro"
-                android:layout_centerHorizontal="true" />
 
         </TableRow>
 
