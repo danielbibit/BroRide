@@ -232,6 +232,12 @@
                 android:layout_marginTop="19dp"
                 android:text="Usuarios" />
 
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecionar" />
+
         </TableRow>
 
     </TableLayout>

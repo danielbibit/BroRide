@@ -88,6 +88,12 @@ public class RideEditor extends AppCompatActivity  {
                     }
                 });
 
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        
+                    }
+                });
                 break;
 
             case "commit":

@@ -176,7 +176,8 @@ public class Data {
             rides[i].insertVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
-            rides[i].setDriverPays(res.getInt(6));
+
+            rides[i].setDriverPays(res.getInt(7));
 
             Log.d("fillRideDebug",""+res.getInt(6));
             countRide++;
