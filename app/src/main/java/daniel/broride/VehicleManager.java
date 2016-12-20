@@ -93,7 +93,7 @@ public class VehicleManager extends AppCompatActivity {
 
     private void fillVehicleArrayId(){
         Data data = Data.getInstance();
-        arrayVehicleId = data.getAllVehicleId();
+        arrayVehicleId = data.getAllVehiclesId();
     }
 
     private void openVehicleEditor(){

@@ -21,17 +21,18 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 public class RideEditor extends AppCompatActivity  {
     int arrayVehicleId[];
     int idVehicle;
+    //View objects
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
     Button btnAction, btnDelete;
+    private int arrayUsersId[];
+    private int idUsers;
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
     private int id;
-    private int arrayUsersId[];
-    private int idUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class RideEditor extends AppCompatActivity  {
                 btnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        
+
                     }
                 });
                 break;
@@ -138,6 +139,7 @@ public class RideEditor extends AppCompatActivity  {
                 });
 
                 break;
+
             case "edit":
                 mode.setText("Editar");
                 btnDelete.setVisibility(View.INVISIBLE);
@@ -180,7 +182,7 @@ public class RideEditor extends AppCompatActivity  {
         // attaching data adapter to spinner
         spCar.setAdapter(dataAdapter);
 
-        arrayVehicleId = data.getAllVehicleId();
+        arrayVehicleId = data.getAllVehiclesId();
     }
 
     private void loadSpinnerUser(){
@@ -203,6 +205,8 @@ public class RideEditor extends AppCompatActivity  {
         etGas.setFocusable(false);
         spCar.setFocusable(false);
         spUser.setFocusable(false);
+        spCar.setEnabled(false);
+        spUser.setEnabled(false);
         cbIsMotorista.setClickable(false);
     }
 
@@ -212,6 +216,10 @@ public class RideEditor extends AppCompatActivity  {
         etDescription.setText(ride.getDescription());
         etGas.setText(String.valueOf(ride.getGasPrice()));
         etDistance.setText(String.valueOf(ride.getDistance()));
+
+        //spUser.setSelection();
+        //spCar.setOnClickListener();
+
         cbIsMotorista.setChecked(ride.getDriverPays() == 1);
     }
 
@@ -285,6 +293,51 @@ public class RideEditor extends AppCompatActivity  {
             finish();
         }
     }
+
+
+/*
+    protected void showSelectUserDialog() {
+
+        boolean[] checkedUsers = new boolean[arrayUsersId.length];
+
+        int count = arrayUsersId.length;
+
+        for(int i = 0; i < count; i++)
+            checkedUsers[i] = selectedColours.contains(colours[i]);
+
+        DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new
+                DialogInterface.OnMultiChoiceClickListener() {
+
+            @Override
+
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                if(isChecked)
+
+                    selectedColours.add(colours[which]);
+
+                else
+
+                    selectedColours.remove(colours[which]);
+
+                //onChangeSelectedColours();
+
+            }
+
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Select Colours");
+
+        builder.setMultiChoiceItems(data.getAllUsersData(), checkedUsers, coloursDialogListener);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+    }
+*/
 
     public void back(View view){
         finish();

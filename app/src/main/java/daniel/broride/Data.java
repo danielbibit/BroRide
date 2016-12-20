@@ -14,6 +14,8 @@ public class Data {
     private Ride[] rides = new Ride[20];
     private int countUsers = 0, countVehicles = 0, countRide = 0;
 
+    private Context context;
+
     public static synchronized Data getInstance(){
         if(mInstance == null){
             mInstance = new Data();
@@ -21,7 +23,6 @@ public class Data {
 
         return mInstance;
     }
-
 
     //Preenche o Data base User
     public void fillUser(Context context){
@@ -144,7 +145,7 @@ public class Data {
         return labels;
     }
 
-    public int[] getAllVehicleId(){
+    public int[] getAllVehiclesId(){
         int[] array = new int[countVehicles];
         for (int i = 0; i < countVehicles; i++) {
             array[i] = vehicles[i].getId();
