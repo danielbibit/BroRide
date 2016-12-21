@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Log.d("Entrei no menu", "menu");
+            Toast.makeText(this, "Help!", Toast.LENGTH_LONG);
+            //Utils.showMessage("ERRO !!!", "Houve um problema com seu DB, tente abrir novamente", this);
             return true;
         }
 
