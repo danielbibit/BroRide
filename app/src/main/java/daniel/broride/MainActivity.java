@@ -92,10 +92,6 @@ public class MainActivity extends AppCompatActivity
             openRideManager();
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-            this.deleteDatabase("main.db");
-        } else if (id == R.id.nav_send) {
-            showAllData();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

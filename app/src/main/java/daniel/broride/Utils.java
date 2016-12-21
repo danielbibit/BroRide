@@ -24,10 +24,10 @@ public class Utils {
     }
 
 
-    public static String ListToString(ArrayList<User> userArrayList){
+    public static String ListToString(ArrayList<String> userArrayList){
         String str = "";
         for(int i = 0; i<userArrayList.size(); i++){
-            str = str+userArrayList.get(i).getId();
+            str = str+userArrayList.get(i);
 
             if(i<userArrayList.size()-1){
                 str = str+strSeparator;
