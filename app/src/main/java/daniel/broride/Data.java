@@ -42,8 +42,13 @@ public class Data {
         return false;
     }
 
-    public boolean verifyVehicleConflict(Vehicle vehicle){
-        //for(int i=0)
+    //Verify id a given Vehicle is registered on any ride
+    public boolean verifyVehicleConflict(Vehicle vehicle) {
+        for(int i=0; i<rideList.size(); i++){
+            if(rideList.get(i).getVehicle() == vehicle){
+                return true;
+            }
+        }
         return true;
     }
 
@@ -178,14 +183,7 @@ public class Data {
 
         if (res.getCount() == 0) {
         }
-
         /*
-        int i = 0;
-        countRide = 0;
-
-        fillVehicle(context.getApplicationContext());
-        fillUser(context.getApplicationContext());
-
         // FIXME: 21/12/2016
         while (res.moveToNext()) {
 
@@ -253,12 +251,6 @@ public class Data {
 
     public Ride getRideById(int id){
         Ride ride = null;
-        /*
-        for(int i = 0; i<countRide ; i++){
-            if(rides[i].getId()== id){
-                return rides[i];
-            }
-        }*/
 
         for(int i = 0; i<rideList.size(); i++){
             if(rideList.get(i).getId()==id){
@@ -270,14 +262,7 @@ public class Data {
 
     ///Metodos usados pelos Managers
     public ArrayList<String> getAllRideData() {
-
         ArrayList<String> labels = new ArrayList<String>();
-
-        /*
-        for (int i = 0; i< countRide; i++){
-            labels.add(rides[i].getName()+" : "+rides[i].getDescription());
-        }
-        */
 
         for (int i = 0; i< rideList.size(); i++){
             labels.add(rideList.get(i).getName()+" : "+rideList.get(i).getDescription());
@@ -287,12 +272,7 @@ public class Data {
     }
 
     public int[] getAllRideId(){
-        //int[] array = new int[countRide];
         int[] array = new int [rideList.size()];
-        /*
-        for (int i = 0; i < countRide; i++) {
-            array[i] = rides[i].getId();
-        }*/
 
         for (int i = 0; i<rideList.size(); i++){
             array[i] = rideList.get(i).getId();

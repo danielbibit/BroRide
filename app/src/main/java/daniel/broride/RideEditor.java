@@ -87,6 +87,7 @@ public class RideEditor extends AppCompatActivity  {
         id = intent.getIntExtra("id", 0);
 
         switch (message){
+            //TODO Don't let the user try to create a new ride if there's no user or vehicle on DB
             case "create":
                 mode.setText("Criar");
                 btnAction.setText("Criar!");
@@ -294,7 +295,7 @@ public class RideEditor extends AppCompatActivity  {
 
         for(int i =0; i<allUsersId.length; i++){
             //if(ride.getUsersId(0) == allUsersId[i]){
-            if(ride.getUsersId(0) == allUsersId[i]){
+            if(ride.getUser(0).getId() == allUsersId[i]){
                 selectedUser = i;
                 break;
             }

@@ -28,7 +28,6 @@ public class VehicleEditor extends AppCompatActivity {
         final Intent intent = getIntent();
         message = getIntent().getStringExtra(EXTRA_MESSAGE);
 
-
         editNome = (EditText) findViewById(R.id.editNome);
         editConsumo = (EditText) findViewById(R.id.editConsumo);
         editCapacidade = (EditText) findViewById(R.id.editCapacidade);
@@ -80,7 +79,6 @@ public class VehicleEditor extends AppCompatActivity {
                 break;
 
             case "edit":
-                //setViewMode(0);
                 description.setText("Editar");
                 btnAction.setText("Confirmar");
 

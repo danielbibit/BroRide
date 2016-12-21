@@ -1,6 +1,7 @@
 package daniel.broride;
 
 import android.content.Intent;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.design.widget.NavigationView;
@@ -41,12 +42,14 @@ public class MainActivity extends AppCompatActivity
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
-        }catch (Exception e){
-            //e.printStackTrace();
-            //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
-            //finish();
+        }catch (SQLException e){
+            e.printStackTrace();
+            this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
+            Utils.showMessage("ERRO !!!", "Houve um problema com seu DB, tente abrir novamente", this);
+            finish();
         }
 
+        //Log.d("Test1", data.getRideById(1).userExists(data.getUserById(4)) ? "sim" : "nao");
     }
 
     @Override
@@ -95,11 +98,11 @@ public class MainActivity extends AppCompatActivity
             openRideManager();
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-            this.deleteDatabase("main.db");
+        } /*else if (id == R.id.nav_share) {
+
         } else if (id == R.id.nav_send) {
-            showAllData();
-        }
+
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -123,25 +126,5 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
-
-    private void showAllData(){
-        /*StringBuffer buffer = new StringBuffer();
-        Log.d("DEBUG", ""+data.getCountRide());
-        data.fillRide(this);
-
-        for(int i = 0; i<data.getCountRide(); i++){
-            Ride ride = data.getRide(i);
-
-            buffer.append("Id : "+ ride.getDriverPays()+"\n");
-            buffer.append("Name : "+ride.getName()+"\n");
-            buffer.append("Description : "+ride.getDescription()+"\n");
-            buffer.append("Distance : "+ride.getDistance()+"\n");
-            buffer.append("Debit: "+ride.getGasPrice()+"\n\n");
-        }
-
-        showMessage("Data", buffer.toString());
-        */
-    }
-
 
 }
