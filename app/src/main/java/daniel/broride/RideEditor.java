@@ -122,6 +122,8 @@ public class RideEditor extends AppCompatActivity  {
                 viewMode();
                 displayRides();
 
+                ride = data.getRideById(id);
+
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -135,8 +137,6 @@ public class RideEditor extends AppCompatActivity  {
                 btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ride = data.getRideById(id);
-
                         if (cbIsMotorista.isChecked()){
                             idUsersRide = ride.getUsersIdWithOutDriver();
                             usersLabelRide = ride.getUsersArrayStringWithoutDriver();
@@ -148,6 +148,21 @@ public class RideEditor extends AppCompatActivity  {
                         showSelectUserDialogCommit();
 
 
+                    }
+                });
+
+                btnAction2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (cbIsMotorista.isChecked()){
+                            ride.commitRide(usersSelected, true, RideEditor.this);
+                            Toast.makeText(RideEditor.this, "Feito", Toast.LENGTH_LONG).show();
+                            finish();
+                        }else{
+                            ride.commitRide(usersSelected, false, RideEditor.this);
+                            Toast.makeText(RideEditor.this, "Feito", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
                     }
                 });
 

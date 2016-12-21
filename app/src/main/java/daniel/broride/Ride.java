@@ -1,5 +1,7 @@
 package daniel.broride;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class Ride {
@@ -14,6 +16,7 @@ public class Ride {
 
     private Double distance, gasPrice;
     private int driverPays;
+    private double totalValue;
 
     public Ride(){
         for(int i=0; i<10; i++){
@@ -106,10 +109,47 @@ public class Ride {
     }
 
 
-    public void commitRide(ArrayList<Integer> ids){
-        //Calcular quanto cada um deve pagar
-        //Levar em consideração driverPays
-        //Debitar em cada Usuario
+    public void commitRide(ArrayList<Integer> ids, boolean mode, Context context){
+        Data data = Data.getInstance();
+        DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
+
+        totalValue = (distance/vehicle.getConsumption())*gasPrice*2.0;
+        double valuePerUser;
+
+        //True = user Pays
+        if(mode){
+            valuePerUser = 0;//= totalValue/(ids.size()+1);
+
+            for (int i = 0; i<ids.size(); i++){
+                User user;
+                user = data.getUserById(ids.get(i));
+                user.setDebit(user.getDebit()+valuePerUser);
+
+                try {
+                    myDb.updateUser(user);
+                } catch (SqlException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return;
+        }else{
+            valuePerUser = 0; //totalValue/ids.size();
+
+            for(int i = 0; i<ids.size(); i++){
+                User user;
+                user = data.getUserById(ids.get(i));
+                user.setDebit(user.getDebit()+valuePerUser);
+
+                try {
+                    myDb.updateUser(user);
+                } catch (SqlException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return;
+        }
     }
 
     public int getId() {

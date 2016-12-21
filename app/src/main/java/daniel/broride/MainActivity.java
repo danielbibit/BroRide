@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity
             data = Data.getInstance();
             data.syncWithDb(this);
         }catch (Exception e){
-            this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
-            finish();
+            //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
+            //finish();
         }
     }
 
