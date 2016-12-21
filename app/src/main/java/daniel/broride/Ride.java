@@ -6,9 +6,12 @@ public class Ride {
     private int id;
     private String name, description;
     private Vehicle vehicle;
-    private User[] users = new User[10];
+
+    //private User[] users = new User[10];
+    private ArrayList<User> usersList = new ArrayList<User>();
     private String[] usersId = new String[20];
     private int userCount = 0;
+
     private Double distance, gasPrice;
     private int driverPays;
 
@@ -19,26 +22,19 @@ public class Ride {
         }
     }
 
-    public void insertUser(User user){
-        users[userCount] = new User();
-        users[userCount] = user;
-        userCount++;
-    }
-
-
     //Gets and Setter
-    public int getVehicleId(){
-        int i = vehicle.getId();
-        return i;
+
+    public void insertUser(User user){
+        /*users[userCount] = new User();
+        users[userCount] = user;
+        userCount++;*/
+        usersList.add(user);
     }
 
     public String[] getUsersId() {
-        //for(int i=0; i<usersId.length; i++){
-        //    usersId[i] ="0";
-        //}
-
-        for(int i=0; i<userCount; i++){
-            usersId[i] = String.valueOf(users[i].getId());
+        for(int i=0; i</*userCount*/usersList.size(); i++){
+            //usersId[i] = String.valueOf(users[i].getId());
+            usersId[i] = String.valueOf(usersList.get(i).getId());
         }
         return usersId;
     }
@@ -49,21 +45,22 @@ public class Ride {
     }
 
     public User getUser(int i){
-        return users[i];
+        //return users[i];
+        return usersList.get(i);
     }
 
-    public User[] getUsers() {
+    /*public User[] getUsers() {
         return users;
-    }
+    }*/
 
-    public ArrayList<String> getUsersLabels(){
+    /*public ArrayList<String> getUsersLabels(){
         ArrayList<String> list = new ArrayList<String>();
         for(int i=0; i<userCount; i++){
             list.add(users[i].getName());
         }
 
         return list;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -89,7 +86,11 @@ public class Ride {
         this.description = description;
     }
 
-    public void insertVehicle (Vehicle vehicle){
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle){
         this.vehicle = vehicle;
     }
 

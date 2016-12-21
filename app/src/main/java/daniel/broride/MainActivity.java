@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity
 
         data = Data.getInstance();
         data.syncWithDb(this);
-        //data.fillUser(this);
-        //data.fillVehicle(this);
-        //data.fillRide(this);
     }
 
     @Override
@@ -102,25 +99,25 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void openVehicleManager(){
+    private void openVehicleManager(){
         Intent intent = new Intent(this, VehicleManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
-    public void openUserManager(){
+    private void openUserManager(){
         Intent intent = new Intent(this, UserManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
-    public void openRideManager(){
+    private void openRideManager(){
         Intent intent = new Intent(this, RideManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
     }
 
-    public void showAllData(){
+    private void showAllData(){
         /*StringBuffer buffer = new StringBuffer();
         Log.d("DEBUG", ""+data.getCountRide());
         data.fillRide(this);
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         */
     }
 
-    public void showMessage(String title, String message){
+    private void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);

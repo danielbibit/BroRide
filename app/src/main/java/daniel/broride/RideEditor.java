@@ -129,22 +129,6 @@ public class RideEditor extends AppCompatActivity  {
 
                 break;
 
-            case "delete":
-                mode.setText("Deletar");
-                btnAction2.setVisibility(View.INVISIBLE);
-                btnAction.setText("Confirmar");
-                viewMode();
-                displayRides();
-
-                btnAction.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        deleteRide();
-                    }
-                });
-
-                break;
-
             case "edit":
                 mode.setText("Editar");
                 btnAction2.setText("Deletar");
@@ -175,6 +159,22 @@ public class RideEditor extends AppCompatActivity  {
                         nIntent.putExtra(EXTRA_MESSAGE, "delete");
                         nIntent.putExtra("id",id);
                         startActivity(nIntent);
+                    }
+                });
+
+                break;
+
+            case "delete":
+                mode.setText("Deletar");
+                btnAction2.setVisibility(View.INVISIBLE);
+                btnAction.setText("Confirmar");
+                viewMode();
+                displayRides();
+
+                btnAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteRide();
                     }
                 });
 
@@ -245,7 +245,7 @@ public class RideEditor extends AppCompatActivity  {
         int selectedCar = 0;
 
         for(int i=0; i<arrayVehicleId.length; i++){
-            if(ride.getVehicleId()==arrayVehicleId[i]){
+            if(ride.getVehicle().getId()==arrayVehicleId[i]){
                 selectedCar=i;
                 break;
             }
@@ -255,8 +255,8 @@ public class RideEditor extends AppCompatActivity  {
 
         int selectedUser = 0;
 
-        Log.d("Motorista: ", ""+ride.getUsersId(0));
         for(int i =0; i<allUsersId.length; i++){
+            //if(ride.getUsersId(0) == allUsersId[i]){
             if(ride.getUsersId(0) == allUsersId[i]){
                 selectedUser = i;
                 break;
@@ -274,7 +274,7 @@ public class RideEditor extends AppCompatActivity  {
 
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
-        ride.insertVehicle(vehicle);
+        ride.setVehicle(vehicle);
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1 : 0);
@@ -305,10 +305,12 @@ public class RideEditor extends AppCompatActivity  {
     private void updateRide(int id){
         DbHelper myDb = DbHelper.getsInstance(this);
 
+        Ride ride = new Ride();
+
         ride.setId(id);
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
-        ride.insertVehicle(data.getVehicleById(idVehicle));
+        ride.setVehicle(data.getVehicleById(idVehicle));
         ride.setDistance(Double.valueOf(etDistance.getText().toString()));
         ride.setGasPrice(Double.valueOf(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);

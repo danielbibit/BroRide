@@ -5,16 +5,15 @@ import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 public class Data {
     private static Data mInstance;
 
-   // private User[] users = new User[20];
     private ArrayList<User> usersList = new ArrayList<>();
-    private Vehicle[] vehicles = new Vehicle[20];
+    private ArrayList<Vehicle> vehicleList = new ArrayList<>();
+    //private Vehicle[] vehicles = new Vehicle[20];
     private Ride[] rides = new Ride[20];
-    private int countUsers = 0, countVehicles = 0, countRide = 0;
+    private int countVehicles = 0, countRide = 0;
 
     private Context context;
 
@@ -44,27 +43,17 @@ public class Data {
             //show message
             //throw error
         }else {
-            int i = 0;
-            /*countUsers = 0;
-
-            while (res.moveToNext()) {
-                users[i] = new User();
-                users[i].setId(res.getInt(0));
-                users[i].setName(res.getString(1));
-                users[i].setDriver(res.getInt(2));
-                users[i].setAge(res.getInt(3));
-                users[i].setDebit(res.getDouble(4));
-                countUsers++;
-                i++;
-            }*/
             usersList.clear();
+
             while(res.moveToNext()){
                 User user = new User();
+
                 user.setId(res.getInt(0));
                 user.setName(res.getString(1));
                 user.setDriver(res.getInt(2));
                 user.setAge(res.getInt(3));
                 user.setDebit(res.getDouble(4));
+
                 usersList.add(user);
             }
         }
@@ -72,27 +61,20 @@ public class Data {
 
     public User getUserById(int id){
         User user = null;
-        /*for(int i = 0; i< countUsers; i++){
-            if(users[i].getId()== id){
-                return users[i];
-            }
-        }*/
+
         for(int i = 0; i<usersList.size(); i++){
             if(usersList.get(i).getId()== id){
                 return usersList.get(i);
             }
         }
+
        return user;
     }
 
     public ArrayList<String> getUsersArrayList() {
-
         ArrayList<String> labels = new ArrayList<String>();
 
-        //for (int i = 0; i< countUsers; i++){
         for (int i = 0; i< usersList.size(); i++){
-
-            //labels.add(users[i].getName());
             labels.add(usersList.get(i).getName());
         }
 
@@ -100,11 +82,9 @@ public class Data {
     }
 
     public String[] getUsersArrayString(){
-        String[] array = new String[/*countUsers*/usersList.size()];
+        String[] array = new String[usersList.size()];
 
-        //for(int i=0; i<countUsers; i++){
         for(int i=0; i<usersList.size(); i++){
-            //array[i] = users[i].getName();
             array[i] = usersList.get(i).getName();
         }
 
@@ -112,12 +92,12 @@ public class Data {
     }
 
     public int[] getAllUsersId(){
-        int[] array = new int[/*countUsers*/usersList.size()];
-        //for (int i = 0; i < countUsers; i++) {
+        int[] array = new int[usersList.size()];
+
         for(int i=0; i<usersList.size(); i++){
-            //array[i] = users[i].getId();
             array[i] = usersList.get(i).getId();
         }
+
         return  array;
     }
 
@@ -132,7 +112,7 @@ public class Data {
             //show message
             //trowh error
         }
-        int i = 0;
+       /* int i = 0;
         countVehicles = 0;
 
         while(res.moveToNext()){
@@ -144,14 +124,30 @@ public class Data {
             vehicles[i].setConsumption(res.getDouble(4));
             countVehicles++;
             i++;
+        }*/
+        vehicleList.clear();
+        while(res.moveToNext()){
+            Vehicle vehicle = new Vehicle();
+   //         vehicles[i] = new Vehicle();
+            vehicle.setId(res.getInt(0));
+            vehicle.setModel(res.getString(1));
+            vehicle.setName(res.getString(2));
+            vehicle.setCapacity(res.getInt(3));
+            vehicle.setConsumption(res.getDouble(4));
+            //countVehicles++;
+            //i++;
+            vehicleList.add(vehicle);
         }
     }
 
     public Vehicle getVehicleById(int id){
         Vehicle vehicle = null;
-        for(int i = 0; i< countVehicles; i++){
-            if(vehicles[i].getId()== id){
+        for(int i = 0; i< /*countVehicles*/ vehicleList.size(); i++){
+            /*if(vehicles[i].getId()== id){
                 return vehicles[i];
+            }*/
+            if(vehicleList.get(i).getId()==id){
+                return vehicleList.get(i);
             }
         }
         return vehicle;
@@ -162,18 +158,20 @@ public class Data {
     public ArrayList<String> getAllVehiclesData() {
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countVehicles; i++){/////////////////////////
+        for (int i = 0; i< /*countVehicles*/ vehicleList.size(); i++){/////////////////////////
 
-            labels.add(vehicles[i].getName());
+            //labels.add(vehicles[i].getName());
+            labels.add(vehicleList.get(i).getName());
         }
 
         return labels;
     }
 
     public int[] getAllVehiclesId(){
-        int[] array = new int[countVehicles];
-        for (int i = 0; i < countVehicles; i++) {
-            array[i] = vehicles[i].getId();
+        int[] array = new int[/*countVehicles*/ vehicleList.size()];
+        for (int i = 0; i < /*countVehicles*/ vehicleList.size(); i++) {
+            //array[i] = vehicles[i].getId();
+            array[i] = vehicleList.get(i).getId();
         }
         return  array;
     }
@@ -199,7 +197,7 @@ public class Data {
             rides[i].setId(res.getInt(0));
             rides[i].setName(res.getString(1));
             rides[i].setDescription(res.getString(2));
-            rides[i].insertVehicle(getVehicleById(res.getInt(3)));
+            rides[i].setVehicle(getVehicleById(res.getInt(3)));
             rides[i].setGasPrice(res.getDouble(4));
             rides[i].setDistance(res.getDouble(5));
             rides[i].setDriverPays(res.getInt(7));
