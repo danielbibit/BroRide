@@ -133,6 +133,8 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     public int insertVehicle(Vehicle vehicle)throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -207,6 +209,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
+
         Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
@@ -230,6 +233,7 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
         contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
+
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});
 
         if(result == 0){

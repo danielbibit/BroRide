@@ -10,12 +10,15 @@ import java.util.PriorityQueue;
 public class Data {
     private static Data mInstance;
 
-    private User[] users = new User[20];
+   // private User[] users = new User[20];
+    private ArrayList<User> usersList = new ArrayList<>();
     private Vehicle[] vehicles = new Vehicle[20];
     private Ride[] rides = new Ride[20];
     private int countUsers = 0, countVehicles = 0, countRide = 0;
 
     private Context context;
+
+    //private Data(Context context){this.context = context;}
 
     public static synchronized Data getInstance(){
         if(mInstance == null){
@@ -25,7 +28,8 @@ public class Data {
         return mInstance;
     }
 
-    public void syncWithDb(){
+    public void syncWithDb(Context context){
+        context = context.getApplicationContext();
         fillUser(context);
         fillVehicle(context);
         fillRide(context);
@@ -38,10 +42,10 @@ public class Data {
 
         if(res.getCount()==0){
             //show message
-            //trowh error
+            //throw error
         }else {
             int i = 0;
-            countUsers = 0;
+            /*countUsers = 0;
 
             while (res.moveToNext()) {
                 users[i] = new User();
@@ -52,15 +56,30 @@ public class Data {
                 users[i].setDebit(res.getDouble(4));
                 countUsers++;
                 i++;
+            }*/
+            usersList.clear();
+            while(res.moveToNext()){
+                User user = new User();
+                user.setId(res.getInt(0));
+                user.setName(res.getString(1));
+                user.setDriver(res.getInt(2));
+                user.setAge(res.getInt(3));
+                user.setDebit(res.getDouble(4));
+                usersList.add(user);
             }
         }
     }
 
     public User getUserById(int id){
         User user = null;
-        for(int i = 0; i< countUsers; i++){
+        /*for(int i = 0; i< countUsers; i++){
             if(users[i].getId()== id){
                 return users[i];
+            }
+        }*/
+        for(int i = 0; i<usersList.size(); i++){
+            if(usersList.get(i).getId()== id){
+                return usersList.get(i);
             }
         }
        return user;
@@ -70,34 +89,39 @@ public class Data {
 
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< countUsers; i++){
+        //for (int i = 0; i< countUsers; i++){
+        for (int i = 0; i< usersList.size(); i++){
 
-            labels.add(users[i].getName());
+            //labels.add(users[i].getName());
+            labels.add(usersList.get(i).getName());
         }
 
         return labels;
     }
 
     public String[] getUsersArrayString(){
-        String[] array = new String[countUsers];
+        String[] array = new String[/*countUsers*/usersList.size()];
 
-        for(int i=0; i<countUsers; i++){
-            array[i] = users[i].getName();
+        //for(int i=0; i<countUsers; i++){
+        for(int i=0; i<usersList.size(); i++){
+            //array[i] = users[i].getName();
+            array[i] = usersList.get(i).getName();
         }
 
         return array;
     }
 
     public int[] getAllUsersId(){
-        int[] array = new int[countUsers];
-        for (int i = 0; i < countUsers; i++) {
-            array[i] = users[i].getId();
+        int[] array = new int[/*countUsers*/usersList.size()];
+        //for (int i = 0; i < countUsers; i++) {
+        for(int i=0; i<usersList.size(); i++){
+            //array[i] = users[i].getId();
+            array[i] = usersList.get(i).getId();
         }
         return  array;
     }
 
     //----------------------------------------------------------------------------------------------
-
 
     //Preenche o Data base Vehicle
     public void fillVehicle(Context context){
@@ -131,14 +155,6 @@ public class Data {
             }
         }
         return vehicle;
-    }
-
-    public Vehicle getVehicle(int i){
-        return vehicles[i];
-    }
-
-    public int getCountVehicle(){
-        return countVehicles;
     }
 
     //Metodos usados pelos Managers
@@ -215,14 +231,6 @@ public class Data {
             }
         }
         return ride;
-    }
-
-    public Ride getRide(int i){
-        return rides[i];
-    }
-
-    public int getCountRide(){
-        return countRide;
     }
 
     ///Metodos usados pelos Managers

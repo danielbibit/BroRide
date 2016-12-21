@@ -73,7 +73,7 @@ public class RideEditor extends AppCompatActivity  {
         cbIsMotorista = (CheckBox) findViewById(R.id.cbIsMotorista);
 
         btnAction = (Button) findViewById(R.id.btnAction);
-        btnAction2  = (Button) findViewById(R.id.btnAction2);
+        btnAction2  = (Button) findViewById(R.id.button_delete);
         btnCommit = (Button) findViewById(R.id.button_commit);
 
         loadSpinnerCar();
@@ -87,29 +87,7 @@ public class RideEditor extends AppCompatActivity  {
                 btnAction.setText("Criar!");
                 btnAction2.setVisibility(View.INVISIBLE);
 
-                spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        idVehicle = arrayVehicleId[position];
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        idVehicle = arrayVehicleId[0];
-                    }
-                });
-
-                spUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        idUser = arrayUsersId[position];
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        idUser = arrayUsersId[0];
-                    }
-                });
+                setSpinnersOnClickListners();
 
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -172,6 +150,16 @@ public class RideEditor extends AppCompatActivity  {
                 btnAction2.setText("Deletar");
 
                 displayRides();
+
+                setSpinnersOnClickListners();
+
+                btnCommit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showSelectUserDialog();
+                    }
+                });
+
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -205,7 +193,6 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     private void loadSpinnerCar() {
-
         // Spinner Drop down elements
         List<String> labels = data.getAllVehiclesData();
 
@@ -291,6 +278,7 @@ public class RideEditor extends AppCompatActivity  {
         ride.setDistance(Double.parseDouble(etDistance.getText().toString()));
         ride.setGasPrice(Double.parseDouble(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1 : 0);
+
         ride.insertUser(data.getUserById(idUser));
         Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
         Log.d("Usuario InsaerindoM2", ride.getUser(0).getName());
@@ -313,16 +301,27 @@ public class RideEditor extends AppCompatActivity  {
         }
     }
 
+    //FIXME
     private void updateRide(int id){
         DbHelper myDb = DbHelper.getsInstance(this);
-        //Data data = Data.getInstance();
 
         ride.setId(id);
         ride.setName(etNome.getText().toString());
         ride.setDescription(etDescription.getText().toString());
+        ride.insertVehicle(data.getVehicleById(idVehicle));
         ride.setDistance(Double.valueOf(etDistance.getText().toString()));
         ride.setGasPrice(Double.valueOf(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);
+
+        Log.d("IdUser",""+idUser);
+        ride.insertUser(data.getUserById(idUser));
+        Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
+        Log.d("Usuario InsaerindoM2", ride.getUser(0).getName());
+
+        for(int i : selectedUsers){
+            ride.insertUser(data.getUserById(i));
+            Log.d("Usuario Inserindo", data.getUserById(i).getName());
+        }
 
         try {
             myDb.updateRide(ride);
@@ -352,7 +351,31 @@ public class RideEditor extends AppCompatActivity  {
             finish();
         }
     }
+    private void setSpinnersOnClickListners(){
+        spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idVehicle = arrayVehicleId[position];
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                idVehicle = arrayVehicleId[0];
+            }
+        });
+
+        spUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idUser = arrayUsersId[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                idUser = arrayUsersId[0];
+            }
+        });
+    }
     protected void showSelectUserDialog() {
         boolean[] checkedUsers = new boolean[arrayUsersId.length];
 

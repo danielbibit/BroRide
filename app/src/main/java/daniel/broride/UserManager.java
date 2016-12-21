@@ -18,9 +18,9 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class UserManager extends AppCompatActivity {
 
-    ListView lista;
-    Button button;
-    int[] arrayUsersId;
+    private ListView lista;
+    private Button button;
+    private int[] arrayUsersId;
     private int id;
 
     @Override
@@ -32,7 +32,7 @@ public class UserManager extends AppCompatActivity {
         button = (Button) findViewById(R.id.addUser);
 
         loadSpinnerData();
-        fillUsersArrayId();;
+        fillUsersArrayId();
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -1,6 +1,5 @@
 package daniel.broride;
 
-
 public class Vehicle {
     private int id;
     private String name, model;
@@ -8,7 +7,6 @@ public class Vehicle {
     private Double consumption;
 
     //Gets and setters
-
     public int getId() {
         return id;
     }
@@ -17,20 +15,20 @@ public class Vehicle {
         this.id = id;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getModel() {
+        return model;
     }
 
     public int getCapacity() {

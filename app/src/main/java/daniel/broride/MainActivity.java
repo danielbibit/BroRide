@@ -36,12 +36,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /*---------------------------------------------------------------------------------------*/
-        //this.deleteDatabase("main.db");
+        //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB
 
         data = Data.getInstance();
-        data.fillUser(this);
-        data.fillVehicle(this);
-        data.fillRide(this);
+        data.syncWithDb(this);
+        //data.fillUser(this);
+        //data.fillVehicle(this);
+        //data.fillRide(this);
     }
 
     @Override
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showAllData(){
-        StringBuffer buffer = new StringBuffer();
+        /*StringBuffer buffer = new StringBuffer();
         Log.d("DEBUG", ""+data.getCountRide());
         data.fillRide(this);
 
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         showMessage("Data", buffer.toString());
+        */
     }
 
     public void showMessage(String title, String message){

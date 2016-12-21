@@ -36,7 +36,7 @@ public class VehicleEditor extends AppCompatActivity {
         description = (TextView) findViewById(R.id.description);
 
         btnAction = (Button) findViewById(R.id.btnAction);
-        btnDelete = (Button) findViewById(R.id.btnAction2);
+        btnDelete = (Button) findViewById(R.id.button_delete);
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         data = Data.getInstance();

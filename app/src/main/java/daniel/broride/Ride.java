@@ -1,5 +1,7 @@
 package daniel.broride;
 
+import java.util.ArrayList;
+
 public class Ride {
     private int id;
     private String name, description;
@@ -15,7 +17,7 @@ public class Ride {
             usersId[i] = new String();
             usersId[i] = "0";
         }
-    };
+    }
 
     public void insertUser(User user){
         users[userCount] = new User();
@@ -23,8 +25,8 @@ public class Ride {
         userCount++;
     }
 
-    //Gets and Setter
 
+    //Gets and Setter
     public int getVehicleId(){
         int i = vehicle.getId();
         return i;
@@ -54,12 +56,13 @@ public class Ride {
         return users;
     }
 
-    public int getDriverPays() {
-        return driverPays;
-    }
+    public ArrayList<String> getUsersLabels(){
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i=0; i<userCount; i++){
+            list.add(users[i].getName());
+        }
 
-    public void setDriverPays(int driverPays) {
-        this.driverPays = driverPays;
+        return list;
     }
 
     public int getId() {
@@ -108,6 +111,14 @@ public class Ride {
 
     public Double getPrice(){
         return gasPrice*distance;
+    }
+
+    public int getDriverPays() {
+        return driverPays;
+    }
+
+    public void setDriverPays(int driverPays) {
+        this.driverPays = driverPays;
     }
 
     public Double getPricePerUser(int i){
