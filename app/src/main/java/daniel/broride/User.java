@@ -2,9 +2,8 @@ package daniel.broride;
 
 
 public class User {
-    private int id;
+    private int id,age;
     private String name;
-    private int age;
     private double debit;
     private int isDriver = 0;
 
