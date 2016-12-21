@@ -13,9 +13,6 @@ public class Data {
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
     private ArrayList<Ride> rideList = new ArrayList<>();
 
-    private Ride[] rides = new Ride[20];
-    private int countVehicles = 0, countRide = 0;
-
     private Context context;
 
     //private Data(Context context){this.context = context;}
@@ -35,7 +32,7 @@ public class Data {
         fillRide(context);
     }
 
-    //V
+    //Verify if a given user is in one ride
     public boolean verifyUserConflict(User user){
         for(int i=0; i<rideList.size(); i++){
             if(rideList.get(i).userExists(user)){
@@ -43,6 +40,11 @@ public class Data {
             }
         }
         return false;
+    }
+
+    public boolean verifyVehicleConflict(Vehicle vehicle){
+        //for(int i=0)
+        return true;
     }
 
     //Preenche o Data base User
@@ -177,6 +179,7 @@ public class Data {
         if (res.getCount() == 0) {
         }
 
+        /*
         int i = 0;
         countRide = 0;
 
@@ -200,7 +203,7 @@ public class Data {
             Log.d("Pegui2", usersFromDb[0]);
             Log.d("Pegui2", usersFromDb[1]);
             Log.d("Pegui2", usersFromDb[2]);
-            Log.d("Pegui2", usersFromDb[3]);*/
+            Log.d("Pegui2", usersFromDb[3]);
 
             for(int j=0; j<usersFromDb.length; j++){
                 //Log.d("Fiz",""+j);
@@ -215,13 +218,51 @@ public class Data {
             countRide++;
             i++;
         }
+        */
+
+        fillUser(context.getApplicationContext());
+        fillVehicle(context.getApplicationContext());
+
+        rideList.clear();
+        while (res.moveToNext()){
+            Ride ride = new Ride();
+
+            ride.setId(res.getInt(0));
+            ride.setName(res.getString(1));
+            ride.setDescription(res.getString(2));
+            ride.setVehicle(getVehicleById(res.getInt(3)));
+            ride.setGasPrice(res.getDouble(4));
+            ride.setDistance(res.getDouble(5));
+            ride.setDriverPays(res.getInt(7));
+
+            String[] usersFromDb = Utils.StringToArray(res.getString(6));
+
+            Log.d("Peguei",res.getString(6));
+
+            for(int i=0; i<usersFromDb.length; i++){
+                if(!(usersFromDb[i].equals("") || usersFromDb[i].equals("0")
+                        || usersFromDb[i].equals("null"))){
+                    ride.insertUser(getUserById( Integer.parseInt(usersFromDb[i]) ));
+                }
+            }
+
+            rideList.add(ride);
+        }
+
     }
 
     public Ride getRideById(int id){
         Ride ride = null;
+        /*
         for(int i = 0; i<countRide ; i++){
             if(rides[i].getId()== id){
                 return rides[i];
+            }
+        }*/
+
+        for(int i = 0; i<rideList.size(); i++){
+            if(rideList.get(i).getId()==id){
+                return rideList.get(i);
             }
         }
         return ride;
@@ -232,18 +273,31 @@ public class Data {
 
         ArrayList<String> labels = new ArrayList<String>();
 
+        /*
         for (int i = 0; i< countRide; i++){
             labels.add(rides[i].getName()+" : "+rides[i].getDescription());
+        }
+        */
+
+        for (int i = 0; i< rideList.size(); i++){
+            labels.add(rideList.get(i).getName()+" : "+rideList.get(i).getDescription());
         }
 
         return labels;
     }
 
     public int[] getAllRideId(){
-        int[] array = new int[countRide];
+        //int[] array = new int[countRide];
+        int[] array = new int [rideList.size()];
+        /*
         for (int i = 0; i < countRide; i++) {
             array[i] = rides[i].getId();
+        }*/
+
+        for (int i = 0; i<rideList.size(); i++){
+            array[i] = rideList.get(i).getId();
         }
+
         return  array;
     }
 

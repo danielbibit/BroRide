@@ -10,10 +10,9 @@ public class Ride {
     private String name, description;
     private Vehicle vehicle;
 
-    //private User[] users = new User[10];
-    private ArrayList<User> usersList = new ArrayList<User>();
+    private ArrayList<User> usersList = new ArrayList<>();
+    private ArrayList<String> usersIds = new ArrayList<>();
     private String[] usersId = new String[20];
-    private int userCount = 0;
 
     private Double distance, gasPrice;
     private int driverPays;
@@ -54,7 +53,7 @@ public class Ride {
             } catch (SqlException e) {
                 e.printStackTrace();
             }
-            
+
             //Charge from driver
             for (int i = 0; i<ids.size(); i++){
                 User user;
@@ -100,18 +99,22 @@ public class Ride {
     //Gets and Setter
 
     public void insertUser(User user){
-        /*users[userCount] = new User();
-        users[userCount] = user;
-        userCount++;*/
         usersList.add(user);
     }
 
     public String[] getUsersId() {
-        for(int i=0; i</*userCount*/usersList.size(); i++){
-            //usersId[i] = String.valueOf(users[i].getId());
+        for(int i=0; i<usersList.size(); i++){
             usersId[i] = String.valueOf(usersList.get(i).getId());
         }
         return usersId;
+    }
+
+    public ArrayList<String> getUsersIdsList(){
+        for(int i=0; i<usersList.size(); i++){
+            usersIds.add(String.valueOf(usersList.get(i).getId()));
+        }
+
+        return usersIds;
     }
 
     public int getUsersId(int n){
@@ -120,7 +123,6 @@ public class Ride {
     }
 
     public User getUser(int i){
-        //return users[i];
         return usersList.get(i);
     }
 

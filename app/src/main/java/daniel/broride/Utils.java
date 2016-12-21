@@ -1,5 +1,9 @@
 package daniel.broride;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
+
 import java.util.ArrayList;
 
 public class Utils {
@@ -35,5 +39,13 @@ public class Utils {
         }
 
         return str;
+    }
+
+    private void showMessage(String title, String message, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context.getApplicationContext());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

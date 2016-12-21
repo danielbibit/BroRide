@@ -37,13 +37,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /*---------------------------------------------------------------------------------------*/
 
+        //this.deleteDatabase("main.db");
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
         }catch (Exception e){
+            //e.printStackTrace();
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
         }
+
     }
 
     @Override
@@ -140,11 +143,5 @@ public class MainActivity extends AppCompatActivity
         */
     }
 
-    private void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
+
 }
