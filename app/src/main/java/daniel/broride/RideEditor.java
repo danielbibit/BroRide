@@ -27,15 +27,17 @@ public class RideEditor extends AppCompatActivity  {
     int[] allUsersId;
     ArrayList<Integer> selectedUsers = new ArrayList<Integer>();
 
-    //Commit variables
+    //btnSelect variables
+    String[] usersLabelRide;
     int[] idUsersRide;
+    ArrayList<Integer> usersSelected = new ArrayList<Integer>();
 
     //View objects
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
     TextView mode;
     CheckBox cbIsMotorista;
-    Button btnAction, btnAction2, btnCommit;
+    Button btnAction, btnAction2, btnSelect;
 
     //Spinner Vehicles
     int arrayVehicleId[];
@@ -77,7 +79,7 @@ public class RideEditor extends AppCompatActivity  {
 
         btnAction = (Button) findViewById(R.id.btnAction);
         btnAction2  = (Button) findViewById(R.id.button_delete);
-        btnCommit = (Button) findViewById(R.id.button_commit);
+        btnSelect = (Button) findViewById(R.id.button_commit);
 
         loadSpinnerCar();
         loadSpinnerUser();
@@ -106,7 +108,7 @@ public class RideEditor extends AppCompatActivity  {
                     }
                 });
 
-                btnCommit.setOnClickListener(new View.OnClickListener() {
+                btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showSelectUserDialog();
@@ -130,11 +132,21 @@ public class RideEditor extends AppCompatActivity  {
                     }
                 });
 
-                btnCommit.setOnClickListener(new View.OnClickListener() {
+                btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ride = data.getRideById(id);
-                        idUsersRide = ride.getUsersIdWithDriver();
+
+                        if (cbIsMotorista.isChecked()){
+                            idUsersRide = ride.getUsersIdWithOutDriver();
+                            usersLabelRide = ride.getUsersArrayStringWithoutDriver();
+                        }else{
+                            idUsersRide = ride.getUsersIdWithDriver();
+                            usersLabelRide = ride.getUsersArrayString();
+                        }
+
+                        showSelectUserDialogCommit();
+
 
                     }
                 });
@@ -149,7 +161,7 @@ public class RideEditor extends AppCompatActivity  {
 
                 setSpinnersOnClickListners();
 
-                btnCommit.setOnClickListener(new View.OnClickListener() {
+                btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showSelectUserDialog();
@@ -418,6 +430,38 @@ public class RideEditor extends AppCompatActivity  {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecione Usuarios");
         builder.setMultiChoiceItems(allUsersLabel, checkedUsers, coloursDialogListener);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+    }
+
+    protected void showSelectUserDialogCommit() {
+        boolean[] checkedUsers = new boolean[idUsersRide.length];
+
+        int count = idUsersRide.length;
+
+        for(int i = 0; i < count; i++)
+            checkedUsers[i] = usersSelected.contains(idUsersRide[i]);
+
+        DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new
+                DialogInterface.OnMultiChoiceClickListener() {
+
+                    @Override
+
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if(isChecked)
+                            usersSelected.add(idUsersRide[which]);
+
+                        else
+                            usersSelected.remove(idUsersRide[which]);
+                    }
+
+                };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecione Usuarios");
+        builder.setMultiChoiceItems(usersLabelRide, checkedUsers, coloursDialogListener);
 
         AlertDialog dialog = builder.create();
 

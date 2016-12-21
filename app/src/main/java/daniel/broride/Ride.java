@@ -57,6 +57,25 @@ public class Ride {
         return usersList.get(i);
     }
 
+    public String[] getUsersArrayString(){
+        String[] array = new String[usersList.size()];
+
+        for(int i=0; i<usersList.size(); i++){
+            array[i] = usersList.get(i).getName();
+        }
+
+        return array;
+    }
+
+    public String[] getUsersArrayStringWithoutDriver(){
+        String[] array = new String[usersList.size()-1];
+
+        for(int i=1; i<usersList.size(); i++){
+            array[i-1] = usersList.get(i).getName();
+        }
+
+        return array;
+    }
     /*public User[] getUsers() {
         return users;
     }*/
@@ -77,10 +96,11 @@ public class Ride {
         }
         return ids;
     }
+
     public int[] getUsersIdWithOutDriver(){
         int[] ids = new int[usersList.size()];
         for(int i=1; i<usersList.size(); i++){
-            ids[i] = usersList.get(i).getId();
+            ids[i-1] = usersList.get(i).getId();
         }
         return ids;
     }
