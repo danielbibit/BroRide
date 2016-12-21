@@ -11,7 +11,8 @@ public class Data {
 
     private ArrayList<User> usersList = new ArrayList<>();
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
-    //private Vehicle[] vehicles = new Vehicle[20];
+    private ArrayList<Ride> rideList = new ArrayList<>();
+
     private Ride[] rides = new Ride[20];
     private int countVehicles = 0, countRide = 0;
 
@@ -112,40 +113,24 @@ public class Data {
             //show message
             //trowh error
         }
-       /* int i = 0;
-        countVehicles = 0;
-
-        while(res.moveToNext()){
-            vehicles[i] = new Vehicle();
-            vehicles[i].setId(res.getInt(0));
-            vehicles[i].setModel(res.getString(1));
-            vehicles[i].setName(res.getString(2));
-            vehicles[i].setCapacity(res.getInt(3));
-            vehicles[i].setConsumption(res.getDouble(4));
-            countVehicles++;
-            i++;
-        }*/
         vehicleList.clear();
         while(res.moveToNext()){
             Vehicle vehicle = new Vehicle();
-   //         vehicles[i] = new Vehicle();
+
             vehicle.setId(res.getInt(0));
             vehicle.setModel(res.getString(1));
             vehicle.setName(res.getString(2));
             vehicle.setCapacity(res.getInt(3));
             vehicle.setConsumption(res.getDouble(4));
-            //countVehicles++;
-            //i++;
+
             vehicleList.add(vehicle);
         }
     }
 
     public Vehicle getVehicleById(int id){
         Vehicle vehicle = null;
-        for(int i = 0; i< /*countVehicles*/ vehicleList.size(); i++){
-            /*if(vehicles[i].getId()== id){
-                return vehicles[i];
-            }*/
+        for(int i = 0; i< vehicleList.size(); i++){
+
             if(vehicleList.get(i).getId()==id){
                 return vehicleList.get(i);
             }
@@ -158,9 +143,7 @@ public class Data {
     public ArrayList<String> getAllVehiclesData() {
         ArrayList<String> labels = new ArrayList<String>();
 
-        for (int i = 0; i< /*countVehicles*/ vehicleList.size(); i++){/////////////////////////
-
-            //labels.add(vehicles[i].getName());
+        for (int i = 0; i< vehicleList.size(); i++){
             labels.add(vehicleList.get(i).getName());
         }
 
@@ -168,9 +151,8 @@ public class Data {
     }
 
     public int[] getAllVehiclesId(){
-        int[] array = new int[/*countVehicles*/ vehicleList.size()];
-        for (int i = 0; i < /*countVehicles*/ vehicleList.size(); i++) {
-            //array[i] = vehicles[i].getId();
+        int[] array = new int[vehicleList.size()];
+        for (int i = 0; i < vehicleList.size(); i++) {
             array[i] = vehicleList.get(i).getId();
         }
         return  array;
