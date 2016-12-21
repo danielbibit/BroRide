@@ -87,7 +87,8 @@ public class RideEditor extends AppCompatActivity  {
         id = intent.getIntExtra("id", 0);
 
         switch (message){
-/*CREATE----*/case "create":
+            //TODO Don't let the user try to create a new ride if there's no user or vehicle on DB
+            case "create":
                 mode.setText("Criar");
                 btnAction.setText("Criar!");
                 btnAction2.setVisibility(View.INVISIBLE);
@@ -117,13 +118,12 @@ public class RideEditor extends AppCompatActivity  {
 
                 break;
 
-/*COMMIT----*/case "commit":
+            case "commit":
                 mode.setText("Commit");
                 viewMode();
                 displayRides();
 
                 ride = data.getRideById(id);
-
 
                 if (cbIsMotorista.isChecked()){
                     idUsersRide = ride.getUsersIdWithOutDriver();
@@ -151,10 +151,8 @@ public class RideEditor extends AppCompatActivity  {
                 });
 
                 btnAction2.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
-                        Utils.saveCache(Integer.toString(id),getApplicationContext());
                         if (cbIsMotorista.isChecked()){
                             ride.commitRide(usersSelected, true, RideEditor.this);
                             Toast.makeText(RideEditor.this, "Feito", Toast.LENGTH_LONG).show();
@@ -297,7 +295,7 @@ public class RideEditor extends AppCompatActivity  {
 
         for(int i =0; i<allUsersId.length; i++){
             //if(ride.getUsersId(0) == allUsersId[i]){
-            if(ride.getUsersId(0) == allUsersId[i]){
+            if(ride.getUser(0).getId() == allUsersId[i]){
                 selectedUser = i;
                 break;
             }

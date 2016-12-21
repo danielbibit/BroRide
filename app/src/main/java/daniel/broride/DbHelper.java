@@ -209,10 +209,13 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_VEHICLE, ride.getVehicle().getId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
+        //contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
+        contentValues.put(RIDE_USERS, Utils.ListToString(ride.getUsersIdsList()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
-        Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
+        //Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
+        Log.d("String Inserida", Utils.ListToString(ride.getUsersIdsList()));
+
         long result = db.insert(TABLE_RIDE, null, contentValues);
 
         if(result == -1){
@@ -233,7 +236,8 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_VEHICLE, ride.getVehicle().getId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
+        //contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
+        contentValues.put(RIDE_USERS, Utils.ListToString(ride.getUsersIdsList()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
         int result = db.update(TABLE_RIDE, contentValues, "ID = ?", new String[]{id});

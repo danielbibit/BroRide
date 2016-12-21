@@ -1,6 +1,5 @@
 package daniel.broride;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,9 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,9 +40,6 @@ public class MainActivity extends AppCompatActivity
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
-            //Utils.saveCache("te",this);
-            //Utils.readCache(this);
-
         }catch (Exception e){
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
@@ -154,6 +147,4 @@ public class MainActivity extends AppCompatActivity
         builder.setMessage(message);
         builder.show();
     }
-
-
 }
