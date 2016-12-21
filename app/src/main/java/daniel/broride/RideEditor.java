@@ -124,6 +124,14 @@ public class RideEditor extends AppCompatActivity  {
 
                 ride = data.getRideById(id);
 
+                if (cbIsMotorista.isChecked()){
+                    idUsersRide = ride.getUsersIdWithOutDriver();
+                    usersLabelRide = ride.getUsersArrayStringWithoutDriver();
+                }else{
+                    idUsersRide = ride.getUsersIdWithDriver();
+                    usersLabelRide = ride.getUsersArrayString();
+                }
+
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -137,17 +145,7 @@ public class RideEditor extends AppCompatActivity  {
                 btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (cbIsMotorista.isChecked()){
-                            idUsersRide = ride.getUsersIdWithOutDriver();
-                            usersLabelRide = ride.getUsersArrayStringWithoutDriver();
-                        }else{
-                            idUsersRide = ride.getUsersIdWithDriver();
-                            usersLabelRide = ride.getUsersArrayString();
-                        }
-
                         showSelectUserDialogCommit();
-
-
                     }
                 });
 
@@ -465,13 +463,16 @@ public class RideEditor extends AppCompatActivity  {
                     @Override
 
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if(isChecked)
+                        if(isChecked){
                             usersSelected.add(idUsersRide[which]);
+                        }else {
+                            try {
+                                usersSelected.remove(idUsersRide[which]);
+                            } catch (Exception e) {
 
-                        else
-                            usersSelected.remove(idUsersRide[which]);
+                            }
+                        }
                     }
-
                 };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

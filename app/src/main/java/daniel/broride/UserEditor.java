@@ -139,7 +139,7 @@ public class UserEditor extends AppCompatActivity{
 
     public void displayData(int id){
         user = data.getUserById(id);
-        editDebit.setText(String.valueOf(user.getDebit()));
+        editDebit.setText(String.format("%.2f",user.getDebit()));
         editName.setText(user.getName());
         editAge.setText(String.valueOf(user.getAge()));
         isDriver.setChecked(user.getIsDriver() == 1);
@@ -202,6 +202,7 @@ public class UserEditor extends AppCompatActivity{
 
             user.setDriver(isDriver.isChecked() ? 1:0);
             user.setAge(Integer.parseInt(editAge.getText().toString()));
+            user.setDebit(Double.parseDouble(editDebit.getText().toString()));
 
             myDb.updateUser(user);
 

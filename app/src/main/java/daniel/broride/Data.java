@@ -196,17 +196,18 @@ public class Data {
             rides[i].setDriverPays(res.getInt(7));
 
             String[] usersFromDb = Utils.StringToArray(res.getString(6));
-            Log.d("Peguei",res.getString(6));
+            /*Log.d("Peguei",res.getString(6));
             Log.d("Pegui2", usersFromDb[0]);
             Log.d("Pegui2", usersFromDb[1]);
             Log.d("Pegui2", usersFromDb[2]);
-            Log.d("Pegui2", usersFromDb[3]);
+            Log.d("Pegui2", usersFromDb[3]);*/
 
             for(int j=0; j<usersFromDb.length; j++){
-                Log.d("Fiz",""+j);
+                //Log.d("Fiz",""+j);
+
                 if(!(usersFromDb[j].equals("") || usersFromDb[j].equals("0")
                         || usersFromDb[j].equals("null"))){
-                    Log.d("Fiz1",usersFromDb[j]+j);
+                    //Log.d("Fiz1",usersFromDb[j]+j);
                     rides[i].insertUser(getUserById( Integer.parseInt(usersFromDb[j]) ));
                 }
             }
