@@ -22,6 +22,14 @@ public class Ride {
         }
     }
 
+    public boolean userExists(User user){
+        if(usersList.contains(user)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //Gets and Setter
 
     public void insertUser(User user){

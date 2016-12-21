@@ -64,6 +64,7 @@ public class VehicleEditor extends AppCompatActivity {
                 setViewMode(0);
                 description.setText("Visualizar");
                 btnAction.setText("Editar");
+                btnDelete.setVisibility(View.INVISIBLE);
 
                 displayData(id);
 
@@ -76,22 +77,11 @@ public class VehicleEditor extends AppCompatActivity {
                         startActivity(nIntent);
                     }
                 });
-
-                btnDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent nIntent = getIntent();
-                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
-                        nIntent.putExtra("id",id);
-                        startActivity(nIntent);
-                    }
-                });
                 break;
 
             case "edit":
                 //setViewMode(0);
                 description.setText("Editar");
-                //btnDelete.setVisibility(View.INVISIBLE);
                 btnAction.setText("Confirmar");
 
                 displayData(id);
@@ -103,7 +93,15 @@ public class VehicleEditor extends AppCompatActivity {
                     }
                 });
 
-
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent nIntent = getIntent();
+                        nIntent.putExtra(EXTRA_MESSAGE, "delete");
+                        nIntent.putExtra("id",id);
+                        startActivity(nIntent);
+                    }
+                });
                 break;
 
             case "delete":
