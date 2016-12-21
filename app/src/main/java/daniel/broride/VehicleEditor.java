@@ -91,7 +91,7 @@ public class VehicleEditor extends AppCompatActivity {
             case "edit":
                 //setViewMode(0);
                 description.setText("Editar");
-                btnDelete.setVisibility(View.INVISIBLE);
+                //btnDelete.setVisibility(View.INVISIBLE);
                 btnAction.setText("Confirmar");
 
                 displayData(id);
@@ -102,6 +102,8 @@ public class VehicleEditor extends AppCompatActivity {
                         updateVehicle(vehicle);
                     }
                 });
+
+
                 break;
 
             case "delete":

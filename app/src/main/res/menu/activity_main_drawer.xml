@@ -12,7 +12,7 @@
             android:title="Veiculos" />
         <item
             android:id="@+id/nav_rides"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_thumb_up_black_24dp"
             android:title="Caronas" />
         <item
             android:id="@+id/nav_manage"

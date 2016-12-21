@@ -191,6 +191,7 @@ public class Data {
         fillVehicle(context.getApplicationContext());
         fillUser(context.getApplicationContext());
 
+        // FIXME: 21/12/2016
         while (res.moveToNext()) {
 
             rides[i] = new Ride();
@@ -208,9 +209,11 @@ public class Data {
             Log.d("Pegui2", usersFromDb[1]);
             Log.d("Pegui2", usersFromDb[2]);
             Log.d("Pegui2", usersFromDb[3]);
+
             for(int j=0; j<usersFromDb.length; j++){
                 Log.d("Fiz",""+j);
-                if(!(usersFromDb[j].equals("") || usersFromDb[j].equals("0") || usersFromDb[j].equals("null"))){
+                if(!(usersFromDb[j].equals("") || usersFromDb[j].equals("0")
+                        || usersFromDb[j].equals("null"))){
                     Log.d("Fiz1",usersFromDb[j]+j);
                     rides[i].insertUser(getUserById( Integer.parseInt(usersFromDb[j]) ));
                 }

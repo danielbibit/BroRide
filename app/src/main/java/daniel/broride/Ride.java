@@ -62,6 +62,20 @@ public class Ride {
         return list;
     }*/
 
+    public int[] getAllUsersId(){
+        int[] ids = new int[usersList.size()];
+        for(int i=0; i<usersList.size(); i++){
+             ids[i] = usersList.get(i).getId();
+        }
+        return ids;
+    }
+
+    public void commitRide(ArrayList<Integer> ids){
+        //Calcular quanto cada um deve pagar
+        //Levar em consideração driverPays
+        //Debitar em cada Usuario
+    }
+
     public int getId() {
         return id;
     }
@@ -120,9 +134,5 @@ public class Ride {
 
     public void setDriverPays(int driverPays) {
         this.driverPays = driverPays;
-    }
-
-    public Double getPricePerUser(int i){
-        return getPrice()/i;
     }
 }
