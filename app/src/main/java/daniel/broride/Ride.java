@@ -62,13 +62,21 @@ public class Ride {
         return list;
     }*/
 
-    public int[] getAllUsersId(){
+    public int[] getUsersIdWithDriver(){
         int[] ids = new int[usersList.size()];
         for(int i=0; i<usersList.size(); i++){
              ids[i] = usersList.get(i).getId();
         }
         return ids;
     }
+    public int[] getUsersIdWithOutDriver(){
+        int[] ids = new int[usersList.size()];
+        for(int i=1; i<usersList.size(); i++){
+            ids[i] = usersList.get(i).getId();
+        }
+        return ids;
+    }
+
 
     public void commitRide(ArrayList<Integer> ids){
         //Calcular quanto cada um deve pagar

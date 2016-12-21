@@ -27,6 +27,9 @@ public class RideEditor extends AppCompatActivity  {
     int[] allUsersId;
     ArrayList<Integer> selectedUsers = new ArrayList<Integer>();
 
+    //Commit variables
+    int[] idUsersRide;
+
     //View objects
     EditText etNome,etDescription,etGas,etDistance;
     Spinner spUser,spCar;
@@ -46,7 +49,7 @@ public class RideEditor extends AppCompatActivity  {
     private String message;
     private Ride ride = new Ride();
     private Data data = Data.getInstance();
-    private int id;
+    private int id; // id da ride que a lista devolve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +127,15 @@ public class RideEditor extends AppCompatActivity  {
                         nIntent.putExtra(EXTRA_MESSAGE, "edit");
                         nIntent.putExtra("id",id);
                         startActivity(nIntent);
+                    }
+                });
+
+                btnCommit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ride = data.getRideById(id);
+                        idUsersRide = ride.getUsersIdWithDriver();
+
                     }
                 });
 
@@ -353,6 +365,7 @@ public class RideEditor extends AppCompatActivity  {
             finish();
         }
     }
+
     private void setSpinnersOnClickListners(){
         spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -378,6 +391,7 @@ public class RideEditor extends AppCompatActivity  {
             }
         });
     }
+
     protected void showSelectUserDialog() {
         boolean[] checkedUsers = new boolean[arrayUsersId.length];
 
@@ -409,7 +423,6 @@ public class RideEditor extends AppCompatActivity  {
 
         dialog.show();
     }
-
 
     public void back(View view){
         finish();
