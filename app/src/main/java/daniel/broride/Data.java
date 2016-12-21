@@ -35,6 +35,16 @@ public class Data {
         fillRide(context);
     }
 
+    //V
+    public boolean verifyUserConflict(User user){
+        for(int i=0; i<rideList.size(); i++){
+            if(rideList.get(i).userExists(user)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Preenche o Data base User
     public void fillUser(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());

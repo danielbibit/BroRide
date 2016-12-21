@@ -353,6 +353,7 @@ public class RideEditor extends AppCompatActivity  {
             finish();
         }
     }
+
     private void setSpinnersOnClickListners(){
         spCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -378,6 +379,7 @@ public class RideEditor extends AppCompatActivity  {
             }
         });
     }
+
     protected void showSelectUserDialog() {
         boolean[] checkedUsers = new boolean[arrayUsersId.length];
 
