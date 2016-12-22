@@ -45,11 +45,11 @@ public class Data {
     //Verify id a given Vehicle is registered on any ride
     public boolean verifyVehicleConflict(Vehicle vehicle) {
         for(int i = 0; i< ridesList.size(); i++){
-            if(ridesList.get(i).getVehicle() == vehicle){
+            if(ridesList.get(i).getVehicle().equals(vehicle)){
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     //Preenche o Data base User

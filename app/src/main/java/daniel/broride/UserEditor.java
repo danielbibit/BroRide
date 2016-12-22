@@ -48,8 +48,8 @@ public class UserEditor extends AppCompatActivity{
 
         switch (message){
             case "create":
-                description.setText("Criar");
-                btnAction.setText("Criar!");
+                description.setText(R.string.modeCreate_textView);
+                btnAction.setText(R.string.create_button);
                 btnDelete.setVisibility(View.INVISIBLE);
                 debitText.setVisibility(View.INVISIBLE);
                 editDebit.setVisibility(View.INVISIBLE);
@@ -64,8 +64,8 @@ public class UserEditor extends AppCompatActivity{
 
             case "display":
                 setViewMode(0);
-                description.setText("Visualizar");
-                btnAction.setText("Editar");
+                description.setText(R.string.modeView_textView);
+                btnAction.setText(R.string.edit_button);
                 btnDelete.setVisibility(View.INVISIBLE);
 
                 displayData(id);
@@ -84,8 +84,8 @@ public class UserEditor extends AppCompatActivity{
                 break;
 
             case "edit":
-                description.setText("Editar");
-                btnAction.setText("Confirmar");
+                description.setText(R.string.modeEdit_textView);
+                btnAction.setText(R.string.confirm_button);
 
                 displayData(id);
 
@@ -110,16 +110,20 @@ public class UserEditor extends AppCompatActivity{
 
             case "delete":
                 setViewMode(0);
-                description.setText("Deletar");
+                description.setText(R.string.modeDelete_textView);
                 btnDelete.setVisibility(View.INVISIBLE);
-                btnAction.setText("Confirmar");
+                btnAction.setText(R.string.confirm_button);
 
                 displayData(id);
 
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteUser(id);
+                        if(data.verifyUserConflict(data.getUserById(id))){
+
+                        }else{
+                            deleteUser(id);
+                        }
                     }
                 });
                 break;

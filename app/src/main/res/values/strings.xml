@@ -5,13 +5,34 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_help">Ajuda</string>
-    <string name="title_activity_user_manager">UserManager</string>
-    <string name="for_all" />
 
-    <string-array name="UserManager">
-        <item>Adicionar Usuario</item>
-        <item></item>
-    </string-array>
     <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+
+    <!-- General Action strings -->
+    <string name="back_button">Voltar</string>
+    <string name="delete_button">Deletar</string>
+    <string name="confirm_button">Confirmar</string>
+    <string name="create_button">Criar</string>
+    <string name="edit_button">Editar</string>
+
+    <!-- Editors Common Modes-->
+    <string name="modeCreate_textView">Criar</string>
+    <string name="modeDelete_textView">Deletar</string>
+    <string name="modeEdit_textView">Editar</string>
+    <string name="modeView_textView">Visualizar</string>
+
+    <!-- User related strings -->
+    <string name="newUser_button">Novo Usuario</string>
+    <string name="userTitle_textView">Usuario</string>
+
+    <!-- Vehicle related strings -->
+    <string name="newVehicle_button">Novo Veiculo</string>
+    <string name="vehicleTitle_textView">Veiculos</string>
+
+    <!-- Ride related strings -->
+    <string name="newRide_button">Nova Carona</string>
+    <string name="rideTitle_textView">Caronas</string>
+
+    <!-- Last Ride related strings -->
+
 </resources>

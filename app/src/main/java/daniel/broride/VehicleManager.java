@@ -18,23 +18,24 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class VehicleManager extends AppCompatActivity {
 
-    private ListView lista;
+    private ListView listView;
     private int[] arrayVehicleId;
-    private Button newVehicle;
+    private Button btnNewVehicle;
+    private Data data = Data.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_manager);
 
-        lista = (ListView) findViewById(R.id.ListaVehicle);
+        listView = (ListView) findViewById(R.id.ListaVehicle);
 
-        newVehicle = (Button) findViewById(R.id.btn_new);
+        btnNewVehicle = (Button) findViewById(R.id.btn_new);
 
         loadSpinnerData();
         fillVehicleArrayId();
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getBaseContext(),"item clicado "+position,Toast.LENGTH_SHORT).show();
@@ -42,7 +43,7 @@ public class VehicleManager extends AppCompatActivity {
             }
         });
 
-        newVehicle.setOnClickListener(new View.OnClickListener() {
+        btnNewVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openVehicleEditor();
@@ -60,9 +61,6 @@ public class VehicleManager extends AppCompatActivity {
     }
 
     private void loadSpinnerData() {
-        //DbHelper myDb = DbHelper.getsInstance(this);
-        Data data = Data.getInstance();
-
         // Spinner Drop down elements
         List<String> labels = data.getVehiclesLabelsList();
 
@@ -85,7 +83,7 @@ public class VehicleManager extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        lista.setAdapter(dataAdapter);
+        listView.setAdapter(dataAdapter);
     }
 
     private void fillVehicleArrayId(){
