@@ -12,12 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView rideName,rideDistance;
+    Button irParaRide;
+    int idRide;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     Data data;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity
 
         rideName = (TextView) findViewById(R.id.rideName);
         rideDistance = (TextView) findViewById(R.id.rideDistance);
+        irParaRide = (Button) findViewById(R.id.btnIrRide);
 
 
         /*---------------------------------------------------------------------------------------*/
@@ -52,6 +57,13 @@ public class MainActivity extends AppCompatActivity
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
         }
+
+        irParaRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRideEditor(idRide);
+            }
+        });
     }
 
     @Override
@@ -163,11 +175,20 @@ public class MainActivity extends AppCompatActivity
         Ride ride;
         Log.d("cheguei aki","");
         if (!(Utils.readCache(getApplicationContext()).equals(null))){
-            int idRide = Integer.parseInt(Utils.readCache(this));
+            idRide = Integer.parseInt(Utils.readCache(this));
             Log.d("id da ride",""+idRide);
             ride = data.getRideById(idRide);
             rideName.setText(ride.getName());
             rideDistance.setText(ride.getDistance().toString());
         }
+    }
+
+    private void openRideEditor(int n){
+        Intent intent = new Intent(this, RideEditor.class);
+
+        intent.putExtra(EXTRA_MESSAGE, "commit");
+        intent.putExtra("id", n);
+        startActivity(intent);
+
     }
 }
