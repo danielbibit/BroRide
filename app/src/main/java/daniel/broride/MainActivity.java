@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
         }catch (Exception e){
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
+            //asdf
         }
 
         irParaRide.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +174,5 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(EXTRA_MESSAGE, "commit");
         intent.putExtra("id", n);
         startActivity(intent);
-
     }
 }
