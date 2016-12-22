@@ -93,7 +93,7 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
 
