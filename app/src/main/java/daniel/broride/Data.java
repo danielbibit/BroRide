@@ -183,40 +183,7 @@ public class Data {
 
         if (res.getCount() == 0) {
         }
-        /*
-        // FIXME: 21/12/2016
-        while (res.moveToNext()) {
 
-            rides[i] = new Ride();
-            rides[i].setId(res.getInt(0));
-            rides[i].setName(res.getString(1));
-            rides[i].setDescription(res.getString(2));
-            rides[i].setVehicle(getVehicleById(res.getInt(3)));
-            rides[i].setGasPrice(res.getDouble(4));
-            rides[i].setDistance(res.getDouble(5));
-            rides[i].setDriverPays(res.getInt(7));
-
-            String[] usersFromDb = Utils.StringToArray(res.getString(6));
-            /*Log.d("Peguei",res.getString(6));
-            Log.d("Pegui2", usersFromDb[0]);
-            Log.d("Pegui2", usersFromDb[1]);
-            Log.d("Pegui2", usersFromDb[2]);
-            Log.d("Pegui2", usersFromDb[3]);
-
-            for(int j=0; j<usersFromDb.length; j++){
-                //Log.d("Fiz",""+j);
-
-                if(!(usersFromDb[j].equals("") || usersFromDb[j].equals("0")
-                        || usersFromDb[j].equals("null"))){
-                    //Log.d("Fiz1",usersFromDb[j]+j);
-                    rides[i].insertUser(getUserById( Integer.parseInt(usersFromDb[j]) ));
-                }
-            }
-
-            countRide++;
-            i++;
-        }
-        */
 
         fillUser(context.getApplicationContext());
         fillVehicle(context.getApplicationContext());

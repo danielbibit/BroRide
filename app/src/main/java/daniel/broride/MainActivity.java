@@ -150,22 +150,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showAllData(){
-        /*StringBuffer buffer = new StringBuffer();
-        Log.d("DEBUG", ""+data.getCountRide());
-        data.fillRide(this);
 
-        for(int i = 0; i<data.getCountRide(); i++){
-            Ride ride = data.getRide(i);
-
-            buffer.append("Id : "+ ride.getDriverPays()+"\n");
-            buffer.append("Name : "+ride.getName()+"\n");
-            buffer.append("Description : "+ride.getDescription()+"\n");
-            buffer.append("Distance : "+ride.getDistance()+"\n");
-            buffer.append("Debit: "+ride.getGasPrice()+"\n\n");
-        }
-
-        showMessage("Data", buffer.toString());
-        */
     }
 
     private void showLastRide(){
