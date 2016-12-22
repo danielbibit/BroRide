@@ -48,11 +48,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /*---------------------------------------------------------------------------------------*/
-        showLastRide();
+
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
+            showLastRide();
         }catch (Exception e){
+            Utils.saveCache("",this);
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
             //asdf
