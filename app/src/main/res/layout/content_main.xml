@@ -13,53 +13,43 @@
     tools:context="daniel.broride.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:text="Catch-a-ride!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:id="@+id/textView23"
-        android:textColor="@android:color/black"
-        android:scaleX="1.8"
-        android:scaleY="1.8"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/checkbox_off_background"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="57dp"
-        android:id="@+id/imageView3"
-        android:scaleX="60"
-        android:scaleY="10" />
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageView2"
+        android:background="@android:drawable/checkbox_off_background"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:layout_weight="1"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp" />
 
     <TextView
-        android:text="Default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rideDistance"
-        android:textColor="@android:color/black"
-        android:scaleX="1.4"
-        android:scaleY="1.4"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/imageView3"
-        android:layout_toStartOf="@+id/imageView3"
-        android:layout_marginBottom="17dp" />
-
-    <TextView
-        android:text="Default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rideName"
-        android:textColor="@android:color/background_dark"
+        android:text="Ultima Carona"
+        android:id="@+id/textView24"
+        android:textColor="?attr/actionModeSplitBackground"
+        android:rotationX="3"
+        android:rotationY="2"
         android:scaleX="1.8"
         android:scaleY="1.8"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_toLeftOf="@+id/imageView3"
-        android:layout_toStartOf="@+id/imageView3" />
+        android:textColorHighlight="@android:color/holo_blue_dark"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rideName"
+        android:layout_alignBottom="@+id/rideName"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -68,52 +58,24 @@
         android:id="@+id/imageView4"
         android:scaleX="3"
         android:scaleY="3"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_below="@+id/textView24"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:scrollX="0dp"
-        android:scrollY="0dp" />
-
-    <TextView
-        android:text="Ultima Carona"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView24"
-        android:textColor="?attr/actionModeSplitBackground"
-        android:rotationX="3"
-        android:rotationY="2"
-        android:layout_marginBottom="33dp"
-        android:scaleX="1.8"
-        android:scaleY="1.8"
-        android:textColorHighlight="@android:color/holo_blue_dark"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:layout_above="@+id/rideName"
-        android:layout_toLeftOf="@+id/imageView2"
-        android:layout_toStartOf="@+id/imageView2" />
+        android:scrollY="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2" />
 
     <Button
         android:text="Ir para a ride"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnIrRide"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_toRightOf="@+id/textView23"
-        android:layout_toEndOf="@+id/textView23"
-        android:onClick="a" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_marginTop="49dp"
-        android:id="@+id/imageView2"
-        android:background="@android:drawable/checkbox_off_background"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:layout_below="@+id/textView22"
-        android:layout_centerHorizontal="true" />
+        android:onClick=""
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="BroRide!"
@@ -123,6 +85,54 @@
         android:textSize="40sp"
         android:textColorLink="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimary"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_weight="1"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/rideDistance"
+        android:layout_alignStart="@+id/rideDistance"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="11dp" />
+
+    <TextView
+        android:text="Catch-a-ride!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView23"
+        android:textColor="@android:color/black"
+        android:scaleX="1.8"
+        android:scaleY="1.8"
+        android:layout_below="@+id/imageView2"
+        android:layout_toRightOf="@+id/rideDistance"
+        android:layout_toEndOf="@+id/rideDistance" />
+
+    <TextView
+        android:text="Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rideName"
+        android:textColor="@android:color/background_dark"
+        android:scaleX="1.8"
+        android:scaleY="1.8"
+        android:layout_weight="1"
+        android:layout_marginBottom="24dp"
+        android:layout_above="@+id/btnIrRide"
+        android:layout_alignLeft="@+id/btnIrRide"
+        android:layout_alignStart="@+id/btnIrRide" />
+
+    <TextView
+        android:text="Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rideDistance"
+        android:textColor="@android:color/black"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:layout_weight="1"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBaseline="@+id/btnIrRide"
+        android:layout_alignBottom="@+id/btnIrRide"
+        android:layout_toRightOf="@+id/textView24"
+        android:layout_toEndOf="@+id/textView24" />
+
 </RelativeLayout>

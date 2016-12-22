@@ -18,10 +18,6 @@ public class Ride {
     private double totalValue;
 
     public Ride(){
-        /*for(int i=0; i<10; i++){
-            usersId[i] = new String();
-            usersId[i] = "0";
-        }*/
     }
 
     public boolean userExists(User user){
@@ -101,14 +97,6 @@ public class Ride {
         usersList.add(user);
     }
 
-    /*
-    public String[] getUsersId() {
-        for(int i=0; i<usersList.size(); i++){
-            usersId[i] = String.valueOf(usersList.get(i).getId());
-        }
-        return usersId;
-    }*/
-
     public ArrayList<String> getUsersIdsList(){
         for(int i=0; i<usersList.size(); i++){
             usersIds.add(String.valueOf(usersList.get(i).getId()));
@@ -116,12 +104,6 @@ public class Ride {
 
         return usersIds;
     }
-
-    /*
-    public int getUsersId(int n){
-        getUsersId();
-        return Integer.valueOf(usersId[n]);
-    }*/
 
     public User getUser(int i){
         return usersList.get(i);
@@ -146,18 +128,6 @@ public class Ride {
 
         return array;
     }
-    /*public User[] getUsers() {
-        return users;
-    }*/
-
-    /*public ArrayList<String> getUsersLabels(){
-        ArrayList<String> list = new ArrayList<String>();
-        for(int i=0; i<userCount; i++){
-            list.add(users[i].getName());
-        }
-
-        return list;
-    }*/
 
     public int[] getUsersIdWithDriver(){
         int[] ids = new int[usersList.size()];

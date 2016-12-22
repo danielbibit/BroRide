@@ -90,7 +90,7 @@ public class Data {
     }
 
     public ArrayList<String> getUsersArrayList() {
-        ArrayList<String> labels = new ArrayList<String>();
+        ArrayList<String> labels = new ArrayList<>();
 
         for (int i = 0; i< usersList.size(); i++){
             labels.add(usersList.get(i).getName());
@@ -158,7 +158,7 @@ public class Data {
     //Metodos usados pelos Managers
 
     public ArrayList<String> getAllVehiclesData() {
-        ArrayList<String> labels = new ArrayList<String>();
+        ArrayList<String> labels = new ArrayList<>();
 
         for (int i = 0; i< vehicleList.size(); i++){
             labels.add(vehicleList.get(i).getName());
@@ -229,7 +229,7 @@ public class Data {
 
     ///Metodos usados pelos Managers
     public ArrayList<String> getAllRideData() {
-        ArrayList<String> labels = new ArrayList<String>();
+        ArrayList<String> labels = new ArrayList<>();
 
         for (int i = 0; i< rideList.size(); i++){
             labels.add(rideList.get(i).getName()+" : "+rideList.get(i).getDescription());

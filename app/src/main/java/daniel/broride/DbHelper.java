@@ -3,14 +3,9 @@ package daniel.broride;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;

@@ -23,7 +23,17 @@
         <activity android:name=".RideEditor" />
         <activity android:name=".UserManager" />
         <activity android:name=".VehicleManager" />
-        <activity android:name=".RideManager"></activity>
+        <activity android:name=".RideManager" />
+
+        <receiver android:name=".Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
     </application>
 
 </manifest>

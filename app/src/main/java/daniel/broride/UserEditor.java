@@ -177,7 +177,7 @@ public class UserEditor extends AppCompatActivity{
 
             Toast.makeText(UserEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
 
-            data.syncWithDb(this); //// FIXME: 20/12/2016
+            data.syncWithDb(this);
 
             finish();
         } catch (SqlException e) {
