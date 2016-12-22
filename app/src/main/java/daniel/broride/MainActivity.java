@@ -168,14 +168,6 @@ public class MainActivity extends AppCompatActivity
         */
     }
 
-    private void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
-
     private void showLastRide(){
         Data data = Data.getInstance();
         Ride ride;
