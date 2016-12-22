@@ -121,7 +121,11 @@ public class RideEditor extends AppCompatActivity  {
 /*COMMIT----*/case "commit":
                 mode.setText("Commit");
                 viewMode();
-                displayRides();
+                try{displayRides();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
 
                 ride = data.getRideById(id);
 

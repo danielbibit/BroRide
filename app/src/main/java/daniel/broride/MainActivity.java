@@ -52,10 +52,12 @@ public class MainActivity extends AppCompatActivity
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
+            Log.d("cheguei aki --------","");
             showLastRide();
         }catch (Exception e){
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
+            irParaRide.setVisibility(View.INVISIBLE);
         }
 
         irParaRide.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +71,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        showLastRide();
+        try {
+            showLastRide();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -173,13 +179,18 @@ public class MainActivity extends AppCompatActivity
     private void showLastRide(){
         Data data = Data.getInstance();
         Ride ride;
-        Log.d("cheguei aki","");
+
         if (!(Utils.readCache(getApplicationContext()).equals(null))){
+            irParaRide.setVisibility(View.VISIBLE);
             idRide = Integer.parseInt(Utils.readCache(this));
             Log.d("id da ride",""+idRide);
             ride = data.getRideById(idRide);
             rideName.setText(ride.getName());
             rideDistance.setText(ride.getDistance().toString());
+        }else{
+            irParaRide.setVisibility(View.INVISIBLE);
+            rideName.setVisibility(View.INVISIBLE);
+            rideDistance.setVisibility(View.INVISIBLE);
         }
     }
 
