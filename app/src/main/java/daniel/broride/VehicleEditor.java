@@ -13,10 +13,10 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class VehicleEditor extends AppCompatActivity {
 
-    String message;
-    EditText editNome,editConsumo,editCapacidade,editModelo;
-    TextView description;
-    Button btnAction,btnDelete,btnVoltar;
+    private String message;
+    private EditText editNome,editConsumo,editCapacidade,editModelo;
+    private TextView description;
+    private Button btnAction,btnDelete,btnVoltar;
     private Vehicle vehicle = new Vehicle();
     private Data data;
 
@@ -39,7 +39,7 @@ public class VehicleEditor extends AppCompatActivity {
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         data = Data.getInstance();
-        data.fillVehicle(this);
+        data.fillVehiclesList(this);
 
 
         final int id = intent.getIntExtra("id", 0);
@@ -171,7 +171,7 @@ public class VehicleEditor extends AppCompatActivity {
             int id = myDb.insertVehicle(vehicle);
             vehicle.setId(id);
             Toast.makeText(VehicleEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
-            data.fillVehicle(this);
+            data.fillVehiclesList(this);
             finish();
         } catch (SqlException e) {
             e.printStackTrace();
@@ -190,7 +190,7 @@ public class VehicleEditor extends AppCompatActivity {
 
         try {
             myDb.updateVehicle(vehicle);
-            data.fillVehicle(this);
+            data.fillVehiclesList(this);
             Toast.makeText(getBaseContext(),"Vehicle Atualizado",Toast.LENGTH_SHORT).show();
             finish();
         } catch (SqlException e) {
@@ -204,7 +204,7 @@ public class VehicleEditor extends AppCompatActivity {
 
         try {
             myDb.deleteVehicle(data.getVehicleById(id));
-            data.fillVehicle(this);
+            data.fillVehiclesList(this);
             Toast.makeText(getBaseContext(),"Veiculo Deletado",Toast.LENGTH_SHORT).show();
             finish();
         } catch (SqlException e) {

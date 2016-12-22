@@ -18,10 +18,9 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class VehicleManager extends AppCompatActivity {
 
-    ListView lista;
-    int[] arrayVehicleId;
-
-    Button newVehicle;
+    private ListView lista;
+    private int[] arrayVehicleId;
+    private Button newVehicle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +60,15 @@ public class VehicleManager extends AppCompatActivity {
     }
 
     private void loadSpinnerData() {
-        // database handler
         //DbHelper myDb = DbHelper.getsInstance(this);
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = data.getAllVehiclesData();
-
+        List<String> labels = data.getVehiclesLabelsList();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lables){
+                android.R.layout.simple_spinner_item, labels){
             @Override
             public View getView(int  position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
@@ -96,14 +93,11 @@ public class VehicleManager extends AppCompatActivity {
         arrayVehicleId = data.getAllVehiclesId();
     }
 
+    //Fixme
     private void openVehicleEditor(){
         Intent intent = new Intent(VehicleManager.this, VehicleEditor.class);
         intent.putExtra(EXTRA_MESSAGE, "create");
         startActivity(intent);
-    }
-
-    public void back(View view){
-        finish();
     }
 
     private void openVehicleEditor(int n){
@@ -118,4 +112,10 @@ public class VehicleManager extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void back(View view){
+        finish();
+    }
+
+
 }

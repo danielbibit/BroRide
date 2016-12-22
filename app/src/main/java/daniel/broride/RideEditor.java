@@ -61,7 +61,7 @@ public class RideEditor extends AppCompatActivity  {
         Intent intent = getIntent();
         message = intent.getStringExtra(EXTRA_MESSAGE);
 
-        allUsersLabel = data.getUsersArrayString();
+        allUsersLabel = data.getUsersLabelsArray();
         allUsersId = data.getAllUsersId();
 
         //EditText
@@ -118,7 +118,7 @@ public class RideEditor extends AppCompatActivity  {
 
                 break;
 
-/*COMMIT----*/case "commit":
+            case "commit":
                 mode.setText("Commit");
                 viewMode();
                 try{displayRides();
@@ -239,7 +239,7 @@ public class RideEditor extends AppCompatActivity  {
 
     private void loadSpinnerCar() {
         // Spinner Drop down elements
-        List<String> labels = data.getAllVehiclesData();
+        List<String> labels = data.getVehiclesLabelsList();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -255,7 +255,7 @@ public class RideEditor extends AppCompatActivity  {
     }
 
     private void loadSpinnerUser(){
-        List<String> labels = data.getUsersArrayList();
+        List<String> labels = data.getUsersLabelsList();
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, labels);
@@ -301,7 +301,6 @@ public class RideEditor extends AppCompatActivity  {
         int selectedUser = 0;
 
         for(int i =0; i<allUsersId.length; i++){
-            //if(ride.getUsersId(0) == allUsersId[i]){
             if(ride.getUser(0).getId() == allUsersId[i]){
                 selectedUser = i;
                 break;
@@ -337,7 +336,7 @@ public class RideEditor extends AppCompatActivity  {
             int id = myDb.insertRide(ride);
             ride.setId(id);
             Toast.makeText(RideEditor.this, "Data inserted", Toast.LENGTH_LONG).show();
-            data.fillRide(this);
+            data.fillRidesList(this);
             finish();
         } catch (SqlException e) {
             e.printStackTrace();
@@ -346,7 +345,6 @@ public class RideEditor extends AppCompatActivity  {
         }
     }
 
-    //FIXME
     private void updateRide(int id){
         DbHelper myDb = DbHelper.getsInstance(this);
 
@@ -373,7 +371,7 @@ public class RideEditor extends AppCompatActivity  {
         try {
             myDb.updateRide(ride);
             Toast.makeText(this, "Data atualizada!", Toast.LENGTH_LONG).show();
-            data.fillRide(this);
+            data.fillRidesList(this);
             finish();
         } catch (SqlException e) {
             Toast.makeText(this, "ERRO: Data não atualizada!", Toast.LENGTH_LONG).show();
@@ -389,7 +387,7 @@ public class RideEditor extends AppCompatActivity  {
 
         try{
             myDb.deleteRide(data.getRideById(ride.getId()));
-            data.fillRide(this);
+            data.fillRidesList(this);
             Toast.makeText(RideEditor.this, "Data deletada", Toast.LENGTH_LONG).show();
             finish();
         }catch(SqlException e){
@@ -439,11 +437,15 @@ public class RideEditor extends AppCompatActivity  {
             @Override
 
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                if(isChecked)
+                if(isChecked){
                     selectedUsers.add(allUsersId[which]);
+                }else {
+                    try {
+                        selectedUsers.remove(allUsersId[which]);
+                    } catch (Exception e) {
 
-                else
-                    selectedUsers.remove(allUsersId[which]);
+                    }
+                }
             }
 
         };

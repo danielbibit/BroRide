@@ -75,7 +75,7 @@ public class UserManager extends AppCompatActivity {
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> lables = data.getUsersArrayList();
+        List<String> lables = data.getUsersLabelsList();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

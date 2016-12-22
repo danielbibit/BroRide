@@ -18,10 +18,10 @@ import static daniel.broride.MainActivity.EXTRA_MESSAGE;
 
 public class RideManager extends AppCompatActivity {
 
-    ListView lista;
-    Button button;
-    int[] arrayRideId;
-    Data data = Data.getInstance();
+    private ListView lista;
+    private Button button;
+    private int[] arrayRideId;
+    private Data data = Data.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class RideManager extends AppCompatActivity {
         super.onResume();
         loadSpinnerData();
         fillRideArrayId();
-        data.fillRide(this);
+        data.fillRidesList(this);
     }
 
     private void openRideEditor(int n){
@@ -77,8 +77,7 @@ public class RideManager extends AppCompatActivity {
         Data data = Data.getInstance();
 
         // Spinner Drop down elements
-        List<String> labels = data.getAllRideData();
-
+        List<String> labels = data.getRidesLabelsList();
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

@@ -42,7 +42,7 @@ public class UserEditor extends AppCompatActivity{
         btnDelete = (Button) findViewById(R.id.button_delete);
 
         data = Data.getInstance();
-        data.fillUser(this);
+        data.fillUsersList(this);
 
         final int id = intent.getIntExtra("id", 0);
 
@@ -206,7 +206,7 @@ public class UserEditor extends AppCompatActivity{
 
             myDb.updateUser(user);
 
-            data.fillUser(this);
+            data.fillUsersList(this);
             Toast.makeText(getBaseContext(),"Usuario Atualizado",Toast.LENGTH_SHORT).show();
             finish();
         } catch (SqlException e) {
@@ -222,7 +222,7 @@ public class UserEditor extends AppCompatActivity{
 
         try {
             myDb.deleteUser(data.getUserById(id));
-            data.fillUser(this);
+            data.fillUsersList(this);
             Toast.makeText(getBaseContext(),"Usuario Deletado",Toast.LENGTH_SHORT).show();
             finish();
         } catch (SqlException e) {

@@ -1,6 +1,5 @@
 package daniel.broride;
 
-
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -9,11 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
-
-
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -89,8 +85,6 @@ public class Utils {
         }
         return "";
     }
-
-
 
     public static void showMessage(String title, String message, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context.getApplicationContext());

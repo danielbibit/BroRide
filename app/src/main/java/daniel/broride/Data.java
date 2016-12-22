@@ -7,35 +7,35 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Data {
-    private static Data mInstance;
+    private static Data instance;
 
     private ArrayList<User> usersList = new ArrayList<>();
-    private ArrayList<Vehicle> vehicleList = new ArrayList<>();
-    private ArrayList<Ride> rideList = new ArrayList<>();
+    private ArrayList<Vehicle> vehiclesList = new ArrayList<>();
+    private ArrayList<Ride> ridesList = new ArrayList<>();
 
     private Context context;
 
     //private Data(Context context){this.context = context;}
 
     public static synchronized Data getInstance(){
-        if(mInstance == null){
-            mInstance = new Data();
+        if(instance == null){
+            instance = new Data();
         }
 
-        return mInstance;
+        return instance;
     }
 
     public void syncWithDb(Context context){
         context = context.getApplicationContext();
-        fillUser(context);
-        fillVehicle(context);
-        fillRide(context);
+        fillUsersList(context);
+        fillVehiclesList(context);
+        fillRidesList(context);
     }
 
     //Verify if a given user is in one ride
     public boolean verifyUserConflict(User user){
-        for(int i=0; i<rideList.size(); i++){
-            if(rideList.get(i).userExists(user)){
+        for(int i = 0; i< ridesList.size(); i++){
+            if(ridesList.get(i).userExists(user)){
                 return true;
             }
         }
@@ -44,8 +44,8 @@ public class Data {
 
     //Verify id a given Vehicle is registered on any ride
     public boolean verifyVehicleConflict(Vehicle vehicle) {
-        for(int i=0; i<rideList.size(); i++){
-            if(rideList.get(i).getVehicle() == vehicle){
+        for(int i = 0; i< ridesList.size(); i++){
+            if(ridesList.get(i).getVehicle() == vehicle){
                 return true;
             }
         }
@@ -53,7 +53,7 @@ public class Data {
     }
 
     //Preenche o Data base User
-    public void fillUser(Context context){
+    public void fillUsersList(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
         Cursor res = myDb.getAllUsersData();
 
@@ -89,7 +89,7 @@ public class Data {
        return user;
     }
 
-    public ArrayList<String> getUsersArrayList() {
+    public ArrayList<String> getUsersLabelsList() {
         ArrayList<String> labels = new ArrayList<>();
 
         for (int i = 0; i< usersList.size(); i++){
@@ -99,7 +99,7 @@ public class Data {
         return labels;
     }
 
-    public String[] getUsersArrayString(){
+    public String[] getUsersLabelsArray(){
         String[] array = new String[usersList.size()];
 
         for(int i=0; i<usersList.size(); i++){
@@ -122,7 +122,7 @@ public class Data {
     //----------------------------------------------------------------------------------------------
 
     //Preenche o Data base Vehicle
-    public void fillVehicle(Context context){
+    public void fillVehiclesList(Context context){
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
         Cursor res = myDb.getAllVehicleData();
 
@@ -130,7 +130,7 @@ public class Data {
             //show message
             //trowh error
         }
-        vehicleList.clear();
+        vehiclesList.clear();
         while(res.moveToNext()){
             Vehicle vehicle = new Vehicle();
 
@@ -140,16 +140,16 @@ public class Data {
             vehicle.setCapacity(res.getInt(3));
             vehicle.setConsumption(res.getDouble(4));
 
-            vehicleList.add(vehicle);
+            vehiclesList.add(vehicle);
         }
     }
 
     public Vehicle getVehicleById(int id){
         Vehicle vehicle = null;
-        for(int i = 0; i< vehicleList.size(); i++){
+        for(int i = 0; i< vehiclesList.size(); i++){
 
-            if(vehicleList.get(i).getId()==id){
-                return vehicleList.get(i);
+            if(vehiclesList.get(i).getId()==id){
+                return vehiclesList.get(i);
             }
         }
         return vehicle;
@@ -157,27 +157,28 @@ public class Data {
 
     //Metodos usados pelos Managers
 
-    public ArrayList<String> getAllVehiclesData() {
+    public ArrayList<String> getVehiclesLabelsList() {
         ArrayList<String> labels = new ArrayList<>();
 
-        for (int i = 0; i< vehicleList.size(); i++){
-            labels.add(vehicleList.get(i).getName());
+        for (int i = 0; i< vehiclesList.size(); i++){
+            labels.add(vehiclesList.get(i).getName());
         }
 
         return labels;
     }
 
     public int[] getAllVehiclesId(){
-        int[] array = new int[vehicleList.size()];
-        for (int i = 0; i < vehicleList.size(); i++) {
-            array[i] = vehicleList.get(i).getId();
+        int[] array = new int[vehiclesList.size()];
+        for (int i = 0; i < vehiclesList.size(); i++) {
+            array[i] = vehiclesList.get(i).getId();
         }
         return  array;
     }
-    //---------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------
 
     //Preenche o Data base Ride
-    public void fillRide(Context context) {
+    public void fillRidesList(Context context) {
         DbHelper myDb = DbHelper.getsInstance(context.getApplicationContext());
         Cursor res = myDb.getAllRides();
 
@@ -185,10 +186,10 @@ public class Data {
         }
 
 
-        fillUser(context.getApplicationContext());
-        fillVehicle(context.getApplicationContext());
+        fillUsersList(context.getApplicationContext());
+        fillVehiclesList(context.getApplicationContext());
 
-        rideList.clear();
+        ridesList.clear();
         while (res.moveToNext()){
             Ride ride = new Ride();
 
@@ -211,7 +212,7 @@ public class Data {
                 }
             }
 
-            rideList.add(ride);
+            ridesList.add(ride);
         }
 
     }
@@ -219,30 +220,30 @@ public class Data {
     public Ride getRideById(int id){
         Ride ride = null;
 
-        for(int i = 0; i<rideList.size(); i++){
-            if(rideList.get(i).getId()==id){
-                return rideList.get(i);
+        for(int i = 0; i< ridesList.size(); i++){
+            if(ridesList.get(i).getId()==id){
+                return ridesList.get(i);
             }
         }
         return ride;
     }
 
     ///Metodos usados pelos Managers
-    public ArrayList<String> getAllRideData() {
+    public ArrayList<String> getRidesLabelsList() {
         ArrayList<String> labels = new ArrayList<>();
 
-        for (int i = 0; i< rideList.size(); i++){
-            labels.add(rideList.get(i).getName()+" : "+rideList.get(i).getDescription());
+        for (int i = 0; i< ridesList.size(); i++){
+            labels.add(ridesList.get(i).getName()+" : "+ ridesList.get(i).getDescription());
         }
 
         return labels;
     }
 
     public int[] getAllRideId(){
-        int[] array = new int [rideList.size()];
+        int[] array = new int [ridesList.size()];
 
-        for (int i = 0; i<rideList.size(); i++){
-            array[i] = rideList.get(i).getId();
+        for (int i = 0; i< ridesList.size(); i++){
+            array[i] = ridesList.get(i).getId();
         }
 
         return  array;

@@ -1,6 +1,7 @@
 package daniel.broride;
 
 import android.content.Intent;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,12 +18,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView rideName,rideDistance;
-    Button irParaRide;
-    int idRide;
+    private TextView rideName,rideDistance;
+    private Button irParaRide;
+    private int idRide;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    Data data;
+    private Data data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +52,11 @@ public class MainActivity extends AppCompatActivity
             data = Data.getInstance();
             data.syncWithDb(this);
             showLastRide();
+        }catch (SQLException e){
+            this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
+            finish();
         }catch (Exception e){
             Utils.saveCache("",this);
-            //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
-            //finish();
-            //asdf
         }
 
         irParaRide.setOnClickListener(new View.OnClickListener() {
@@ -145,10 +147,6 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, RideManager.class);
         intent.putExtra(EXTRA_MESSAGE, "test");
         startActivity(intent);
-    }
-
-    private void showAllData(){
-
     }
 
     private void showLastRide(){

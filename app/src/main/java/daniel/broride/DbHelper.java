@@ -192,19 +192,11 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        //// TODO: 21/12/2016 remove this
-        Log.d("LogDbn",ride.getName());
-        Log.d("LogDbd",ride.getDescription());
-        Log.d("LogDbd",""+ride.getDistance());
-        Log.d("LogDbg",""+ride.getGasPrice());
-        Log.d("Log drivepay",""+ride.getDriverPays());
-
         contentValues.put(RIDE_NAME, ride.getName());
         contentValues.put(RIDE_DESCRIPTION, ride.getDescription());
         contentValues.put(RIDE_VEHICLE, ride.getVehicle().getId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        //contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_USERS, Utils.ListToString(ride.getUsersIdsList()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
@@ -231,7 +223,6 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_VEHICLE, ride.getVehicle().getId());
         contentValues.put(RIDE_GAS, ride.getGasPrice());
         contentValues.put(RIDE_DISTANCE, ride.getDistance());
-        //contentValues.put(RIDE_USERS, Utils.ArrayToString(ride.getUsersId()));
         contentValues.put(RIDE_USERS, Utils.ListToString(ride.getUsersIdsList()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
