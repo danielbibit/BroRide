@@ -109,20 +109,6 @@
         android:text="Default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rideName"
-        android:textColor="@android:color/background_dark"
-        android:scaleX="1.8"
-        android:scaleY="1.8"
-        android:layout_weight="1"
-        android:layout_marginBottom="24dp"
-        android:layout_above="@+id/btnIrRide"
-        android:layout_alignLeft="@+id/btnIrRide"
-        android:layout_alignStart="@+id/btnIrRide" />
-
-    <TextView
-        android:text="Default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/rideDistance"
         android:textColor="@android:color/black"
         android:scaleX="1.4"
@@ -134,5 +120,19 @@
         android:layout_alignBottom="@+id/btnIrRide"
         android:layout_toRightOf="@+id/textView24"
         android:layout_toEndOf="@+id/textView24" />
+
+    <TextView
+        android:text="Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rideName"
+        android:textColor="@android:color/background_dark"
+        android:scaleX="1.8"
+        android:scaleY="1.8"
+        android:layout_weight="1"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/btnIrRide"
+        android:layout_alignLeft="@+id/btnIrRide"
+        android:layout_alignStart="@+id/btnIrRide" />
 
 </RelativeLayout>

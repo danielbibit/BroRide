@@ -126,9 +126,7 @@ public class RideEditor extends AppCompatActivity  {
                     e.printStackTrace();
                 }
 
-
                 ride = data.getRideById(id);
-
 
                 if (cbIsMotorista.isChecked()){
                     idUsersRide = ride.getUsersIdWithOutDriver();

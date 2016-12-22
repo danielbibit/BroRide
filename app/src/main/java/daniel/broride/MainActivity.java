@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,9 +71,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("cheguei no onresume","");
         try{
             showLastRide();
         }catch (Exception e ){
+            Log.d("entrei no catch","");
             e.printStackTrace();
         }
     }
@@ -154,6 +157,8 @@ public class MainActivity extends AppCompatActivity
         Ride ride;
 
         if(!(Utils.readCache(this).equals("null"))){
+            rideName.setVisibility(View.VISIBLE);
+            rideDistance.setVisibility(View.VISIBLE);
             irParaRide.setVisibility(View.VISIBLE);
             idRide = Integer.parseInt(Utils.readCache(this));
             ride = data.getRideById(idRide);
