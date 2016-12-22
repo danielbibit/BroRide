@@ -12,9 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView rideName,rideDistance;
 
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     Data data;
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rideName = (TextView) findViewById(R.id.rideName);
+        rideDistance = (TextView) findViewById(R.id.rideDistance);
+
 
         /*---------------------------------------------------------------------------------------*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,10 +47,17 @@ public class MainActivity extends AppCompatActivity
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
+            showLastRide();
         }catch (Exception e){
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showLastRide();
     }
 
     @Override
@@ -142,5 +156,18 @@ public class MainActivity extends AppCompatActivity
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    private void showLastRide(){
+        Data data = Data.getInstance();
+        Ride ride;
+        Log.d("cheguei aki","");
+        if (!(Utils.readCache(getApplicationContext()).equals(null))){
+            int idRide = Integer.parseInt(Utils.readCache(this));
+            Log.d("id da ride",""+idRide);
+            ride = data.getRideById(idRide);
+            rideName.setText(ride.getName());
+            rideDistance.setText(ride.getDistance().toString());
+        }
     }
 }
