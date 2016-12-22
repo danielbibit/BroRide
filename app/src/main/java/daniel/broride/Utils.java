@@ -28,8 +28,6 @@ public class Utils {
     private final static String strSeparator = "__,__";
     final static String fileName = "cache";
 
-
-
     private Utils(){}
 
     public static String ArrayToString(String[] array){
@@ -62,7 +60,6 @@ public class Utils {
 
         return str;
     }
-
 
     public static void saveCache(String string,Context context){
         try {
