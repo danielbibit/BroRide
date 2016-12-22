@@ -96,7 +96,7 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     public static void showMessage(String title, String message, Context context){

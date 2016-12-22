@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity
         rideDistance = (TextView) findViewById(R.id.rideDistance);
         irParaRide = (Button) findViewById(R.id.btnIrRide);
 
-
         /*---------------------------------------------------------------------------------------*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,16 +48,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /*---------------------------------------------------------------------------------------*/
-
+        showLastRide();
         try{
             data = Data.getInstance();
             data.syncWithDb(this);
-            Log.d("cheguei aki --------","");
-            showLastRide();
         }catch (Exception e){
             //this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
             //finish();
-            irParaRide.setVisibility(View.INVISIBLE);
         }
 
         irParaRide.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +68,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        try {
+        try{
             showLastRide();
-        }catch (Exception e){
+        }catch (Exception e ){
             e.printStackTrace();
         }
     }
@@ -180,10 +177,9 @@ public class MainActivity extends AppCompatActivity
         Data data = Data.getInstance();
         Ride ride;
 
-        if (!(Utils.readCache(getApplicationContext()).equals(null))){
+        if(!(Utils.readCache(this).equals("null"))){
             irParaRide.setVisibility(View.VISIBLE);
             idRide = Integer.parseInt(Utils.readCache(this));
-            Log.d("id da ride",""+idRide);
             ride = data.getRideById(idRide);
             rideName.setText(ride.getName());
             rideDistance.setText(ride.getDistance().toString());
