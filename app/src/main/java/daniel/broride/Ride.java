@@ -98,6 +98,7 @@ public class Ride {
     }
 
     public ArrayList<String> getUsersIdsList(){
+        usersIds.clear();
         for(int i=0; i<usersList.size(); i++){
             usersIds.add(String.valueOf(usersList.get(i).getId()));
         }

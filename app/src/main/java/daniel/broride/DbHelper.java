@@ -200,7 +200,6 @@ public class DbHelper extends SQLiteOpenHelper {
         contentValues.put(RIDE_USERS, Utils.ListToString(ride.getUsersIdsList()));
         contentValues.put(RIDE_DRIVERPAY, ride.getDriverPays());
 
-        //Log.d("String Inserida", Utils.ArrayToString(ride.getUsersId()));
         Log.d("String Inserida", Utils.ListToString(ride.getUsersIdsList()));
 
         long result = db.insert(TABLE_RIDE, null, contentValues);

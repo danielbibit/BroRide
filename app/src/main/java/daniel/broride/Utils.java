@@ -36,7 +36,6 @@ public class Utils {
         return arr;
     }
 
-
     public static String ListToString(ArrayList<String> userArrayList){
 
         String str = "";

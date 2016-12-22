@@ -49,13 +49,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /*---------------------------------------------------------------------------------------*/
 
+        data = Data.getInstance();
+        data.syncWithDb(this);
+
+        //this.deleteDatabase("main.db");
+
         try{
-            data = Data.getInstance();
-            data.syncWithDb(this);
             showLastRide();
         }catch (SQLException e){
-            this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
-            finish();
+            /*this.deleteDatabase("main.db"); //CAUTION ! UNCOMENT FOR DELETING THE WHOLE DB !!!
+            finish();*/
         }catch (Exception e){
             Utils.saveCache("",this);
         }
@@ -125,8 +128,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rides) {
             openRideManager();
         } else if (id == R.id.nav_manage) {
-            this.deleteDatabase("main.db");
-            Utils.saveCache("",this);
+            //this.deleteDatabase("main.db");
+            //Utils.saveCache("",this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

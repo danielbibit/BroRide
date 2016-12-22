@@ -323,7 +323,12 @@ public class RideEditor extends AppCompatActivity  {
 
         ride.insertUser(data.getUserById(idUser));
         Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
-        Log.d("Usuario InsaerindoM2", ride.getUser(0).getName());
+
+        for(int i=0; i<selectedUsers.size(); i++){
+            if(selectedUsers.get(i) == idUser){
+                selectedUsers.remove(i);
+            }
+        }
 
         for(int i : selectedUsers){
             ride.insertUser(data.getUserById(i));
@@ -359,7 +364,13 @@ public class RideEditor extends AppCompatActivity  {
         Log.d("IdUser",""+idUser);
         ride.insertUser(data.getUserById(idUser));
         Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
-        Log.d("Usuario InsaerindoM2", ride.getUser(0).getName());
+
+
+        for(int i=0; i<selectedUsers.size(); i++){
+            if(selectedUsers.get(i) == idUser){
+                selectedUsers.remove(i);
+            }
+        }
 
         for(int i : selectedUsers){
             ride.insertUser(data.getUserById(i));
