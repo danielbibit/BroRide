@@ -14,29 +14,6 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
-        android:text="BroRide!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView22"
-        android:textSize="40sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColorLink="@color/colorPrimaryDark"
-        android:textColor="@color/colorPrimary" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_marginTop="50dp"
-        android:id="@+id/imageView2"
-        android:background="@android:drawable/checkbox_off_background"
-        android:scaleX="3"
-        android:scaleY="3"
-        android:layout_below="@+id/textView22"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="Catch-a-ride!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,4 +102,27 @@
         android:layout_toRightOf="@+id/textView23"
         android:layout_toEndOf="@+id/textView23"
         android:onClick="a" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="49dp"
+        android:id="@+id/imageView2"
+        android:background="@android:drawable/checkbox_off_background"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:layout_below="@+id/textView22"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="BroRide!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView22"
+        android:textSize="40sp"
+        android:textColorLink="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
