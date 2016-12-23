@@ -3,9 +3,9 @@ AP2 Project
 
 Desenvolvido por: 
 
-Pedro Ramos Krauze Diehl
-
 Daniel Moraes dos Santos
+
+Pedro Ramos Krauze Diehl
 
 BroRide é um aplicativo gerenciador de caronas (ride), seu objetivo é calcular o preço de uma carona e automaticamente atribuir o debito à pessoa que pegou uma carona. A ideia do projeto veio da necessidade de calcular o preço de uma viagem, e gerenciar esses valores. O programa funciona em 4 etapas:
 
