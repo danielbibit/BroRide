@@ -217,7 +217,9 @@ public class RideEditor extends AppCompatActivity  {
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.saveCache("",getApplicationContext());
+                        if (id == Integer.parseInt(Utils.readCache(getApplicationContext()))){
+                            Utils.saveCache("",getApplicationContext());
+                        }
                         deleteRide();
                     }
                 });
