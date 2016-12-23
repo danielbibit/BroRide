@@ -17,7 +17,7 @@ public class VehicleEditor extends AppCompatActivity {
     private String message;
     private EditText editNome,editConsumo,editCapacidade,editModelo;
     private TextView description;
-    private Button btnAction,btnDelete,btnVoltar;
+    private Button btnAction,btnDelete;
     private Vehicle vehicle = new Vehicle();
     private Data data;
 
@@ -37,7 +37,7 @@ public class VehicleEditor extends AppCompatActivity {
 
         btnAction = (Button) findViewById(R.id.btnAction);
         btnDelete = (Button) findViewById(R.id.button_delete);
-        btnVoltar = (Button) findViewById(R.id.btnVoltar);
+        //btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         data = Data.getInstance();
         data.syncWithDb(this);
@@ -143,7 +143,6 @@ public class VehicleEditor extends AppCompatActivity {
         editConsumo.setText(String.valueOf(vehicle.getConsumption()));
         editCapacidade.setText(String.valueOf(vehicle.getCapacity()));
         editModelo.setText(vehicle.getModel());
-
     }
 
     public void setViewMode(int mode){

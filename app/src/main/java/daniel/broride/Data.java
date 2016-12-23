@@ -13,10 +13,6 @@ public class Data {
     private ArrayList<Vehicle> vehiclesList = new ArrayList<>();
     private ArrayList<Ride> ridesList = new ArrayList<>();
 
-    private Context context;
-
-    //private Data(Context context){this.context = context;}
-
     public static synchronized Data getInstance(){
         if(instance == null){
             instance = new Data();

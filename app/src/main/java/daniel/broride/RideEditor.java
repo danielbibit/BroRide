@@ -361,10 +361,7 @@ public class RideEditor extends AppCompatActivity  {
         ride.setGasPrice(Double.valueOf(etGas.getText().toString()));
         ride.setDriverPays(cbIsMotorista.isChecked() ? 1:0);
 
-        Log.d("IdUser",""+idUser);
         ride.insertUser(data.getUserById(idUser));
-        Log.d("Usuario InserindoM", data.getUserById(idUser).getName());
-
 
         for(int i=0; i<selectedUsers.size(); i++){
             if(selectedUsers.get(i) == idUser){
@@ -374,7 +371,6 @@ public class RideEditor extends AppCompatActivity  {
 
         for(int i : selectedUsers){
             ride.insertUser(data.getUserById(i));
-            Log.d("Usuario Inserindo", data.getUserById(i).getName());
         }
 
         try {

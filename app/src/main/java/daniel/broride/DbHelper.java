@@ -71,7 +71,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_RIDE);
     }
 
-    /*------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
 
     public int insertUser(User user) throws SqlException{
         SQLiteDatabase db = this.getWritableDatabase();
