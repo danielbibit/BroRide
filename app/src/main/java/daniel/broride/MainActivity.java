@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("cheguei no onresume","");
+
         try{
             showLastRide();
         }catch (Exception e ){
-            Log.d("entrei no catch","");
+
             e.printStackTrace();
         }
     }
