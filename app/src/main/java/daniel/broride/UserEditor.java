@@ -3,6 +3,7 @@ package daniel.broride;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,7 +43,7 @@ public class UserEditor extends AppCompatActivity{
         btnDelete = (Button) findViewById(R.id.button_delete);
 
         data = Data.getInstance();
-        data.fillUsersList(this);
+        data.syncWithDb(this);
 
         final int id = intent.getIntExtra("id", 0);
 
@@ -110,7 +111,7 @@ public class UserEditor extends AppCompatActivity{
 
             case "delete":
                 setViewMode(0);
-                description.setText(R.string.modeDelete_textView);
+                description.setText(R.string.delete_button);
                 btnDelete.setVisibility(View.INVISIBLE);
                 btnAction.setText(R.string.confirm_button);
 
@@ -119,8 +120,10 @@ public class UserEditor extends AppCompatActivity{
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(data.verifyUserConflict(data.getUserById(id))){
-
+                        if(data.verifyUserConflict(data.getUserById(id)) == true){
+                            Toast.makeText(UserEditor.this, "O usuario esta sendo usado",
+                                    Toast.LENGTH_LONG).show();
+                            finish();
                         }else{
                             deleteUser(id);
                         }

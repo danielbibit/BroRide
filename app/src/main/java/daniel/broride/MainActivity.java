@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity
 
         //this.deleteDatabase("main.db");
 
+        Log.d("Usuario1", data.verifyUserConflict(data.getUserById(1))? "sim" : "nao");
+        //Log.d("Usuario3", data.verifyUserConflict(data.getUserById(3))? "sim" : "nao");
+        //Log.d("Usuario4", data.verifyUserConflict(data.getUserById(4))? "sim" : "nao");
+       // Log.d("Usuario5", data.verifyUserConflict(data.getUserById(5))? "sim" : "nao");
+        //Log.d("Usuario6", data.verifyUserConflict(data.getUserById(6))? "sim" : "nao");
+
+        //Log.d("Carro2", data.verifyVehicleConflict(data.getVehicleById(2))? "sim" : "nao");
+
         try{
             showLastRide();
         }catch (SQLException e){

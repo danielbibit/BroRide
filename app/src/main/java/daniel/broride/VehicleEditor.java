@@ -3,6 +3,7 @@ package daniel.broride;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,11 +40,9 @@ public class VehicleEditor extends AppCompatActivity {
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         data = Data.getInstance();
-        data.fillVehiclesList(this);
-
+        data.syncWithDb(this);
 
         final int id = intent.getIntExtra("id", 0);
-
 
         switch (message){
             case "create":
@@ -113,13 +112,20 @@ public class VehicleEditor extends AppCompatActivity {
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                    if(data.verifyVehicleConflict(data.getVehicleById(id))){
+                        Toast.makeText(VehicleEditor.this, "O veiculo esta sendo utilizado ",
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }else{
                         deleteVehicle(id);
+                    }
                     }
                 });
                 break;
 
             default:
                 //never reach
+                break;
         }
 
     }
@@ -129,7 +135,6 @@ public class VehicleEditor extends AppCompatActivity {
         super.onPause();
         finish();
     }
-
 
     public void displayData(int id){
         vehicle = data.getVehicleById(id);
